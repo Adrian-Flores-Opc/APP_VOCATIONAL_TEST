@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="registerForm">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput formControlName="fullnameRegister" [(ngModel)]="_modelRegister.fullName">
+          <mat-error *ngIf="registerForm.controls.fullnameRegister.hasError('required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="emailRegister" [(ngModel)]="_modelRegister.email">
+          <mat-error *ngIf="registerForm.controls.emailRegister.hasError('required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Telefono</mat-label>
+          <input matInput formControlName="cellphoneRegister" [(ngModel)]="_modelRegister.cellphone">
+          <mat-error *ngIf="registerForm.controls.cellphoneRegister.hasError('required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input matInput formControlName="dateOfBirdRegister" [(ngModel)]="_modelRegister.dateOfBird">
+          <mat-error *ngIf="registerForm.controls.dateOfBirdRegister.hasError('required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre de usuario</mat-label>
+          <input matInput formControlName="nameUserRegister" [(ngModel)]="_modelRegister.nameUser">
+          <mat-error *ngIf="registerForm.controls.nameUserRegister.hasError('required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordRegister" [(ngModel)]="_modelRegister.password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
+          <mat-error *ngIf="registerForm.controls.passwordRegister.hasError('required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Repita Contraseña</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="verifyPasswordRegister" [(ngModel)]="_modelRegister.verifyPassword">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
+          <mat-error *ngIf="registerForm.controls.verifyPasswordRegister.hasError('required')">El campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" [disabled]="!registerForm.valid" (click)="submitUserRegister(_modelRegister)">
+          <mat-icon>search</mat-icon>
+          Registar Usuario
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>

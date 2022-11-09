@@ -1,0 +1,21 @@
+*{
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  background: #012d74;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+form{
+  width: 360px;
+  text-align: center;
+  display: grid;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 250px;
+}

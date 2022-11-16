@@ -1,15 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 container-form">
+      <h2>Inicio de Sesion</h2>
       <form [formGroup]="registerForm">
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" style="margin-bottom: 20px;">
           <mat-label>Usuario</mat-label>
           <input matInput formControlName="usuarioLogin" [(ngModel)]="_modelLogin.usuario">
           <mat-error *ngIf="registerForm.controls.usuarioLogin.hasError('required')">El campo es obligatorio</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" style="margin-bottom: 20px;">
           <mat-label>Contraseña</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordLogin" [(ngModel)]="_modelLogin.password">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
@@ -21,7 +23,10 @@
           Iniciar Sesion
         </button>
 
+        <ul class="title-password" (click)="recuperarPassword()">Olvido su Contraseña?</ul>
+
       </form>
     </div>
+    <div class="col-md-3"></div>
   </div>
 </div>

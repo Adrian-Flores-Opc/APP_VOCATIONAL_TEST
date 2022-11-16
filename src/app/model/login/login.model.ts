@@ -10,7 +10,7 @@ export class LoginResponse {
   public cellphone !: string;
   public dateOfBird !: string;
   public nameUser !: string;
-  public password !: string;
+  public passUser !: string;
   public verifyPassword !: string;
 }
 

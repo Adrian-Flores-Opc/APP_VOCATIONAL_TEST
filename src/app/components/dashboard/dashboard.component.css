@@ -1,0 +1,7 @@
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  /* background-image: linear-gradient(90deg, rgba(2,0,36,0.5886729691876751) 0%, rgba(1,45,116,0.5326505602240896) 35%, rgba(0,212,255,0.4318102240896359) 100%), url("assets/Images/fondo_1.png"); */
+  background-image: linear-gradient(90deg, rgba(2,0,36,0.5886729691876751) 0%, rgba(1,45,116,0.5326505602240896) 35%, rgba(0,212,255,0.4318102240896359) 100%);
+}

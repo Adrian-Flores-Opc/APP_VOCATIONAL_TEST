@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "alertifyjs": "^1.13.1",
     "angular-sweetalert-2": "^1.0.1",
+    "animate.css": "^4.1.1",
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
     "ngx-spinner": "^14.0.0",

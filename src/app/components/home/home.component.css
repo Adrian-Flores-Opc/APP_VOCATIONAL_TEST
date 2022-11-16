@@ -1,13 +1,29 @@
 .container-button{
-  padding: 50px;
+  padding: 180px;
 }
 .img{
   margin: 10px auto;
   border-radius: 5px;
-  border: 1px solid #999;
   padding: 13px;
   width: 100%;
   height: 420px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+.container-title{
+  float: right;
+  display: flex;
+  align-items: center;
+  word-break: break-all;
+  margin: 0 0 1em;
+  width: 50%;
+  white-space: break-spaces;
+  font-size: 38px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: justify;
+}
+.container-img{
+  border-radius: 50px;
+  box-shadow: 1px 3px 13px 9px #00000012;
 }

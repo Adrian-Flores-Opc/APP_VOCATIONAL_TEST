@@ -29,9 +29,9 @@ export class MainNavComponent {
     }
 
   public home():void{
-    // this._service.headerEvetEmmiter.next(true);
+    this._service.headerEvetEmmiter.next(true);
     // window.location.reload();
-    // this.router.navigate(['/Home']);
+    this.router.navigate(['/']);
   }
 
 }

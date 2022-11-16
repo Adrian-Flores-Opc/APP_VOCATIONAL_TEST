@@ -2,3 +2,8 @@
   position: absolute;
   right: 0;
 }
+
+.menu-text{
+  font-size: 25px;
+  color: #6b6b81;
+}

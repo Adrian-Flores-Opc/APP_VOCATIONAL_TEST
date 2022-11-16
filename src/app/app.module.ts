@@ -12,6 +12,9 @@ import { SharedModule } from './components/shared/shared.module';
 import { MainComponent } from './components/main/main.component';
 
 import { ServiceMainService } from './core/service/service-main.service';
+import { AccessService } from './core/layout/access.service';
+import { StorageService } from './core/session/storage.service';
+import { AuthGuardService } from './core/auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import { ServiceMainService } from './core/service/service-main.service';
     BrowserAnimationsModule,
     SharedModule
   ],
-  providers: [ServiceMainService],
+  providers: [ServiceMainService, AccessService, StorageService, AuthGuardService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

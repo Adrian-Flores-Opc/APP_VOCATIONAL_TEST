@@ -5,6 +5,7 @@ export class LoginRequest {
 }
 
 export class LoginResponse {
+  public idUser !: number;
   public fullName !: string;
   public email !: string;
   public cellphone !: string;

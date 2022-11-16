@@ -10,4 +10,5 @@ export class AnswersResponse{
   public ANSWERS!: String;
   public PUNCTUATION !: number;
   public TYPE_ANSWERS !: String;
+  public CHECK : boolean = true;
 }

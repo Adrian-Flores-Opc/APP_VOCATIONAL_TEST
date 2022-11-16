@@ -25,6 +25,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatSidenavModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule
   ],
   exports:[
     CommonModule,
@@ -77,7 +79,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatSidenavModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

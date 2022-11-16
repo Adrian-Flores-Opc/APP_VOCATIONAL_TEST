@@ -7,6 +7,8 @@ import { LoginResponse } from 'src/app/model/login/login.model';
 import { QuestionsResponse } from 'src/app/model/questions/questions.model';
 import { AnswersResponse } from 'src/app/model/answers/answers.model';
 import { RegisterUserRequest } from 'src/app/model/register/register-user.model';
+import { TestingResponse } from 'src/app/model/testing/testing.model';
+import { ResultRequest, ResultResponse } from 'src/app/model/result/result.model';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +60,62 @@ export class ConeectionApiService {
     const withCredentials = false;
     let headers = new HttpHeaders();
     return this.http.get<SectionsResponse[]>(this.rootUrl + 'SectionsController/api/v1/List', { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
+
+
+  // CONEXION METODOS DE TESTING 
+  public getTesting(): Observable<TestingResponse[]>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<TestingResponse[]>(this.rootUrl + 'TestingController/api/v1/List', { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
+
+  public getTestingById(id:number): Observable<TestingResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<TestingResponse>(`${this.rootUrl} + 'TestingController/api/v1/ById'/ ${id}`, { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
+
+  public saveTesting(_datos: TestingResponse): Observable<TestingResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.post<TestingResponse>(this.rootUrl + 'TestingController/api/v1/Save',
+    _datos,{
+      headers:{
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*'
+      }, withCredentials
+    })
+    .pipe(catchError(this.handleError));
+  }
+
+  //CONEXION METODOS DE GUARDAR RESPUESTAS 
+  
+  public saveResult(_datos: ResultRequest): Observable<ResultResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.post<ResultResponse>(this.rootUrl + 'ResultController/api/v1/Save',
+    _datos,{
+      headers:{
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*'
+      }, withCredentials
+    })
+    .pipe(catchError(this.handleError));
+  }
+
+
+  public updateTesting(_datos: TestingResponse): Observable<TestingResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.put<TestingResponse>(`${this.rootUrl} + 'TestingController/api/v1/Update/' ${_datos.ID_TESTING}`,
+    _datos,{
+      headers:{
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*'
+      }, withCredentials
+    })
+    .pipe(catchError(this.handleError));
   }
 
   public handleError(message: HttpErrorResponse){

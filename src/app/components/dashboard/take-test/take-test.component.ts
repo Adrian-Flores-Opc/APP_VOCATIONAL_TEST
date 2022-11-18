@@ -118,79 +118,79 @@ export class TakeTestComponent implements OnInit {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 2);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionBTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 2);
+    this._modelQuestionsResult.sectionBTypeA.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 3);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionCTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 3);
+    this._modelQuestionsResult.sectionCTypeA.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 4);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionDTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 4);
+    this._modelQuestionsResult.sectionDTypeA.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 5);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionETypeA = this._questionsResponse.filter(x => x.ID_SECTION == 5);
+    this._modelQuestionsResult.sectionETypeA.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 6);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionFTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 6);
+    this._modelQuestionsResult.sectionFTypeA.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 7);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionGTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 7);
+    this._modelQuestionsResult.sectionGTypeA.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 8);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionHTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 8);
+    this._modelQuestionsResult.sectionHTypeA.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
     });
 
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 9);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionATypeB = this._questionsResponse.filter(x => x.ID_SECTION == 9);
+    this._modelQuestionsResult.sectionATypeB.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 10);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionBTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 10);
+    this._modelQuestionsResult.sectionBTypeB.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 11);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionCTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 11);
+    this._modelQuestionsResult.sectionCTypeB.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 12);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionDTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 12);
+    this._modelQuestionsResult.sectionDTypeB.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 13);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionETypeB = this._questionsResponse.filter(x => x.ID_SECTION == 13);
+    this._modelQuestionsResult.sectionETypeB.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 14);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionFTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 14);
+    this._modelQuestionsResult.sectionFTypeB.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 15);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionGTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 15);
+    this._modelQuestionsResult.sectionGTypeB.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
 
-    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 16);
-    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+    this._modelQuestionsResult.sectionHTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 16);
+    this._modelQuestionsResult.sectionHTypeB.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
   }
@@ -671,5 +671,8 @@ export class TakeTestComponent implements OnInit {
         Swal.fire('Respuestas guardadas correctamente.','','info');
       }
     });    
+  }
+  onChangeEventFunc(_dato: AnswersResponse, isChecked: boolean){
+
   }
 }

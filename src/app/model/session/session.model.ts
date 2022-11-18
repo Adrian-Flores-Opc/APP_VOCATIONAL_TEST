@@ -32,6 +32,8 @@ export class Session {
 
     public puntuactionSectionA!:dataPuntuaction[];
     public puntuactionSectionB!:dataPuntuaction[];
+
+    public idInteligence !: number;
 }
 
 

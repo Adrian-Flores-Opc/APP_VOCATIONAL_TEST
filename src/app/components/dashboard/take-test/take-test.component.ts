@@ -452,13 +452,13 @@ export class TakeTestComponent implements OnInit {
             console.log('ID SECTION PARA VERIFICAR: ' + this._questionResponseCalculation.ID_SECTION + ' - ' + element.ID_ANSWERS);
             let _comparationBloques: dataPuntuaction[] = [
               { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueASectionA },
-              { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueBSectionA },
-              { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueCSectionA },
-              { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueDSectionA },
-              { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueESectionA },
-              { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueFSectionA },
-              { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueGSectionA },
-              { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueHSectionA }
+              { bloque:'B',puntuaction: this._sessionResponse.puntuactionBloqueBSectionA },
+              { bloque:'C',puntuaction: this._sessionResponse.puntuactionBloqueCSectionA },
+              { bloque:'D',puntuaction: this._sessionResponse.puntuactionBloqueDSectionA },
+              { bloque:'E',puntuaction: this._sessionResponse.puntuactionBloqueESectionA },
+              { bloque:'F',puntuaction: this._sessionResponse.puntuactionBloqueFSectionA },
+              { bloque:'G',puntuaction: this._sessionResponse.puntuactionBloqueGSectionA },
+              { bloque:'H',puntuaction: this._sessionResponse.puntuactionBloqueHSectionA }
             ];
             switch(_response.ID_SECTION){
               case 1:
@@ -597,6 +597,8 @@ export class TakeTestComponent implements OnInit {
 
           }});
         }
+        this._sessionResponse = this._storage.getCurrentSession();
+        this.getIntelligense(this._sessionResponse.puntuactionBloqueA, this._sessionResponse.puntuactionBloqueB, this._sessionResponse.puntuactionSectionA , this._sessionResponse.puntuactionSectionB);
       }, error: (_error) => {
 
       }, complete: () => {
@@ -605,7 +607,82 @@ export class TakeTestComponent implements OnInit {
     });
   }
 
-  public getIntelligense(_interesMayor: number, _habilidadMayor: number, _bloqueInteres: dataPuntuaction[], bloqueHabilidad :dataPuntuaction[]):void{
+  public getIntelligense(_habilidadMayor:number,  _interesMayor: number, bloqueHabilidad: dataPuntuaction[],  _bloqueInteres:dataPuntuaction[]):void{
+    let _habilidarMayorIntSec = bloqueHabilidad.filter(x => x.puntuaction == _habilidadMayor);
+    let _interesMayorIntSec = _bloqueInteres.filter(x => x.puntuaction == _interesMayor);
+    let _interesAct = _habilidadMayor;
+    //#region VALIDARDOR ID INTELIGENCIA 1
+    if(_habilidadMayor < 15 && _interesMayor >= 15){
+      // ASIGNAR ID INTELIGENCIA 1
+      this._sessionResponse.idInteligence = 1;
+      this._storage.setCurrentSession(this._sessionResponse);
+    }
+    //#endregion
 
+    //#region VALIDAR ID INTELIGENCIA 2
+    if(_habilidadMayor >= 15 && _habilidadMayor <= 19 && _interesMayor >= 15){
+      if  (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
+          // ASIGNAR ID INTELIGENCIA 2
+          this._sessionResponse.idInteligence = 2;
+          this._storage.setCurrentSession(this._sessionResponse);
+      }
+    }
+    //#endregion
+
+    //#region VALIDAR ID INTELIGENCIA 3
+    if(_habilidadMayor > 15 && _habilidadMayor < 19 && _interesMayor > 15 && _interesMayor < 19){
+      if (_habilidarMayorIntSec != _interesMayorIntSec){
+        // ASIGNAR ID INTELIGENCIA 3
+        this._sessionResponse.idInteligence = 3;
+        this._storage.setCurrentSession(this._sessionResponse);
+      }
+    }
+    //#endregion
+
+    //#region VALIDAR ID INTELIGENCIA 4
+    if(_habilidadMayor > 18 && _interesMayor >= _interesAct && _interesMayor < 16){
+      // ASIGNAR ID INTELIGENCIA 4
+      this._sessionResponse.idInteligence = 4;
+      this._storage.setCurrentSession(this._sessionResponse);
+    }
+    //#endregion
+
+    //#region VALIDAR ID INTELIGENCIA 5
+    if(_habilidadMayor > 18 && _interesMayor > 18 && _interesMayor < 24){
+      if(_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
+        // ASIGNAR ID INTELIGENCIA 5
+        this._sessionResponse.idInteligence = 5;
+        this._storage.setCurrentSession(this._sessionResponse);
+      }
+    }
+    //#endregion
+
+    //#region  VALIDAR ID INTELIGENCIA 6
+    if(_habilidadMayor > 18 && _interesMayor > 18 ){
+      if (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
+        // ASIGNAR ID INTELIGENCIA 6
+        this._sessionResponse.idInteligence = 6;
+        this._storage.setCurrentSession(this._sessionResponse);
+      }
+    }
+    //#endregion
+
+    //#region VALIDAR ID INTELIGENCIA 7
+    if (_habilidadMayor > 18 && _interesMayor > 23){
+      if (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
+        // ASIGNAR ID INTELIGENCIA 7
+        this._sessionResponse.idInteligence = 7;
+        this._storage.setCurrentSession(this._sessionResponse);
+      }
+    } 
+    //#endregion
+
+    //#region VALIDAR ID INTELIGENCIA 8
+    if (_interesMayor < 15 && _habilidadMayor < 15){
+      // ASIGNAR ID INTELIGENCIA 8
+      this._sessionResponse.idInteligence = 8;
+      this._storage.setCurrentSession(this._sessionResponse);
+    }
+    //#endregion
   }
 }

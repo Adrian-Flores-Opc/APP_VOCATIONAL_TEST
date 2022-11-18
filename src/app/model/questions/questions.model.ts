@@ -21,3 +21,23 @@ export class QuestionsResult{
   public PUNTUACTION !:number;
   public ANSWERS!: AnswersResponse[];
 }
+
+
+export class QuestionsModelResul{
+  public sectionATypeA !: QuestionsResult[];
+  public sectionBTypeA !: QuestionsResult[];
+  public sectionCTypeA !: QuestionsResult[];
+  public sectionDTypeA !: QuestionsResult[];
+  public sectionETypeA !: QuestionsResult[];
+  public sectionFTypeA !: QuestionsResult[];
+  public sectionGTypeA !: QuestionsResult[];
+  public sectionHTypeA !: QuestionsResult[];
+  public sectionATypeB !: QuestionsResult[];
+  public sectionBTypeB !: QuestionsResult[];
+  public sectionCTypeB !: QuestionsResult[];
+  public sectionDTypeB !: QuestionsResult[];
+  public sectionETypeB !: QuestionsResult[];
+  public sectionFTypeB !: QuestionsResult[];
+  public sectionGTypeB !: QuestionsResult[];
+  public sectionHTypeB !: QuestionsResult[];
+}

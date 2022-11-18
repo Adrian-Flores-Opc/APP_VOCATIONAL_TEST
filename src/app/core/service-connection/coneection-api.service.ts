@@ -46,6 +46,11 @@ export class ConeectionApiService {
     return this.http.get<QuestionsResponse[]>(this.rootUrl + 'QuestionsController/api/v1/List', { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
   }
 
+  public getQuestionsById(id:number): Observable<QuestionsResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<QuestionsResponse>(`${this.rootUrl}QuestionsController/api/v1/ById/${id}`, { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
 
   //CONEXION METODOS DE RESPUESTAS
   public getAnswers(): Observable<AnswersResponse[]>{
@@ -53,7 +58,11 @@ export class ConeectionApiService {
     let headers = new HttpHeaders();
     return this.http.get<AnswersResponse[]>(this.rootUrl + 'AnswersController/api/v1/List', { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
   }
-
+  public getAnswersById(id:number): Observable<AnswersResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<AnswersResponse>(`${this.rootUrl}AnswersController/api/v1/ById/${id}`, { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
 
   // CONEXION METODOS DE SECCIONES
   public getSections(): Observable<SectionsResponse[]>{
@@ -73,7 +82,7 @@ export class ConeectionApiService {
   public getTestingById(id:number): Observable<TestingResponse>{
     const withCredentials = false;
     let headers = new HttpHeaders();
-    return this.http.get<TestingResponse>(`${this.rootUrl} + 'TestingController/api/v1/ById'/ ${id}`, { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+    return this.http.get<TestingResponse>(`${this.rootUrl}TestingController/api/v1/ById/${id}`, { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
   }
 
   public saveTesting(_datos: TestingResponse): Observable<TestingResponse>{
@@ -91,6 +100,12 @@ export class ConeectionApiService {
 
   //CONEXION METODOS DE GUARDAR RESPUESTAS 
   
+  public getResul(): Observable<ResultResponse[]>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<ResultResponse[]>(this.rootUrl + 'ResultController/api/v1/List', { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
+
   public saveResult(_datos: ResultRequest): Observable<ResultResponse>{
     const withCredentials = false;
     let headers = new HttpHeaders();
@@ -108,7 +123,7 @@ export class ConeectionApiService {
   public updateTesting(_datos: TestingResponse): Observable<TestingResponse>{
     const withCredentials = false;
     let headers = new HttpHeaders();
-    return this.http.put<TestingResponse>(`${this.rootUrl} + 'TestingController/api/v1/Update/' ${_datos.ID_TESTING}`,
+    return this.http.put<TestingResponse>(`${this.rootUrl}TestingController/api/v1/Update/${_datos.ID_TESTING}`,
     _datos,{
       headers:{
         'Content-Type': 'application/json',

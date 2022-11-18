@@ -1,7 +1,7 @@
 import { SectionsResponse } from './../../../model/sections/sections.model';
 import { Component, OnInit } from '@angular/core';
 import { ConeectionApiService } from 'src/app/core/service-connection/coneection-api.service';
-import { QuestionsResponse, QuestionsResult } from 'src/app/model/questions/questions.model';
+import { QuestionsModelResul, QuestionsResponse, QuestionsResult } from 'src/app/model/questions/questions.model';
 import { AnswersResponse } from 'src/app/model/answers/answers.model';
 import { StorageService } from 'src/app/core/session/storage.service';
 import { Session } from 'src/app/model/session/session.model';
@@ -37,6 +37,7 @@ export class TakeTestComponent implements OnInit {
   public _answersSectionGTypeA !: AnswersResponse[];
   public _answersSectionHTypeA !: AnswersResponse[];
 
+  public _resultCalculation !: ResultResponse[];
 
   public _questionsResult !: QuestionsResult[];
 
@@ -44,18 +45,156 @@ export class TakeTestComponent implements OnInit {
   public _resultQuestionsRequest !: ResultRequest;
   public _resultQuestionsResponse !: ResultResponse;
 
+
+  public _modelQuestionsResult !: QuestionsModelResul;
+
+
+  public _answersResponseCalculation !: AnswersResponse;
+  public _questionResponseCalculation !:QuestionsResponse;
+
+  public _puntuactionBloqueA!:number;
+
+  public _puntuactionBloqueASectionA!:number;
+  public _puntuactionBloqueASectionB!:number;
+  public _puntuactionBloqueASectionC!:number;
+  public _puntuactionBloqueASectionD!:number;
+  public _puntuactionBloqueASectionE!:number;
+  public _puntuactionBloqueASectionF!:number;
+  public _puntuactionBloqueASectionG!:number;
+  public _puntuactionBloqueASectionH!:number;
+
+  public _puntuactionBloqueB!:number;
+
+  public _puntuactionBloqueBSectionA!:number;
+  public _puntuactionBloqueBSectionB!:number;
+  public _puntuactionBloqueBSectionC!:number;
+  public _puntuactionBloqueBSectionD!:number;
+  public _puntuactionBloqueBSectionE!:number;
+  public _puntuactionBloqueBSectionF!:number;
+  public _puntuactionBloqueBSectionG!:number;
+  public _puntuactionBloqueBSectionH!:number;
+
+
+
   constructor(private _connectionService: ConeectionApiService, private _storage: StorageService) { }
 
   ngOnInit(): void {
     // this._questionsResponse = new QuestionsResponse;
+    this._puntuactionBloqueA = 0;
+    this._puntuactionBloqueB = 0;
     this._resultQuestionsRequest = new ResultRequest();
     this._resultQuestionsResponse = new ResultResponse();
-    
+    this._modelQuestionsResult = new QuestionsModelResul();
     this._sessionResponse = this._storage.getCurrentSession();
+
+    this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA = 0;
+    this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB = 0;
+    this._sessionResponse.puntuactionBloqueCSectionA = this._puntuactionBloqueASectionC = 0;
+    this._sessionResponse.puntuactionBloqueDSectionA = this._puntuactionBloqueASectionD = 0;
+    this._sessionResponse.puntuactionBloqueESectionA = this._puntuactionBloqueASectionE = 0;
+    this._sessionResponse.puntuactionBloqueFSectionA = this._puntuactionBloqueASectionF = 0;
+    this._sessionResponse.puntuactionBloqueGSectionA = this._puntuactionBloqueASectionG = 0;
+    this._sessionResponse.puntuactionBloqueHSectionA = this._puntuactionBloqueASectionH = 0;
+
+    this._sessionResponse.puntuactionBloqueASectionB = this._puntuactionBloqueBSectionA = 0;
+    this._sessionResponse.puntuactionBloqueBSectionB = this._puntuactionBloqueBSectionB = 0;
+    this._sessionResponse.puntuactionBloqueCSectionB = this._puntuactionBloqueBSectionC = 0;
+    this._sessionResponse.puntuactionBloqueDSectionB = this._puntuactionBloqueBSectionD = 0;
+    this._sessionResponse.puntuactionBloqueESectionB = this._puntuactionBloqueBSectionE = 0;
+    this._sessionResponse.puntuactionBloqueFSectionB = this._puntuactionBloqueBSectionF = 0;
+    this._sessionResponse.puntuactionBloqueGSectionB = this._puntuactionBloqueBSectionG = 0;
+    this._sessionResponse.puntuactionBloqueHSectionB = this._puntuactionBloqueBSectionH = 0;
+
+  
     console.log('SESSION DENTRO DEL DASHBOARD TAKE TEST: ' + JSON.stringify(this._sessionResponse));
     this.getQuestions();
     this.getAnswers();
     this.getSections();
+    // this.generateModelResult();
+  }
+  public generateModelResult():void{
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 1);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 2);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 3);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 4);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 5);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 6);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 7);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 8);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+    });
+
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 9);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 10);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 11);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 12);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 13);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 14);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 15);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+    });
+
+    this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 16);
+    this._modelQuestionsResult.sectionATypeA.forEach( element => {
+      element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+    });
+
+    console.log('MODELO PARA EL FORMULARIO: ' + JSON.stringify(this._modelQuestionsResult));
   }
   public getQuestions():void{
     this._connectionService.getQuestions().subscribe({ next: (_response) => {
@@ -69,6 +208,23 @@ export class TakeTestComponent implements OnInit {
       this._questionsSectionFTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 6);
       this._questionsSectionGTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 7);
       this._questionsSectionHTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 8);
+
+      this._modelQuestionsResult.sectionATypeA = this._questionsResponse.filter(x => x.ID_SECTION == 1);
+      this._modelQuestionsResult.sectionBTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 2);
+      this._modelQuestionsResult.sectionCTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 3);
+      this._modelQuestionsResult.sectionDTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 4);
+      this._modelQuestionsResult.sectionETypeA = this._questionsResponse.filter(x => x.ID_SECTION == 5);
+      this._modelQuestionsResult.sectionFTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 6);
+      this._modelQuestionsResult.sectionGTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 7);
+      this._modelQuestionsResult.sectionHTypeA = this._questionsResponse.filter(x => x.ID_SECTION == 8);
+      this._modelQuestionsResult.sectionATypeB = this._questionsResponse.filter(x => x.ID_SECTION == 9);
+      this._modelQuestionsResult.sectionBTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 10);
+      this._modelQuestionsResult.sectionCTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 11);
+      this._modelQuestionsResult.sectionDTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 12);
+      this._modelQuestionsResult.sectionETypeB = this._questionsResponse.filter(x => x.ID_SECTION == 13);
+      this._modelQuestionsResult.sectionFTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 14);
+      this._modelQuestionsResult.sectionGTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 15);
+      this._modelQuestionsResult.sectionHTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 16);
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
@@ -79,14 +235,110 @@ export class TakeTestComponent implements OnInit {
   public getAnswers():void{
     this._connectionService.getAnswers().subscribe({ next: (_response) => {
       this._answersResponse = _response;
-      this._answersSectionATypeA = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
-      this._answersSectionBTypeA = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
-      this._answersSectionCTypeA = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
-      this._answersSectionDTypeA = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
-      this._answersSectionETypeA = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
-      this._answersSectionFTypeA = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
-      this._answersSectionGTypeA = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
-      this._answersSectionHTypeA = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+
+
+      this._modelQuestionsResult.sectionATypeA.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionBTypeA.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionCTypeA.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionDTypeA.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionETypeA.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionFTypeA.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionGTypeA.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionHTypeA.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'A');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+
+
+      this._modelQuestionsResult.sectionATypeB.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionBTypeB.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionCTypeB.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionDTypeB.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionETypeB.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionFTypeB.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionGTypeB.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+      this._modelQuestionsResult.sectionHTypeB.forEach( element => {
+        element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
+        element.ANSWERS.forEach( elementAnswers => {
+          elementAnswers.CHECK = false;
+        });
+      });
+
+
+
+      console.log('MODELO PARA EL FORMULARIO QUESTIOSN: ' + JSON.stringify(this._modelQuestionsResult));
       console.log(JSON.stringify(this._answersResponse));
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
@@ -98,7 +350,7 @@ export class TakeTestComponent implements OnInit {
   public getSections():void{
     this._connectionService.getSections().subscribe({ next: (_response) => {
       this._sectionsResponse = _response;
-      console.log(JSON.stringify(this._sectionsResponse));
+      console.log('SECTION_RESPONSE: ' + JSON.stringify(this._sectionsResponse));
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
@@ -106,18 +358,32 @@ export class TakeTestComponent implements OnInit {
     }});
   }
 
-  public checkAnswersVerify(_data: AnswersResponse, typeSection: String, section: String, event:boolean, _dataQuestions: QuestionsResponse):void{
+  public checkAnswersVerify(_data: AnswersResponse, typeSection: String, section: String, _dataQuestions:QuestionsResult, evento:boolean, quesId: number, ansId: number):void{
     console.log('ANSWERS CHECK: ' + JSON.stringify(_data));
     console.log('ANSWERS CHECK: ' + JSON.stringify(_dataQuestions));
     console.log('ANSWERS CHECK: ' + typeSection);
     console.log('ANSWERS CHECK: ' + section);
-    console.log('ANSWERS CHECK: ' + event);
-    this.saveResultAnswers(_data.ID_ANSWERS, _dataQuestions.ID_QUESTIONS);
-    this._answersSectionATypeA.forEach(element => {
-      if(element.ID_ANSWERS != _data.ID_ANSWERS){
-        element.CHECK = false;
+    console.log('ANSWERS CHECK: ' + evento);
+    console.log('ANSWERS CHECK: ' + quesId);
+    console.log('ANSWERS CHECK: ' + ansId);
+    this.saveResultAnswers(_data.ID_ANSWERS,_dataQuestions.ID_QUESTIONS);
+    if(typeSection === 'A'){
+      switch(section){
+        case 'A':
+          // this._modelQuestionsResult.sectionATypeA[quesId].
+          _dataQuestions.ANSWERS.forEach(element => {
+            if(element.ID_ANSWERS != _data.ID_ANSWERS){
+              element.CHECK = false;
+            }
+          });
+          break;
+        case 'B':
+          break;
       }
-    });
+
+    } else if (typeSection === 'B') {
+
+    }
   }
 
   public saveResultAnswers(idAnswers: number, idQuestions: number):void{
@@ -131,5 +397,170 @@ export class TakeTestComponent implements OnInit {
     }, complete: () => {
 
     }});
+  }
+
+
+  public getResultTesting():void{
+    this._connectionService.getResul().subscribe({ next: (_response) => {
+      console.log('RESPUESTAS OBTENIDAS: ' + JSON.stringify(_response));
+      this._resultCalculation = _response.filter(x => x.ID_TESTING == 19);
+      this.obtTotalTipoSeccion(this._resultCalculation);
+    }, error: (_error) => {
+
+    }, complete: () => {
+
+    }});
+  }
+
+  public getResultById(_data:any):AnswersResponse{
+    this._connectionService.getAnswersById(_data.ID_ANSWERS).subscribe({ next: (_response) => {
+      this._answersResponseCalculation = _response;
+    }, error: (_error) => {
+
+    }, complete: () => {
+
+    }});
+    return this._answersResponseCalculation;
+  }
+
+
+  public getQuestionsById(_data:any):QuestionsResponse{
+    console.log('DATO PARA CONSULTAR LA PREGUNTA: ' + _data)
+    this._connectionService.getQuestionsById(_data).subscribe({ next: (_response) => {
+      this._questionResponseCalculation = _response;
+      console.log('RESPUESTA PARA SUMAR LA PREGUNTA: ' + JSON.stringify(this._questionResponseCalculation));
+    }, error: (_error) => {
+
+    }, complete: () => {
+
+    }});
+    return this._questionResponseCalculation;
+  }
+
+  public obtTotalTipoSeccion(_datos: ResultResponse[]):void{
+    console.log('DATOS PARA SUMAR: ' + JSON.stringify(_datos));
+    _datos.forEach(element => {
+      // this._questionResponseCalculation = this.getQuestionsById(_questionId);
+      console.log('ID QUESTIONS CONSULTA: ' +element.ID_QUESTIONS);
+      this._connectionService.getQuestionsById(element.ID_QUESTIONS).subscribe({ next: (_response) => {
+        console.log('RESPUESTA TIPO DE PREGUNTA: '+ _response.ID_QUESTIONS +' - ' + JSON.stringify(_response));
+        this._questionResponseCalculation = _response;
+        console.log('DATOS PERGUNTA: ' + element.ID_QUESTIONS + ' - ' + JSON.stringify(this._questionResponseCalculation));
+        if(_response.ID_SECTION === 1 || _response.ID_SECTION === 2 || _response.ID_SECTION === 3|| _response.ID_SECTION === 4|| _response.ID_SECTION === 5|| _response.ID_SECTION === 6|| _response.ID_SECTION === 7|| _response.ID_SECTION === 8){
+          
+          this._connectionService.getAnswersById(element.ID_ANSWERS).subscribe({ next: (_responsePunt) => {
+            // this._answersResponseCalculation = _response;
+            console.log('DATOS RESPUESTA A: ' + element.ID_ANSWERS + ' - ' + JSON.stringify(_response));
+            console.log('ID SECTION PARA VERIFICAR: ' + this._questionResponseCalculation.ID_SECTION + ' - ' + element.ID_ANSWERS);
+            // if(_response.ID_SECTION === 1){
+            //   this._puntuactionBloqueASectionA = this._puntuactionBloqueASectionA + _responsePunt.PUNCTUATION;
+            //   this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA;
+            //   console.log('DATOS SECCION A DE A: ' + this._questionResponseCalculation.ID_SECTION + ' - ' + this._sessionResponse.puntuactionBloqueASectionA);              
+            // }
+            switch(_response.ID_SECTION){
+              case 1:
+                this._puntuactionBloqueASectionA = this._puntuactionBloqueASectionA + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA;
+                console.log('DATOS SECCION A DE A: ' + this._questionResponseCalculation.ID_SECTION + ' - ' + this._sessionResponse.puntuactionBloqueASectionA);
+              break;
+              case 2:
+                this._puntuactionBloqueASectionB = this._puntuactionBloqueASectionB + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB;
+              break;
+              case 3:
+                this._puntuactionBloqueASectionC = this._puntuactionBloqueASectionC + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueCSectionA = this._puntuactionBloqueASectionC;
+              break;
+              case 4:
+                this._puntuactionBloqueASectionD = this._puntuactionBloqueASectionD + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueDSectionA = this._puntuactionBloqueASectionD;
+              break;
+              case 5:
+                this._puntuactionBloqueASectionE = this._puntuactionBloqueASectionE + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueESectionA = this._puntuactionBloqueASectionE;
+              break;
+              case 6:
+                this._puntuactionBloqueASectionF = this._puntuactionBloqueASectionF + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueFSectionA = this._puntuactionBloqueASectionF;
+              break;
+              case 7:
+                this._puntuactionBloqueASectionG = this._puntuactionBloqueASectionG + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueGSectionA = this._puntuactionBloqueASectionG;
+              break;
+              case 8:
+                this._puntuactionBloqueASectionH = this._puntuactionBloqueASectionH + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueHSectionA = this._puntuactionBloqueASectionH;
+              break;
+            }
+            this._puntuactionBloqueA = this._puntuactionBloqueA +_responsePunt.PUNCTUATION;
+            this._sessionResponse.puntuactionBloqueA = this._puntuactionBloqueA;
+            this._storage.setCurrentSession(this._sessionResponse);
+            console.log('PUNTUACION A SUMAR BLOQUE A : ' + this._puntuactionBloqueA);
+            // this._sessionResponse = this._storage.getCurrentSession();
+            // this._puntuactionBloqueB!:number;
+          }, error: (_error) => {
+
+          }, complete: () => {
+
+          }});
+
+        }
+        if(_response.ID_SECTION === 9 || _response.ID_SECTION === 10 || _response.ID_SECTION === 11 || _response.ID_SECTION === 12|| _response.ID_SECTION === 13|| _response.ID_SECTION === 14|| _response.ID_SECTION === 15|| _response.ID_SECTION === 16){
+          // const _datoCalculation = this.getResultById(_resultId);
+          // console.log('PUNTUACION A SUMAR BLOQUE B : ' + _datoCalculation.PUNCTUATION);
+
+          this._connectionService.getAnswersById(element.ID_ANSWERS).subscribe({ next: (_responsePunt) => {
+            // this._answersResponseCalculation = _response;
+            switch(_response.ID_SECTION){
+              case 9:
+                this._puntuactionBloqueBSectionA = this._puntuactionBloqueBSectionA + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueASectionB = this._puntuactionBloqueBSectionA;
+                
+              break;
+              case 10:
+                this._puntuactionBloqueBSectionB = this._puntuactionBloqueBSectionB + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueBSectionB = this._puntuactionBloqueBSectionB;
+              break;
+              case 11:
+                this._puntuactionBloqueBSectionC = this._puntuactionBloqueBSectionC + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueCSectionB = this._puntuactionBloqueBSectionC;
+              break;
+              case 12:
+                this._puntuactionBloqueBSectionD = this._puntuactionBloqueBSectionD + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueDSectionB = this._puntuactionBloqueBSectionD;
+              break;
+              case 13:
+                this._puntuactionBloqueBSectionE = this._puntuactionBloqueBSectionE + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueESectionB = this._puntuactionBloqueBSectionE;
+              break;
+              case 14:
+                this._puntuactionBloqueBSectionF = this._puntuactionBloqueBSectionF + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueFSectionB = this._puntuactionBloqueBSectionF;
+              break;
+              case 15:
+                this._puntuactionBloqueBSectionG = this._puntuactionBloqueBSectionG + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueGSectionB = this._puntuactionBloqueBSectionG;
+              break;
+              case 16:
+                this._puntuactionBloqueBSectionH = this._puntuactionBloqueBSectionH + _responsePunt.PUNCTUATION;
+                this._sessionResponse.puntuactionBloqueHSectionB = this._puntuactionBloqueBSectionH;
+              break;
+            }
+            this._puntuactionBloqueB = this._puntuactionBloqueB +_responsePunt.PUNCTUATION;
+            this._sessionResponse.puntuactionBloqueB = this._puntuactionBloqueB;
+            this._storage.setCurrentSession(this._sessionResponse);
+            console.log('PUNTUACION A SUMAR BLOQUE B : ' + this._puntuactionBloqueB);
+          }, error: (_error) => {
+
+          }, complete: () => {
+
+          }});
+        }
+      }, error: (_error) => {
+
+      }, complete: () => {
+
+      }});
+    });
   }
 }

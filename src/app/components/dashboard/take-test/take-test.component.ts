@@ -597,17 +597,18 @@ export class TakeTestComponent implements OnInit {
 
           }});
         }
-        this._sessionResponse = this._storage.getCurrentSession();
-        this.getIntelligense(this._sessionResponse.puntuactionBloqueA, this._sessionResponse.puntuactionBloqueB, this._sessionResponse.puntuactionSectionA , this._sessionResponse.puntuactionSectionB);
       }, error: (_error) => {
 
       }, complete: () => {
 
       }});
     });
+    this._sessionResponse = this._storage.getCurrentSession();
+    this.getIntelligense(this._sessionResponse.puntuactionBloqueA, this._sessionResponse.puntuactionBloqueB, this._sessionResponse.puntuactionSectionA , this._sessionResponse.puntuactionSectionB);
   }
 
   public getIntelligense(_habilidadMayor:number,  _interesMayor: number, bloqueHabilidad: dataPuntuaction[],  _bloqueInteres:dataPuntuaction[]):void{
+    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ');
     let _habilidarMayorIntSec = bloqueHabilidad.filter(x => x.puntuaction == _habilidadMayor);
     let _interesMayorIntSec = _bloqueInteres.filter(x => x.puntuaction == _interesMayor);
     let _interesAct = _habilidadMayor;

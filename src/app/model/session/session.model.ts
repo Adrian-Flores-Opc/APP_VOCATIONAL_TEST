@@ -30,6 +30,12 @@ export class Session {
     public puntuactionBloqueGSectionB !:number;
     public puntuactionBloqueHSectionB !:number;
 
-    public puntuactionSectionA!:number[];
-    public puntuactionSectionB!:number[];
+    public puntuactionSectionA!:dataPuntuaction[];
+    public puntuactionSectionB!:dataPuntuaction[];
+}
+
+
+export class dataPuntuaction{
+    public bloque!: String;
+    public puntuaction !: number;
 }

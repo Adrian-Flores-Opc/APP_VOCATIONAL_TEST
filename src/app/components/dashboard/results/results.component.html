@@ -11,8 +11,15 @@
             Para obtener una recomendación y conocer los resultados del test vocacional es necesario realizar el test.
           </P>
         </mat-card-content>
+
         <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
-          <p>MOSTRAR LA DESCRICION DEPENDIENDO DE SU RESULTADO EN EL TEST VOCAICONAL</p>
+          <p>De acuerdo a las habilidades en la que destaca y sus intereses, su inteligencia predominante es: {{_responseIntelligence.NAME_INTELLIGENSE}}</p>
+          <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile>CAPACIDADES</mat-grid-tile>
+            <mat-grid-tile>{{_responseIntelligence.CAPABILITIES}}</mat-grid-tile>
+            <mat-grid-tile>HABILIDADES</mat-grid-tile>
+            <mat-grid-tile>{{_responseIntelligence.SKILLS}}</mat-grid-tile>
+          </mat-grid-list>
         </mat-card-content>
 
         <mat-card-actions *ngIf="_sessionResponse.stateTestingIdentity == 'P'">

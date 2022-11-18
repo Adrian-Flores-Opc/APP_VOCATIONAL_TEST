@@ -9,6 +9,9 @@ import { AnswersResponse } from 'src/app/model/answers/answers.model';
 import { RegisterUserRequest } from 'src/app/model/register/register-user.model';
 import { TestingResponse } from 'src/app/model/testing/testing.model';
 import { ResultRequest, ResultResponse } from 'src/app/model/result/result.model';
+import { UniversitiesResponse } from 'src/app/model/universities/universities.model';
+import { CareersResponse } from 'src/app/model/careers/careers.model';
+import { IntelligenceResponse } from 'src/app/model/intelligence/intelligence.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +40,49 @@ export class ConeectionApiService {
     })
     .pipe(catchError(this.handleError));
   }
+
+
+  //CONEXION METODOS UNIVERSIDADES 
+  public getUniversities(): Observable<UniversitiesResponse[]>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<UniversitiesResponse[]>(this.rootUrl + 'UniversitiesController/api/v1/List', { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
+
+  public getUniversitiesById(id:number): Observable<UniversitiesResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<UniversitiesResponse>(`${this.rootUrl}UniversitiesController/api/v1/ById/${id}`, { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }  
+
+
+  //CONEXION METODOS CARRERAS 
+
+  public getCareers(): Observable<CareersResponse[]>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<CareersResponse[]>(this.rootUrl + 'CareersController/api/v1/List', { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
+
+  public getCareersById(id:number): Observable<CareersResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<CareersResponse>(`${this.rootUrl}CareersController/api/v1/ById/${id}`, { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }  
+
+
+  // CONEXION METODOS INTELIGENCIA
+  public getIntelligence(): Observable<IntelligenceResponse[]>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<IntelligenceResponse[]>(this.rootUrl + 'IntelligenceController/api/v1/List', { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
+
+  public getIntelligenceById(id:number): Observable<IntelligenceResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.get<IntelligenceResponse>(`${this.rootUrl}IntelligenceController/api/v1/ById/${id}`, { headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }  
 
   //CONEXCION METODOS PREGUNTAS
 

@@ -26,7 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
-
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [],
@@ -54,7 +54,8 @@ import { FormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatSidenavModule,
     MatExpansionModule,
-    FormsModule
+    FormsModule,
+    MatGridListModule
   ],
   exports:[
     CommonModule,
@@ -80,7 +81,8 @@ import { FormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatSidenavModule,
     MatExpansionModule,
-    FormsModule
+    FormsModule,
+    MatGridListModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

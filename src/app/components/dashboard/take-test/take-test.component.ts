@@ -447,57 +447,69 @@ export class TakeTestComponent implements OnInit {
         this._questionResponseCalculation = _response;
         console.log('DATOS PERGUNTA: ' + element.ID_QUESTIONS + ' - ' + JSON.stringify(this._questionResponseCalculation));
         if(_response.ID_SECTION === 1 || _response.ID_SECTION === 2 || _response.ID_SECTION === 3|| _response.ID_SECTION === 4|| _response.ID_SECTION === 5|| _response.ID_SECTION === 6|| _response.ID_SECTION === 7|| _response.ID_SECTION === 8){
-          
           this._connectionService.getAnswersById(element.ID_ANSWERS).subscribe({ next: (_responsePunt) => {
-            // this._answersResponseCalculation = _response;
             console.log('DATOS RESPUESTA A: ' + element.ID_ANSWERS + ' - ' + JSON.stringify(_response));
             console.log('ID SECTION PARA VERIFICAR: ' + this._questionResponseCalculation.ID_SECTION + ' - ' + element.ID_ANSWERS);
-            // if(_response.ID_SECTION === 1){
-            //   this._puntuactionBloqueASectionA = this._puntuactionBloqueASectionA + _responsePunt.PUNCTUATION;
-            //   this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA;
-            //   console.log('DATOS SECCION A DE A: ' + this._questionResponseCalculation.ID_SECTION + ' - ' + this._sessionResponse.puntuactionBloqueASectionA);              
-            // }
+            let _comparationBloques: number[] = [
+              this._sessionResponse.puntuactionBloqueASectionA,
+              this._sessionResponse.puntuactionBloqueBSectionA,
+              this._sessionResponse.puntuactionBloqueCSectionA,
+              this._sessionResponse.puntuactionBloqueDSectionA,
+              this._sessionResponse.puntuactionBloqueESectionA,
+              this._sessionResponse.puntuactionBloqueFSectionA,
+              this._sessionResponse.puntuactionBloqueGSectionA,
+              this._sessionResponse.puntuactionBloqueHSectionA
+            ];
             switch(_response.ID_SECTION){
               case 1:
                 this._puntuactionBloqueASectionA = this._puntuactionBloqueASectionA + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA;
-                console.log('DATOS SECCION A DE A: ' + this._questionResponseCalculation.ID_SECTION + ' - ' + this._sessionResponse.puntuactionBloqueASectionA);
+                _comparationBloques[0] = this._sessionResponse.puntuactionBloqueASectionA;
               break;
               case 2:
                 this._puntuactionBloqueASectionB = this._puntuactionBloqueASectionB + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB;
+                _comparationBloques[1] = this._sessionResponse.puntuactionBloqueBSectionA;
               break;
               case 3:
                 this._puntuactionBloqueASectionC = this._puntuactionBloqueASectionC + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueCSectionA = this._puntuactionBloqueASectionC;
+                _comparationBloques[2] = this._sessionResponse.puntuactionBloqueCSectionA;
               break;
               case 4:
                 this._puntuactionBloqueASectionD = this._puntuactionBloqueASectionD + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueDSectionA = this._puntuactionBloqueASectionD;
+                _comparationBloques[3] = this._sessionResponse.puntuactionBloqueDSectionA;
               break;
               case 5:
                 this._puntuactionBloqueASectionE = this._puntuactionBloqueASectionE + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueESectionA = this._puntuactionBloqueASectionE;
+                _comparationBloques[4] = this._sessionResponse.puntuactionBloqueESectionA;
               break;
               case 6:
                 this._puntuactionBloqueASectionF = this._puntuactionBloqueASectionF + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueFSectionA = this._puntuactionBloqueASectionF;
+                _comparationBloques[5] = this._sessionResponse.puntuactionBloqueFSectionA;
               break;
               case 7:
                 this._puntuactionBloqueASectionG = this._puntuactionBloqueASectionG + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueGSectionA = this._puntuactionBloqueASectionG;
+                _comparationBloques[6] = this._sessionResponse.puntuactionBloqueGSectionA;
               break;
               case 8:
                 this._puntuactionBloqueASectionH = this._puntuactionBloqueASectionH + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueHSectionA = this._puntuactionBloqueASectionH;
+                _comparationBloques[7] = this._sessionResponse.puntuactionBloqueHSectionA;
               break;
             }
+
             this._puntuactionBloqueA = this._puntuactionBloqueA +_responsePunt.PUNCTUATION;
+            this._puntuactionBloqueA = Math.max(this._sessionResponse.puntuactionBloqueASectionA, this._sessionResponse.puntuactionBloqueBSectionA,this._sessionResponse.puntuactionBloqueCSectionA,this._sessionResponse.puntuactionBloqueDSectionA,this._sessionResponse.puntuactionBloqueESectionA,this._sessionResponse.puntuactionBloqueFSectionA,this._sessionResponse.puntuactionBloqueGSectionA,this._sessionResponse.puntuactionBloqueHSectionA);
+            this._sessionResponse.puntuactionSectionA = _comparationBloques;
             this._sessionResponse.puntuactionBloqueA = this._puntuactionBloqueA;
             this._storage.setCurrentSession(this._sessionResponse);
             console.log('PUNTUACION A SUMAR BLOQUE A : ' + this._puntuactionBloqueA);
-            // this._sessionResponse = this._storage.getCurrentSession();
-            // this._puntuactionBloqueB!:number;
+            console.log('PUNTAJE MAYOR PARA LA SECCION A: ' + this._sessionResponse.puntuactionBloqueA);
           }, error: (_error) => {
 
           }, complete: () => {
@@ -511,45 +523,74 @@ export class TakeTestComponent implements OnInit {
 
           this._connectionService.getAnswersById(element.ID_ANSWERS).subscribe({ next: (_responsePunt) => {
             // this._answersResponseCalculation = _response;
+            let _comparationBloques: number[] = [
+              this._sessionResponse.puntuactionBloqueASectionB,
+              this._sessionResponse.puntuactionBloqueBSectionB,
+              this._sessionResponse.puntuactionBloqueCSectionB,
+              this._sessionResponse.puntuactionBloqueDSectionB,
+              this._sessionResponse.puntuactionBloqueESectionB,
+              this._sessionResponse.puntuactionBloqueFSectionB,
+              this._sessionResponse.puntuactionBloqueGSectionB,
+              this._sessionResponse.puntuactionBloqueHSectionB
+            ];
             switch(_response.ID_SECTION){
               case 9:
                 this._puntuactionBloqueBSectionA = this._puntuactionBloqueBSectionA + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueASectionB = this._puntuactionBloqueBSectionA;
-                
+                _comparationBloques[0] = this._sessionResponse.puntuactionBloqueASectionB;
               break;
               case 10:
                 this._puntuactionBloqueBSectionB = this._puntuactionBloqueBSectionB + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueBSectionB = this._puntuactionBloqueBSectionB;
+                _comparationBloques[1] = this._sessionResponse.puntuactionBloqueBSectionB;
               break;
               case 11:
                 this._puntuactionBloqueBSectionC = this._puntuactionBloqueBSectionC + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueCSectionB = this._puntuactionBloqueBSectionC;
+                _comparationBloques[2] = this._sessionResponse.puntuactionBloqueCSectionB;
               break;
               case 12:
                 this._puntuactionBloqueBSectionD = this._puntuactionBloqueBSectionD + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueDSectionB = this._puntuactionBloqueBSectionD;
+                _comparationBloques[3] = this._sessionResponse.puntuactionBloqueDSectionB;
               break;
               case 13:
                 this._puntuactionBloqueBSectionE = this._puntuactionBloqueBSectionE + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueESectionB = this._puntuactionBloqueBSectionE;
+                _comparationBloques[4] = this._sessionResponse.puntuactionBloqueESectionB;
               break;
               case 14:
                 this._puntuactionBloqueBSectionF = this._puntuactionBloqueBSectionF + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueFSectionB = this._puntuactionBloqueBSectionF;
+                _comparationBloques[5] = this._sessionResponse.puntuactionBloqueFSectionB;
               break;
               case 15:
                 this._puntuactionBloqueBSectionG = this._puntuactionBloqueBSectionG + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueGSectionB = this._puntuactionBloqueBSectionG;
+                _comparationBloques[6] = this._sessionResponse.puntuactionBloqueGSectionB;
               break;
               case 16:
                 this._puntuactionBloqueBSectionH = this._puntuactionBloqueBSectionH + _responsePunt.PUNCTUATION;
                 this._sessionResponse.puntuactionBloqueHSectionB = this._puntuactionBloqueBSectionH;
+                _comparationBloques[7] = this._sessionResponse.puntuactionBloqueHSectionB;
               break;
             }
+
             this._puntuactionBloqueB = this._puntuactionBloqueB +_responsePunt.PUNCTUATION;
+            this._puntuactionBloqueB = Math.max(
+              this._sessionResponse.puntuactionBloqueASectionB, 
+              this._sessionResponse.puntuactionBloqueBSectionB,
+              this._sessionResponse.puntuactionBloqueCSectionB,
+              this._sessionResponse.puntuactionBloqueDSectionB,
+              this._sessionResponse.puntuactionBloqueESectionB,
+              this._sessionResponse.puntuactionBloqueFSectionB,
+              this._sessionResponse.puntuactionBloqueGSectionB,
+              this._sessionResponse.puntuactionBloqueHSectionB);
+              
+            this._sessionResponse.puntuactionSectionB = _comparationBloques;
             this._sessionResponse.puntuactionBloqueB = this._puntuactionBloqueB;
             this._storage.setCurrentSession(this._sessionResponse);
-            console.log('PUNTUACION A SUMAR BLOQUE B : ' + this._puntuactionBloqueB);
+            console.log('PUNTAJE MAYOR PARA LA SECCION B: '+ this._puntuactionBloqueB);
           }, error: (_error) => {
 
           }, complete: () => {

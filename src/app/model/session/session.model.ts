@@ -29,4 +29,7 @@ export class Session {
     public puntuactionBloqueFSectionB !:number;
     public puntuactionBloqueGSectionB !:number;
     public puntuactionBloqueHSectionB !:number;
+
+    public puntuactionSectionA!:number[];
+    public puntuactionSectionB!:number[];
 }

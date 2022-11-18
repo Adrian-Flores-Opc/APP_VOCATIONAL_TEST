@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { SectionsResponse } from './../../../model/sections/sections.model';
 import { Component, OnInit } from '@angular/core';
 import { ConeectionApiService } from 'src/app/core/service-connection/coneection-api.service';
@@ -6,6 +7,7 @@ import { AnswersResponse } from 'src/app/model/answers/answers.model';
 import { StorageService } from 'src/app/core/session/storage.service';
 import { dataPuntuaction, Session } from 'src/app/model/session/session.model';
 import { ResultRequest, ResultResponse } from 'src/app/model/result/result.model';
+
 
 @Component({
   selector: 'app-take-test',
@@ -652,5 +654,22 @@ export class TakeTestComponent implements OnInit {
       this._storage.setCurrentSession(this._sessionResponse);
     }
     //#endregion
+  }
+
+  public confirmationSaveTestVocational():void{
+    Swal.fire({
+      title : '¿Desea Registrar sus respuestas?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Confirmar',
+      denyButtonText: 'Continuar Test'
+    }).then((_result) => {
+      if (_result.isConfirmed){
+        this.getResultTesting();
+        Swal.fire('Respuestas guardadas correctamente.','','success');
+      } else if (_result.isDenied) {
+        Swal.fire('Respuestas guardadas correctamente.','','info');
+      }
+    });    
   }
 }

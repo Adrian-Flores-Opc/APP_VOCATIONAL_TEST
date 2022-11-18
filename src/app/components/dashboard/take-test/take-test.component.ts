@@ -358,7 +358,6 @@ export class TakeTestComponent implements OnInit {
     if(typeSection === 'A'){
       switch(section){
         case 'A':
-          // this._modelQuestionsResult.sectionATypeA[quesId].
           _dataQuestions.ANSWERS.forEach(element => {
             if(element.ID_ANSWERS != _data.ID_ANSWERS){
               element.CHECK = false;

@@ -609,6 +609,10 @@ export class TakeTestComponent implements OnInit {
 
   public getIntelligense(_habilidadMayor:number,  _interesMayor: number, bloqueHabilidad: dataPuntuaction[],  _bloqueInteres:dataPuntuaction[]):void{
     console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ');
+    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ' + _habilidadMayor);
+    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ' + _interesMayor);
+    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ' + JSON.stringify(bloqueHabilidad));
+    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ' + JSON.stringify(_bloqueInteres));
     let _habilidarMayorIntSec = bloqueHabilidad.filter(x => x.puntuaction == _habilidadMayor);
     let _interesMayorIntSec = _bloqueInteres.filter(x => x.puntuaction == _interesMayor);
     let _interesAct = _habilidadMayor;

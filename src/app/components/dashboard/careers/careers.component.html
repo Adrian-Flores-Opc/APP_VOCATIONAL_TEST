@@ -2,24 +2,24 @@
   <div class="container-careers">
     <div class="row">
       <div class="col-md-12">
-        <div class="container-title"><p>Carreras Profesionales</p></div>
-        <div class="container-content-one"><p>Dado que su inteligencia predominante es: LOGICO - MATEMATICO</p><p>Se le sugiere tomar una
-          de las carreras profesionales de la siguiente lista:
-        </p></div>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>CARRERAS PROFESIONALES</mat-card-title>
+          </mat-card-header>
+          <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
+            <P>
+              Para obtener una recomendación y conocer los resultados del test vocacional es necesario realizar el test.
+            </P>
+          </mat-card-content>
+          <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
+            <p>MOSTRAR LAS CARRERAS DEPENDIENDO DEL TEST VOCACIONAL</p>
+          </mat-card-content>
+  
+          <mat-card-actions *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
+            <button mat-button>REALIZAR TEST</button>
+          </mat-card-actions>
+        </mat-card>
       </div>
     </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="container-content-two">
-        <li>Lic. Economia</li>
-        <li>Ing. Comercial</li>
-        <li>Lic. Estadistica</li>
-        <li>Lic. Auditoria</li>
-        <li>Lic. Contabilidad</li>
-      </div>
-    </div>
-  </div>
-
   </div>
 </div>

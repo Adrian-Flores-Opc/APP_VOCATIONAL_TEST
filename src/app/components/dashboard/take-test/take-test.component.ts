@@ -105,8 +105,6 @@ export class TakeTestComponent implements OnInit {
     this._sessionResponse.puntuactionBloqueGSectionB = this._puntuactionBloqueBSectionG = 0;
     this._sessionResponse.puntuactionBloqueHSectionB = this._puntuactionBloqueBSectionH = 0;
 
-  
-    console.log('SESSION DENTRO DEL DASHBOARD TAKE TEST: ' + JSON.stringify(this._sessionResponse));
     this.getQuestions();
     this.getAnswers();
     this.getSections();
@@ -193,8 +191,6 @@ export class TakeTestComponent implements OnInit {
     this._modelQuestionsResult.sectionATypeA.forEach( element => {
       element.ANSWERS = this._answersResponse.filter(x => x.TYPE_ANSWERS == 'B');
     });
-
-    console.log('MODELO PARA EL FORMULARIO: ' + JSON.stringify(this._modelQuestionsResult));
   }
   public getQuestions():void{
     this._connectionService.getQuestions().subscribe({ next: (_response) => {
@@ -228,7 +224,6 @@ export class TakeTestComponent implements OnInit {
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
-      console.log('INFORMACION OBTENIDA CORRECTAMENTE');
     }});
   }
 
@@ -338,34 +333,25 @@ export class TakeTestComponent implements OnInit {
 
 
 
-      console.log('MODELO PARA EL FORMULARIO QUESTIOSN: ' + JSON.stringify(this._modelQuestionsResult));
-      console.log(JSON.stringify(this._answersResponse));
+      
+      
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
-      console.log('INFORMACION OBTENIDA CORRECTAMENTE');
     }});
   }
 
   public getSections():void{
     this._connectionService.getSections().subscribe({ next: (_response) => {
       this._sectionsResponse = _response;
-      console.log('SECTION_RESPONSE: ' + JSON.stringify(this._sectionsResponse));
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
-      console.log('INFORMACION OBTENIDA CORRECTAMENTE');
+      
     }});
   }
 
   public checkAnswersVerify(_data: AnswersResponse, typeSection: String, section: String, _dataQuestions:QuestionsResult, evento:boolean, quesId: number, ansId: number):void{
-    console.log('ANSWERS CHECK: ' + JSON.stringify(_data));
-    console.log('ANSWERS CHECK: ' + JSON.stringify(_dataQuestions));
-    console.log('ANSWERS CHECK: ' + typeSection);
-    console.log('ANSWERS CHECK: ' + section);
-    console.log('ANSWERS CHECK: ' + evento);
-    console.log('ANSWERS CHECK: ' + quesId);
-    console.log('ANSWERS CHECK: ' + ansId);
     this.saveResultAnswers(_data.ID_ANSWERS,_dataQuestions.ID_QUESTIONS);
     if(typeSection === 'A'){
       switch(section){
@@ -391,7 +377,6 @@ export class TakeTestComponent implements OnInit {
     this._resultQuestionsRequest.ID_QUESTIONS = idQuestions;
     this._resultQuestionsRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
     this._connectionService.saveResult(this._resultQuestionsRequest).subscribe({ next: (_response) => {
-      console.log('RESPUESTA ENVIADA: ' + JSON.stringify(_response));
     }, error: (_error) => {
 
     }, complete: () => {
@@ -402,7 +387,6 @@ export class TakeTestComponent implements OnInit {
 
   public getResultTesting():void{
     this._connectionService.getResul().subscribe({ next: (_response) => {
-      console.log('RESPUESTAS OBTENIDAS: ' + JSON.stringify(_response));
       this._resultCalculation = _response.filter(x => x.ID_TESTING == 19);
       this.obtTotalTipoSeccion(this._resultCalculation);
     }, error: (_error) => {
@@ -425,10 +409,8 @@ export class TakeTestComponent implements OnInit {
 
 
   public getQuestionsById(_data:any):QuestionsResponse{
-    console.log('DATO PARA CONSULTAR LA PREGUNTA: ' + _data)
     this._connectionService.getQuestionsById(_data).subscribe({ next: (_response) => {
       this._questionResponseCalculation = _response;
-      console.log('RESPUESTA PARA SUMAR LA PREGUNTA: ' + JSON.stringify(this._questionResponseCalculation));
     }, error: (_error) => {
 
     }, complete: () => {
@@ -438,18 +420,11 @@ export class TakeTestComponent implements OnInit {
   }
 
   public obtTotalTipoSeccion(_datos: ResultResponse[]):void{
-    console.log('DATOS PARA SUMAR: ' + JSON.stringify(_datos));
     _datos.forEach(element => {
-      // this._questionResponseCalculation = this.getQuestionsById(_questionId);
-      console.log('ID QUESTIONS CONSULTA: ' +element.ID_QUESTIONS);
       this._connectionService.getQuestionsById(element.ID_QUESTIONS).subscribe({ next: (_response) => {
-        console.log('RESPUESTA TIPO DE PREGUNTA: '+ _response.ID_QUESTIONS +' - ' + JSON.stringify(_response));
         this._questionResponseCalculation = _response;
-        console.log('DATOS PERGUNTA: ' + element.ID_QUESTIONS + ' - ' + JSON.stringify(this._questionResponseCalculation));
         if(_response.ID_SECTION === 1 || _response.ID_SECTION === 2 || _response.ID_SECTION === 3|| _response.ID_SECTION === 4|| _response.ID_SECTION === 5|| _response.ID_SECTION === 6|| _response.ID_SECTION === 7|| _response.ID_SECTION === 8){
           this._connectionService.getAnswersById(element.ID_ANSWERS).subscribe({ next: (_responsePunt) => {
-            console.log('DATOS RESPUESTA A: ' + element.ID_ANSWERS + ' - ' + JSON.stringify(_response));
-            console.log('ID SECTION PARA VERIFICAR: ' + this._questionResponseCalculation.ID_SECTION + ' - ' + element.ID_ANSWERS);
             let _comparationBloques: dataPuntuaction[] = [
               { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueASectionA },
               { bloque:'B',puntuaction: this._sessionResponse.puntuactionBloqueBSectionA },
@@ -508,8 +483,6 @@ export class TakeTestComponent implements OnInit {
             this._sessionResponse.puntuactionSectionA = _comparationBloques;
             this._sessionResponse.puntuactionBloqueA = this._puntuactionBloqueA;
             this._storage.setCurrentSession(this._sessionResponse);
-            console.log('PUNTUACION A SUMAR BLOQUE A : ' + this._puntuactionBloqueA);
-            console.log('PUNTAJE MAYOR PARA LA SECCION A: ' + this._sessionResponse.puntuactionBloqueA);
           }, error: (_error) => {
 
           }, complete: () => {
@@ -518,11 +491,7 @@ export class TakeTestComponent implements OnInit {
 
         }
         if(_response.ID_SECTION === 9 || _response.ID_SECTION === 10 || _response.ID_SECTION === 11 || _response.ID_SECTION === 12|| _response.ID_SECTION === 13|| _response.ID_SECTION === 14|| _response.ID_SECTION === 15|| _response.ID_SECTION === 16){
-          // const _datoCalculation = this.getResultById(_resultId);
-          // console.log('PUNTUACION A SUMAR BLOQUE B : ' + _datoCalculation.PUNCTUATION);
-
           this._connectionService.getAnswersById(element.ID_ANSWERS).subscribe({ next: (_responsePunt) => {
-            // this._answersResponseCalculation = _response;
             let _comparationBloques: dataPuntuaction[] = [
               { bloque:'A',puntuaction: this._sessionResponse.puntuactionBloqueASectionB },
               { bloque:'B',puntuaction: this._sessionResponse.puntuactionBloqueBSectionB },
@@ -590,7 +559,6 @@ export class TakeTestComponent implements OnInit {
             this._sessionResponse.puntuactionSectionB = _comparationBloques;
             this._sessionResponse.puntuactionBloqueB = this._puntuactionBloqueB;
             this._storage.setCurrentSession(this._sessionResponse);
-            console.log('PUNTAJE MAYOR PARA LA SECCION B: '+ this._puntuactionBloqueB);
           }, error: (_error) => {
 
           }, complete: () => {
@@ -608,11 +576,6 @@ export class TakeTestComponent implements OnInit {
   }
 
   public getIntelligense(_habilidadMayor:number,  _interesMayor: number, bloqueHabilidad: dataPuntuaction[],  _bloqueInteres:dataPuntuaction[]):void{
-    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ');
-    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ' + _habilidadMayor);
-    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ' + _interesMayor);
-    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ' + JSON.stringify(bloqueHabilidad));
-    console.log('INICIA EL CALCULO DEL ID INTELIGENCIA ' + JSON.stringify(_bloqueInteres));
     let _habilidarMayorIntSec = bloqueHabilidad.filter(x => x.puntuaction == _habilidadMayor);
     let _interesMayorIntSec = _bloqueInteres.filter(x => x.puntuaction == _interesMayor);
     let _interesAct = _habilidadMayor;

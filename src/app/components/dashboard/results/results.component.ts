@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from 'src/app/core/session/storage.service';
+import { Session } from 'src/app/model/session/session.model';
 
 export interface datosResultados {
   capacidades: string,
@@ -17,9 +19,12 @@ export class ResultsComponent implements OnInit {
   displayedColumns: string[] = ['capacidades','descripcion'];
   dataSource = ELEMENT_DATA;
 
-  constructor() { }
+  public _sessionResponse !: Session;
+
+  constructor(private _storage: StorageService) { }
 
   ngOnInit(): void {
+    this._sessionResponse = this._storage.getCurrentSession();
   }
 
 }

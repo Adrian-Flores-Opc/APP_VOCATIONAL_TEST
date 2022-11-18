@@ -1,33 +1,25 @@
 <div class="container">
   <div class="container-results">
     <div class="row">
-      <div class="col-md-12">
-        <div class="container-results-title"><p>Resultados</p></div>
-        <div class="container-results-one"><p>De acuerdo a las habilidades en la que destacan y sus intereses, su inteligencia predominante es:</p>
-          <p>LOGICO - MATEMATICO</p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="container-results-two">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <ng-container matColumnDef="capacidades">
-              <th mat-header-cell *matHeaderCellDef>Capacidades</th>
-              <td mat-cell *matCellDef="let element">{{element.capacidades}}</td>
-            </ng-container>
+      
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>RESULTADOS</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
+          <P>
+            Para obtener una recomendación y conocer los resultados del test vocacional es necesario realizar el test.
+          </P>
+        </mat-card-content>
+        <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
+          <p>MOSTRAR LA DESCRICION DEPENDIENDO DE SU RESULTADO EN EL TEST VOCAICONAL</p>
+        </mat-card-content>
 
-            <ng-container matColumnDef="descripcion">
-              <th mat-header-cell *matHeaderCellDef>Contempla las capacidades de logica, abstracta, razonamiento complejo solucion de problemas calculo numerico, pensamiento critico.</th>
-              <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
-            </ng-container>
+        <mat-card-actions *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
+          <button mat-button>REALIZAR TEST</button>
+        </mat-card-actions>
+      </mat-card>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let rows; columns: displayedColumns;"></tr>
-          </table>
-        </div>
-      </div>
     </div>
   </div>
-
 </div>

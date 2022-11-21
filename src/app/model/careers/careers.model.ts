@@ -13,4 +13,5 @@ export class CareersResponse{
 export class CareersModel{
     public CAREERS !: CareersResponse;
     public UNIVERSITIES !: UniversitiesResponse[];
+  elementoCarrera: Promise<UniversitiesResponse[]>;
 }

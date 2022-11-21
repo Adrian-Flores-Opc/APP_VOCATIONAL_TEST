@@ -49,7 +49,7 @@ export class CareersComponent implements OnInit {
           if (_verificationCarrera.length === 0){
             let _carrerasAdd: CareersModel = new CareersModel();
             _carrerasAdd.CAREERS = elementCarrera;
-            console.log('CARRERA : ' + JSON.stringify(_carrerasAdd.CAREERS));
+            // console.log('CARRERA : ' + JSON.stringify(_carrerasAdd.CAREERS));
             _carrerasIterar.forEach( elementUniversidades => {
               if(elementUniversidades.CAREERS === _carrerasAdd.CAREERS.CAREERS){
                 this._serviceConnection.getUniversitiesById(elementUniversidades.ID_UNIVERSITIES).subscribe({ next: (_response) => {
@@ -57,7 +57,7 @@ export class CareersComponent implements OnInit {
                   // _universidadesAdd = _response;
                   // _carrerasAdd.UNIVERSITIES.push(_universidadesAdd);
                   _carrerasAdd.UNIVERSITIES.push(_response);
-                  console.log('UNIVERSIDADES: ' + JSON.stringify(_carrerasAdd.UNIVERSITIES));
+                  // console.log('UNIVERSIDADES: ' + JSON.stringify(_carrerasAdd.UNIVERSITIES));
                 }, error: (_error) => {
             
                 }, complete:() =>{
@@ -65,6 +65,7 @@ export class CareersComponent implements OnInit {
                 }});
               }
             });
+            console.log('CARRERA AGREGAR : ' + JSON.stringify(_carrerasAdd));
             this._carrersModel.push(_carrerasAdd);
           }
         });

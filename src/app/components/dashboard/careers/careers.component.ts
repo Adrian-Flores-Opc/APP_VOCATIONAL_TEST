@@ -4,6 +4,8 @@ import { StorageService } from 'src/app/core/session/storage.service';
 import { Session } from 'src/app/model/session/session.model';
 import { CareersModel, CareersResponse } from 'src/app/model/careers/careers.model';
 import { UniversitiesResponse } from 'src/app/model/universities/universities.model';
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-careers',
@@ -33,7 +35,7 @@ export class CareersComponent implements OnInit {
 
   public _agregarUniversidadesXCarrera : UniversitiesResponse[] = [];
 
-  constructor(private _storage: StorageService, private _serviceConnection: ConeectionApiService) {
+  constructor(private _storage: StorageService, private _serviceConnection: ConeectionApiService, private _dialog: MatDialog) {
    }
 
   
@@ -48,6 +50,9 @@ export class CareersComponent implements OnInit {
     }
   }
 
+  openDialog(_nameCarrera: String){
+    this._dialog.open(DialogComponent, {data:{ carrera: _nameCarrera} });
+  }
 
   public getCarrerasIterar():void{
     this._serviceConnection.getCareers().subscribe({ next: (_response) =>{

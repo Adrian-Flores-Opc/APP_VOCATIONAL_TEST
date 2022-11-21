@@ -29,6 +29,7 @@ import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { MatMenuModule } from '@angular/material/menu';
     FormsModule,
     MatGridListModule,
     MatTreeModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   exports:[
     CommonModule,
@@ -89,7 +91,8 @@ import { MatMenuModule } from '@angular/material/menu';
     FormsModule,
     MatGridListModule,
     MatTreeModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

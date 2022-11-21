@@ -9,6 +9,7 @@ import { CareersComponent } from './careers/careers.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     TakeTestComponent,
     ResultsComponent,
     CareersComponent,
-    MainNavComponent
+    MainNavComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

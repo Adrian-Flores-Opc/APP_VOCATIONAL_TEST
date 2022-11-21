@@ -52,36 +52,13 @@ export class CareersComponent implements OnInit {
 
 
   public getUniversitiesByCareers(_dato: CareersResponse[]):CareersModel[]{
-    console.log('CARRERAS: ' + JSON.stringify(_dato));
-    let _carreras:String[] = [];
     _dato.forEach(elemnet => {
       let _verifycation = this._carrersModel.filter(x => x.CAREERS.CAREERS === elemnet.CAREERS);
-      console.log(_verifycation.length + ' - ' + elemnet.CAREERS + ' - ' + JSON.stringify(_carreras));
       if(_verifycation.length === 0 ){
         this._careersAdd.CAREERS = elemnet;
-        this._careersVerifyAdd = _dato.filter( x => x.CAREERS === elemnet.CAREERS); 
-        this._careersVerifyAdd.forEach(item => {
-          let _responseUniversitiesAdd = this.getUniversitiesById(item.ID_UNIVERSITIES);
-          this._careersAdd.UNIVERSITIES.push(_responseUniversitiesAdd);
-        });
         this._carrersModel.push(this._careersAdd);
       }
-
     });
-
-    // this._carrersModel.forEach( element => {
-    //   this._careersVerifyAdd = _dato.filter( x => x.CAREERS === element.CAREERS.CAREERS);
-    //   this._careersVerifyAdd.forEach(item => {
-    //     this._serviceConnection.getUniversitiesById(item.ID_UNIVERSITIES).subscribe({ next: (_response) => {
-    //       element.UNIVERSITIES.push(_response);
-    //       console.log('UNIVERSIDAD RESPONSE: ' + JSON.stringify(element.UNIVERSITIES));
-    //     }, error: (_error) => {
-  
-    //     }, complete:() =>{
-  
-    //     }});
-    //   });
-    // });
     return this._carrersModel;
   }
 

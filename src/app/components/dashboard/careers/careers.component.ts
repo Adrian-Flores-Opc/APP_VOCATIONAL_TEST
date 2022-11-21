@@ -38,22 +38,26 @@ export class CareersComponent implements OnInit {
     this._sessionResponse = this._storage.getCurrentSession();
     if(this._sessionResponse.stateTestingIdentity === 'P'){
       this._serviceConnection.getCareers().subscribe({ next: (_response) => {
-        this._careersResponse = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
+        let _carrerasIterar = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
+        // this._careersResponse = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
+        console.log('CARRERAS A ITERAR : ' + JSON.stringify(_carrerasIterar));
         // OBJETO QUE CONTIENE TODAS LAS CARRERAS CORRESPONDIENTE AL ID INTELIENCIA
-        this._carrersModelResponse = this.getUniversitiesByCareers(this._careersResponse);
+        // this._carrersModelResponse = this.getUniversitiesByCareers(this._careersResponse);
         // ITERAR EL OBTEJO PARA ARMAR LAS UNIVERSIDADES POR CARRERA 
-        this._carrersModelResponse.forEach( elementCarrera => {
-          let _verificationCarrera = this._carrersModel.filter(x => x.CAREERS.CAREERS === elementCarrera.CAREERS.CAREERS);
+        _carrerasIterar.forEach( elementCarrera => {
+          let _verificationCarrera = this._carrersModel.filter(x => x.CAREERS.CAREERS === elementCarrera.CAREERS);
           if (_verificationCarrera.length === 0){
             let _carrerasAdd: CareersModel = new CareersModel();
-            _carrerasAdd.CAREERS = elementCarrera.CAREERS;
-            this._careersResponse.forEach( elementUniversidades => {
+            _carrerasAdd.CAREERS = elementCarrera;
+            console.log('CARRERA : ' + JSON.stringify(_carrerasAdd.CAREERS));
+            _carrerasIterar.forEach( elementUniversidades => {
               if(elementUniversidades.CAREERS === _carrerasAdd.CAREERS.CAREERS){
                 this._serviceConnection.getUniversitiesById(elementUniversidades.ID_UNIVERSITIES).subscribe({ next: (_response) => {
                   // let _universidadesAdd: UniversitiesResponse = new UniversitiesResponse();
                   // _universidadesAdd = _response;
                   // _carrerasAdd.UNIVERSITIES.push(_universidadesAdd);
                   _carrerasAdd.UNIVERSITIES.push(_response);
+                  console.log('UNIVERSIDADES: ' + JSON.stringify(_carrerasAdd.UNIVERSITIES));
                 }, error: (_error) => {
             
                 }, complete:() =>{

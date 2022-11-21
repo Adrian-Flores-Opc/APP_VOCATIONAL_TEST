@@ -27,57 +27,67 @@ export class CareersComponent implements OnInit {
 
   public _carrersModelResponse: CareersModel[] = [];
   public _universitiesResponse !: UniversitiesResponse;
+
+
+  public _modelToDrawRaces:CareersModel[] = [];
+
   constructor(private _storage: StorageService, private _serviceConnection: ConeectionApiService) {
    }
 
   
   ngOnInit(): void {
+
     this._universitiesResponse = new UniversitiesResponse();
     this._careersAdd = new CareersModel();
     this._universitiesAdd = new UniversitiesResponse();
     this._sessionResponse = this._storage.getCurrentSession();
     if(this._sessionResponse.stateTestingIdentity === 'P'){
-      this._serviceConnection.getCareers().subscribe({ next: (_response) => {
-        let _carrerasIterar = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
-        // this._careersResponse = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
-        console.log('CARRERAS A ITERAR : ' + JSON.stringify(_carrerasIterar));
-        // OBJETO QUE CONTIENE TODAS LAS CARRERAS CORRESPONDIENTE AL ID INTELIENCIA
-        // this._carrersModelResponse = this.getUniversitiesByCareers(this._careersResponse);
-        // ITERAR EL OBTEJO PARA ARMAR LAS UNIVERSIDADES POR CARRERA 
-        _carrerasIterar.forEach( elementCarrera => {
-          let _verificationCarrera = this._carrersModel.filter(x => x.CAREERS.CAREERS === elementCarrera.CAREERS);
-          if (_verificationCarrera.length === 0){
-            let _carrerasAdd: CareersModel = new CareersModel();
-            _carrerasAdd.CAREERS = elementCarrera;
-            // console.log('CARRERA : ' + JSON.stringify(_carrerasAdd.CAREERS));
-            _carrerasIterar.forEach( elementUniversidades => {
-              if(elementUniversidades.CAREERS === _carrerasAdd.CAREERS.CAREERS){
-                this._serviceConnection.getUniversitiesById(elementUniversidades.ID_UNIVERSITIES).subscribe({ next: (_response) => {
-                  // let _universidadesAdd: UniversitiesResponse = new UniversitiesResponse();
-                  // _universidadesAdd = _response;
-                  // _carrerasAdd.UNIVERSITIES.push(_universidadesAdd);
-                  _carrerasAdd.UNIVERSITIES.push(_response);
-                  // console.log('UNIVERSIDADES: ' + JSON.stringify(_carrerasAdd.UNIVERSITIES));
-                }, error: (_error) => {
-            
-                }, complete:() =>{
-            
-                }});
-              }
-            });
-            console.log('CARRERA AGREGAR : ' + JSON.stringify(_carrerasAdd));
-            this._carrersModel.push(_carrerasAdd);
-          }
-        });
-      }, error: (_error) => {
-
-      }, complete:() =>{
-
-      }});
-      console.log('LISTA DE CARRERAS POR UNIVERSIDADES: ' + JSON.stringify(this._carrersModel));
+      this.getCarrerasIterar();
+      
     }
   }
 
+
+  public getCarrerasIterar():void{
+    this._serviceConnection.getCareers().subscribe({ next: (_response) =>{
+      let _verificarCarreraIterar = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
+      this.armadoModeloCarrera(_verificarCarreraIterar);
+      this.armadoModeloUniversidaXCarrera(_verificarCarreraIterar);
+    }, error: (_error) =>{
+
+    }, complete:() =>{
+
+    }});
+  }
+
+  public armadoModeloCarrera(_dato: CareersResponse[]):void{
+    _dato.forEach( elementCarrera => {
+      let _verificarCarreraAgregar = this._modelToDrawRaces.filter(x => x.CAREERS.CAREERS === elementCarrera.CAREERS);
+      if(_verificarCarreraAgregar.length === 0 ){
+        let _agregarCarreraFiltrado: CareersModel = new CareersModel();
+        _agregarCarreraFiltrado.CAREERS = elementCarrera;
+        _agregarCarreraFiltrado.UNIVERSITIES = [];
+        this._modelToDrawRaces.push(_agregarCarreraFiltrado);
+      }
+    });
+  }
+
+  public armadoModeloUniversidaXCarrera(_datoCarreras: CareersResponse[]):void{
+    this._modelToDrawRaces.forEach( elementoCarrera => {
+      let _universidadesXCarrera = _datoCarreras.filter(x => x.CAREERS === elementoCarrera.CAREERS.CAREERS);
+      _universidadesXCarrera.forEach( elementoUniversidad => {
+        let _agregarUniversidadesXCarrera : UniversitiesResponse = new UniversitiesResponse();
+        this._serviceConnection.getUniversitiesById(elementoUniversidad.ID_UNIVERSITIES).subscribe({ next: (_response) => {
+          _agregarUniversidadesXCarrera = _response;
+          elementoCarrera.UNIVERSITIES.push(_agregarUniversidadesXCarrera);
+        }, error: (_error) => {
+    
+        }, complete:() =>{
+    
+        }});
+      });
+    });
+  }
 
   public getUniversitiesByCareers(_dato: CareersResponse[]):CareersModel[]{
     _dato.forEach(elemnet => {

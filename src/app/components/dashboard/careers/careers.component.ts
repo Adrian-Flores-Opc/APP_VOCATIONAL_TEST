@@ -31,6 +31,8 @@ export class CareersComponent implements OnInit {
 
   public _modelToDrawRaces:CareersModel[] = [];
 
+  public _agregarUniversidadesXCarrera : UniversitiesResponse[] = [];
+
   constructor(private _storage: StorageService, private _serviceConnection: ConeectionApiService) {
    }
 
@@ -72,22 +74,52 @@ export class CareersComponent implements OnInit {
     console.log('LISTA DE CARRERAS FILTRADO: ' + JSON.stringify(this._modelToDrawRaces));
   }
 
+  public armadoUniversidadesXCarreraServicio(_datoCarreras: CareersResponse[], _carrera: String):UniversitiesResponse[]{
+    const _armadoUniversities : UniversitiesResponse[] = [];
+    let _universidadesXCarrera = _datoCarreras.filter(x => x.CAREERS === _carrera);
+    
+    for(let i = 0; i < _universidadesXCarrera.length; i++){
+      this._serviceConnection.getUniversitiesById(_universidadesXCarrera[i].ID_UNIVERSITIES).subscribe({ next: (_response) => {
+
+        // console.log('UNIVERSIDAD AGREGADO PRINCIPAL: ' + JSON.stringify(_response));
+        // this._agregarUniversidadesXCarrera.push(_response);
+        console.log('RESPUESTAS GENERACION ARRAY UNI: ' + JSON.stringify(_response));
+        _armadoUniversities.push(_response);
+
+      }, error: (_error) => {
+  
+      }, complete:() =>{
+  
+      }});
+
+    };      
+    console.log('UNIVERSIDAD AGREGADO PRINCIPAL: ' + JSON.stringify(_armadoUniversities)); 
+    return _armadoUniversities;
+  }
   public armadoModeloUniversidaXCarrera(_datoCarreras: CareersResponse[]):void{
     this._modelToDrawRaces.forEach( elementoCarrera => {
       let _universidadesXCarrera = _datoCarreras.filter(x => x.CAREERS === elementoCarrera.CAREERS.CAREERS);
-      _universidadesXCarrera.forEach( elementoUniversidad => {
-        let _agregarUniversidadesXCarrera : UniversitiesResponse = new UniversitiesResponse();
-        this._serviceConnection.getUniversitiesById(elementoUniversidad.ID_UNIVERSITIES).subscribe({ next: (_response) => {
-          _agregarUniversidadesXCarrera = _response;
-          console.log('UNIVERSIDAD A AGREGAR: ' + JSON.stringify(_agregarUniversidadesXCarrera));
-          elementoCarrera.UNIVERSITIES.push(_agregarUniversidadesXCarrera);
-          console.log('UNIVERSIDADES AGREGADAS ' + JSON.stringify(elementoCarrera.UNIVERSITIES));
-        }, error: (_error) => {
+      console.log('UNIVERSIDADES A AGREGAR INICIAL: '+ JSON.stringify(_universidadesXCarrera));
+      // this.armadoUniversidadesXCarreraServicio(_universidadesXCarrera, elementoCarrera.CAREERS.CAREERS);
+
+      // _universidadesXCarrera.forEach( elementoUniversidad => {
+      //   this._serviceConnection.getUniversitiesById(elementoUniversidad.ID_UNIVERSITIES).subscribe({ next: (_response) => {
+
+      //     // console.log('UNIVERSIDAD AGREGADO PRINCIPAL: ' + JSON.stringify(_response));
+      //     this._agregarUniversidadesXCarrera.push(_response);
+      //     console.log('UNIVERSIDAD AGREGADO PRINCIPAL: ' + JSON.stringify(this._agregarUniversidadesXCarrera));
+
+      //   }, error: (_error) => {
     
-        }, complete:() =>{
+      //   }, complete:() =>{
     
-        }});
-      });
+      //   }});
+      // });
+
+      
+      elementoCarrera.UNIVERSITIES = this.armadoUniversidadesXCarreraServicio(_universidadesXCarrera, elementoCarrera.CAREERS.CAREERS);
+      // console.log('ELEMENTO UNIVERSIDAD AGREGADO: ' + JSON.stringify(elementoCarrera.UNIVERSITIES));
+      console.log('ELEMENTO AGREGADO: ' + JSON.stringify(elementoCarrera));
     });
     console.log('LISTA DE UNIVERSIDADES COMPLETO ' + JSON.stringify(this._modelToDrawRaces));
   }

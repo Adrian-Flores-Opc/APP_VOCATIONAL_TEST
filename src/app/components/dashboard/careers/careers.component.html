@@ -13,6 +13,9 @@
           </mat-card-content>
           <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
             
+            <span *ngFor="let item of _modelToDrawRaces">
+              <button mat-button (click)="openDialog(item.CAREERS.CAREERS)">{{item.CAREERS.CAREERS}}</button>
+            </span>
           </mat-card-content>
   
           <mat-card-actions *ngIf="_sessionResponse.stateTestingIdentity == 'P'">

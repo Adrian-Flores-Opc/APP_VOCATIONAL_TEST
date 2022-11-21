@@ -28,6 +28,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatMenuModule } from '@angular/material/menu';
+
+
 @NgModule({
   declarations: [],
   imports: [
@@ -56,8 +59,8 @@ import { MatTreeModule } from '@angular/material/tree';
     MatExpansionModule,
     FormsModule,
     MatGridListModule,
-    MatTreeModule
-    
+    MatTreeModule,
+    MatMenuModule
   ],
   exports:[
     CommonModule,
@@ -85,7 +88,8 @@ import { MatTreeModule } from '@angular/material/tree';
     MatExpansionModule,
     FormsModule,
     MatGridListModule,
-    MatTreeModule
+    MatTreeModule,
+    MatMenuModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

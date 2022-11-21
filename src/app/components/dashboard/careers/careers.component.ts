@@ -26,11 +26,13 @@ export class CareersComponent implements OnInit {
 
 
   public _carrersModelResponse: CareersModel[] = [];
+  public _universitiesResponse !: UniversitiesResponse;
   constructor(private _storage: StorageService, private _serviceConnection: ConeectionApiService) {
    }
 
   
   ngOnInit(): void {
+    this._universitiesResponse = new UniversitiesResponse();
     this._careersAdd = new CareersModel();
     this._universitiesAdd = new UniversitiesResponse();
     this._sessionResponse = this._storage.getCurrentSession();
@@ -77,5 +79,17 @@ export class CareersComponent implements OnInit {
       });
     });
     return this._carrersModel;
+  }
+
+  public getUniversitiesById(_idUniversity: number): UniversitiesResponse{
+    let _responseUniversities: UniversitiesResponse = new UniversitiesResponse;
+    this._serviceConnection.getUniversitiesById(_idUniversity).subscribe({ next: (_response) => {
+      _responseUniversities = _response;
+    }, error: (_error) => {
+
+    }, complete:() =>{
+
+    }});
+    return _responseUniversities;
   }
 }

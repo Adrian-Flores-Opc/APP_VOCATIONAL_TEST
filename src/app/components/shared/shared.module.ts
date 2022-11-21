@@ -27,7 +27,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
-
+import { MatTreeModule } from '@angular/material/tree';
 @NgModule({
   declarations: [],
   imports: [
@@ -55,7 +55,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSidenavModule,
     MatExpansionModule,
     FormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTreeModule
+    
   ],
   exports:[
     CommonModule,
@@ -82,7 +84,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSidenavModule,
     MatExpansionModule,
     FormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTreeModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

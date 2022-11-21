@@ -15,8 +15,8 @@
               <mat-card-content>
 
                 <section *ngFor="let itemAnswersA of itemQuestionsA.ANSWERS; let i = index">
-                  <!-- <mat-checkbox class="example-margin" [(ngModel)]="_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK" (click)="checkAnswersVerify(itemAnswersA, 'A', 'A',itemQuestionsA,!_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK, indexOfElement,i)">{{itemAnswersA.ANSWERS}}</mat-checkbox> -->
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersA, 'A', 'A',itemQuestionsA,!_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK, indexOfElement,i)">{{itemAnswersA.ANSWERS}}</mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK" (click)="checkAnswersVerify(itemAnswersA, 'A', 'A',itemQuestionsA,!_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK, indexOfElement,i)">{{itemAnswersA.ANSWERS}}</mat-checkbox>
+                  <!-- <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersA, 'A', 'A',itemQuestionsA,!_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK, indexOfElement,i)">{{itemAnswersA.ANSWERS}}</mat-checkbox> -->
                 </section>
 
               </mat-card-content>

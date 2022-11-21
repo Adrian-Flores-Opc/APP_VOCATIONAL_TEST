@@ -60,24 +60,28 @@ export class CareersComponent implements OnInit {
       if(_verifycation.length === 0 ){
         this._careersAdd.CAREERS = elemnet;
         this._careersVerifyAdd = _dato.filter( x => x.CAREERS === elemnet.CAREERS); 
+        this._careersVerifyAdd.forEach(item => {
+          let _responseUniversitiesAdd = this.getUniversitiesById(item.ID_UNIVERSITIES);
+          this._careersAdd.UNIVERSITIES.push(_responseUniversitiesAdd);
+        });
         this._carrersModel.push(this._careersAdd);
       }
 
     });
 
-    this._carrersModel.forEach( element => {
-      this._careersVerifyAdd = _dato.filter( x => x.CAREERS === element.CAREERS.CAREERS);
-      this._careersVerifyAdd.forEach(item => {
-        this._serviceConnection.getUniversitiesById(item.ID_UNIVERSITIES).subscribe({ next: (_response) => {
-          element.UNIVERSITIES.push(_response);
-          console.log('UNIVERSIDAD RESPONSE: ' + JSON.stringify(element.UNIVERSITIES));
-        }, error: (_error) => {
+    // this._carrersModel.forEach( element => {
+    //   this._careersVerifyAdd = _dato.filter( x => x.CAREERS === element.CAREERS.CAREERS);
+    //   this._careersVerifyAdd.forEach(item => {
+    //     this._serviceConnection.getUniversitiesById(item.ID_UNIVERSITIES).subscribe({ next: (_response) => {
+    //       element.UNIVERSITIES.push(_response);
+    //       console.log('UNIVERSIDAD RESPONSE: ' + JSON.stringify(element.UNIVERSITIES));
+    //     }, error: (_error) => {
   
-        }, complete:() =>{
+    //     }, complete:() =>{
   
-        }});
-      });
-    });
+    //     }});
+    //   });
+    // });
     return this._carrersModel;
   }
 

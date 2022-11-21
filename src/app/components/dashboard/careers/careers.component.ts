@@ -39,14 +39,37 @@ export class CareersComponent implements OnInit {
     if(this._sessionResponse.stateTestingIdentity === 'P'){
       this._serviceConnection.getCareers().subscribe({ next: (_response) => {
         this._careersResponse = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
+        // OBJETO QUE CONTIENE TODAS LAS CARRERAS CORRESPONDIENTE AL ID INTELIENCIA
         this._carrersModelResponse = this.getUniversitiesByCareers(this._careersResponse);
-        console.log('RESPONSE FINAL CARRERAS: ' + JSON.stringify(this._carrersModelResponse));
-        console.log('LISTA FINAL DE CARRERAS: ' + JSON.stringify(this._carrersModel));
+        // ITERAR EL OBTEJO PARA ARMAR LAS UNIVERSIDADES POR CARRERA 
+        this._carrersModelResponse.forEach( elementCarrera => {
+          let _verificationCarrera = this._carrersModel.filter(x => x.CAREERS.CAREERS === elementCarrera.CAREERS.CAREERS);
+          if (_verificationCarrera.length === 0){
+            let _carrerasAdd: CareersModel = new CareersModel();
+            _carrerasAdd.CAREERS = elementCarrera.CAREERS;
+            this._careersResponse.forEach( elementUniversidades => {
+              if(elementUniversidades.CAREERS === _carrerasAdd.CAREERS.CAREERS){
+                this._serviceConnection.getUniversitiesById(elementUniversidades.ID_UNIVERSITIES).subscribe({ next: (_response) => {
+                  // let _universidadesAdd: UniversitiesResponse = new UniversitiesResponse();
+                  // _universidadesAdd = _response;
+                  // _carrerasAdd.UNIVERSITIES.push(_universidadesAdd);
+                  _carrerasAdd.UNIVERSITIES.push(_response);
+                }, error: (_error) => {
+            
+                }, complete:() =>{
+            
+                }});
+              }
+            });
+            this._carrersModel.push(_carrerasAdd);
+          }
+        });
       }, error: (_error) => {
 
       }, complete:() =>{
 
       }});
+      console.log('LISTA DE CARRERAS POR UNIVERSIDADES: ' + JSON.stringify(this._carrersModel));
     }
   }
 

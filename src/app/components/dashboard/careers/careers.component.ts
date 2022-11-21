@@ -43,7 +43,6 @@ export class CareersComponent implements OnInit {
     this._sessionResponse = this._storage.getCurrentSession();
     if(this._sessionResponse.stateTestingIdentity === 'P'){
       this.getCarrerasIterar();
-      
     }
   }
 
@@ -70,6 +69,7 @@ export class CareersComponent implements OnInit {
         this._modelToDrawRaces.push(_agregarCarreraFiltrado);
       }
     });
+    console.log('LISTA DE CARRERAS FILTRADO: ' + JSON.stringify(this._modelToDrawRaces));
   }
 
   public armadoModeloUniversidaXCarrera(_datoCarreras: CareersResponse[]):void{
@@ -79,7 +79,9 @@ export class CareersComponent implements OnInit {
         let _agregarUniversidadesXCarrera : UniversitiesResponse = new UniversitiesResponse();
         this._serviceConnection.getUniversitiesById(elementoUniversidad.ID_UNIVERSITIES).subscribe({ next: (_response) => {
           _agregarUniversidadesXCarrera = _response;
+          console.log('UNIVERSIDAD A AGREGAR: ' + JSON.stringify(_agregarUniversidadesXCarrera));
           elementoCarrera.UNIVERSITIES.push(_agregarUniversidadesXCarrera);
+          console.log('UNIVERSIDADES AGREGADAS ' + JSON.stringify(elementoCarrera.UNIVERSITIES));
         }, error: (_error) => {
     
         }, complete:() =>{
@@ -87,6 +89,7 @@ export class CareersComponent implements OnInit {
         }});
       });
     });
+    console.log('LISTA DE UNIVERSIDADES COMPLETO ' + JSON.stringify(this._modelToDrawRaces));
   }
 
   public getUniversitiesByCareers(_dato: CareersResponse[]):CareersModel[]{

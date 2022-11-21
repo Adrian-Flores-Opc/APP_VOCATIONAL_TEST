@@ -12,7 +12,7 @@
             </P>
           </mat-card-content>
           <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
-            <span *ngFor="let item of _carrersModel; let i=index">
+            <span *ngFor="let item of _carrersModelResponse; let i=index">
               <button mat-button [matMenuTriggerFor]="$any(i)">{{ item.CAREERS.CAREERS }}</button>
               <mat-menu #i="matMenu">
                 <button mat-menu-item *ngFor="let uni of item.UNIVERSITIES">{{uni.UNIVERSITIES}}</button>

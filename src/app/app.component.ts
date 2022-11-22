@@ -22,15 +22,14 @@ export class AppComponent {
 
     console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
 
-    console.log('URL MAIN: ' + this.router.url);
-    this._service.headerEvetEmmiter.next(false);
-    this._service.headerEvetEmmiter.subscribe(data => {
-      console.log('DATO DEL METODO ESCUCHA: ' + data);
-      if (data) {
-        this.identityLogin = false;
-      } else {
-        this.identityLogin = true;
-      }
-    });
+    // this._service.headerEvetEmmiter.next(false);
+    // this._service.headerEvetEmmiter.subscribe(data => {
+    //   console.log('DATO DEL METODO ESCUCHA: ' + data);
+    //   if (data) {
+    //     this.identityLogin = false;
+    //   } else {
+    //     this.identityLogin = true;
+    //   }
+    // });
   }
 }

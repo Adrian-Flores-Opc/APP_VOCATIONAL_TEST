@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { map, shareReplay } from 'rxjs/operators';
 import { ThemePalette } from '@angular/material/core';
 import { ServiceMainService } from 'src/app/core/service/service-main.service';
+import { StorageService } from 'src/app/core/session/storage.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -23,15 +24,15 @@ export class MainNavComponent {
     );
   constructor(private breakpointObserver: BreakpointObserver,
     public router: Router,
-    private ngZone: NgZone, private _service: ServiceMainService) {}
+    private ngZone: NgZone, private _service: ServiceMainService, private _storage:StorageService) {}
 
     ngOnInit(): void {
     }
 
   public home():void{
-    this._service.headerEvetEmmiter.next(true);
-    // window.location.reload();
-    this.router.navigate(['/']);
+    // this._service.headerEvetEmmiter.next(true);
+    this._storage.logout();
+    this._storage.logoutSession();
   }
 
 }

@@ -1,2 +1,2 @@
-<app-main [ngClass]="identityLogin ? '': 'ocultarMain'"></app-main>
+<app-main *ngIf="!_sessionResponse.dashboard"></app-main>
 <router-outlet></router-outlet>

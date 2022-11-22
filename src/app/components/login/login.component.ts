@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this._storage.logoutSession();
-    this._service.headerEvetEmmiter.next(false);
+    // this._service.headerEvetEmmiter.next(false);
     this._testingRequest = new TestingResponse;
     this._testingResponse = new TestingResponse;
     this._requestLogin = new LoginRequest();

@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
   constructor(private _service: ServiceMainService, private _storage: StorageService) { }
 
   ngOnInit(): void {
-    this._service.headerEvetEmmiter.next(false);
+    // this._service.headerEvetEmmiter.next(false);
     this._storage.logoutSession();
   }
 }

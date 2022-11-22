@@ -33,6 +33,7 @@ export class MainNavComponent {
     // this._service.headerEvetEmmiter.next(true);
     this._storage.logout();
     this._storage.logoutSession();
+    window.location.reload;
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ConeectionApiService } from 'src/app/core/service-connection/coneection-api.service';
 import { ServiceMainService } from 'src/app/core/service/service-main.service';
+import { StorageService } from 'src/app/core/session/storage.service';
 import { RegisterUser, RegisterUserRequest } from 'src/app/model/register/register-user.model';
 import Swal from 'sweetalert2';
 
@@ -16,9 +17,10 @@ export class UserRegisterComponent implements OnInit {
   public _modelRegister!: RegisterUser;
   public _requestUserRegister !: RegisterUserRequest;
   hide = true;
-  constructor(private _service: ServiceMainService, private _serviceConnection: ConeectionApiService) { }
+  constructor(private _service: ServiceMainService, private _serviceConnection: ConeectionApiService, private _storage: StorageService) { }
 
   ngOnInit(): void {
+    this._storage.logoutSession();
     this._service.headerEvetEmmiter.next(false);
     this._modelRegister = new RegisterUser();
     this._requestUserRegister = new RegisterUserRequest;

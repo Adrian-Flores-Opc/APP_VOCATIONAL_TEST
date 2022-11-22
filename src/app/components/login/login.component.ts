@@ -93,6 +93,7 @@ export class LoginComponent implements OnInit {
       this._sessionRequest.passUserIdentity = _request.passUser;
       this._sessionRequest.stateTestingIdentity = this._testingResponse.STATE;
       this._sessionRequest.tokenIdentity = this._accessService.GetToken();
+      this._sessionRequest.dashboard = true;
       this.correctLogin(this._sessionRequest);
     }, error: (_error) => {
       console.log('ERROR TESTING REGISTER: ' + JSON.stringify(_error));

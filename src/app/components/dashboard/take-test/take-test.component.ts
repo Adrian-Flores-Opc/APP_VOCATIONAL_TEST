@@ -88,7 +88,7 @@ export class TakeTestComponent implements OnInit {
     this._resultQuestionsResponse = new ResultResponse();
     this._modelQuestionsResult = new QuestionsModelResul();
     this._sessionResponse = this._storage.getCurrentSession();
-
+    console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
     this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA = 0;
     this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB = 0;
     this._sessionResponse.puntuactionBloqueCSectionA = this._puntuactionBloqueASectionC = 0;
@@ -388,7 +388,11 @@ export class TakeTestComponent implements OnInit {
 
   public getResultTesting():void{
     this._connectionService.getResul().subscribe({ next: (_response) => {
-      this._resultCalculation = _response.filter(x => x.ID_TESTING == 19);
+
+      //ID TESTING PARA OBTENER LA RESPUESTAS
+      this._resultCalculation = _response.filter(x => x.ID_TESTING === this._sessionResponse.idTestingIdentity);
+      //DATO QUEMADO
+      // this._resultCalculation = _response.filter(x => x.ID_TESTING == 19);
       this.obtTotalTipoSeccion(this._resultCalculation);
     }, error: (_error) => {
 
@@ -665,9 +669,11 @@ export class TakeTestComponent implements OnInit {
     }).then((_result) => {
       if (_result.isConfirmed){
         this.getResultTesting();
+        this._sessionResponse.stateTestingIdentity = 'C';
+        this._storage.setCurrentSession(this._sessionResponse);
         Swal.fire('Respuestas guardadas correctamente.','','success');
       } else if (_result.isDenied) {
-        Swal.fire('Respuestas guardadas correctamente.','','info');
+        // Swal.fire('Respuestas guardadas correctamente.','','info');
       }
     });    
   }

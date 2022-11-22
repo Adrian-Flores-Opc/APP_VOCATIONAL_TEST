@@ -18,18 +18,21 @@ export class AppComponent {
   ngOnInit(){
     this._storage.logoutSession();
     this._sessionResponse = new Session();
-    // this._sessionResponse = this._storage.getCurrentSession();
+    // this._sessionResponse = this._storage.getCurrentSession(); !_sessionResponse.dashboard
 
     console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
 
     // this._service.headerEvetEmmiter.next(false);
-    // this._service.headerEvetEmmiter.subscribe(data => {
-    //   console.log('DATO DEL METODO ESCUCHA: ' + data);
-    //   if (data) {
-    //     this.identityLogin = false;
-    //   } else {
-    //     this.identityLogin = true;
-    //   }
-    // });
+    this._service.headerEvetEmmiter.subscribe(data => {
+      console.log('DATO DEL METODO ESCUCHA: ' + data);
+      if (data) {
+        this.identityLogin = true;
+      } else {
+        this.identityLogin = false;
+      }
+    });
+    if(!this._sessionResponse.dashboard){
+      this.identityLogin = false;
+    }
   }
 }

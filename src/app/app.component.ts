@@ -18,7 +18,7 @@ export class AppComponent {
   ngOnInit(){
     this._storage.logoutSession();
     this._sessionResponse = new Session();
-    this._sessionResponse = this._storage.getCurrentSession();
+    // this._sessionResponse = this._storage.getCurrentSession();
 
     console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
 

@@ -22,7 +22,6 @@ export class DialogComponent implements OnInit {
   public getUniversitiesByCarrera():void{
     this._serviceConnection.getCareers().subscribe({ next: (_response) => {
       let _carrerasSearch : CareersResponse[] = [];
-      console.log('CARRERA A FILTRAR: ' + this.data.carrera);
       _carrerasSearch = _response.filter(x => x.CAREERS === this.data.carrera);
       _carrerasSearch.forEach( element => {
         this._serviceConnection.getUniversitiesById(element.ID_UNIVERSITIES).subscribe({ next: (_response) => {
@@ -33,11 +32,11 @@ export class DialogComponent implements OnInit {
 
         }});
       });
-      console.log('LISTADO DE UNIVERSIDADES POR CARRERA:' + JSON.stringify(this._universitiesResponse));
     }, error: (_error) => {
 
     }, complete:() => {
 
     }});
   }
+
 }

@@ -30,6 +30,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatGridListModule,
     MatTreeModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    RouterModule
   ],
   exports:[
     CommonModule,
@@ -92,7 +94,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatGridListModule,
     MatTreeModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    RouterModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

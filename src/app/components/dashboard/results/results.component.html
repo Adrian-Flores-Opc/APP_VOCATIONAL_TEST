@@ -6,25 +6,30 @@
         <mat-card-header>
           <mat-card-title>RESULTADOS</mat-card-title>
         </mat-card-header>
-        <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
-          <P>
-            Para obtener una recomendación y conocer los resultados del test vocacional es necesario realizar el test.
-          </P>
-        </mat-card-content>
 
-        <mat-card-content *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
-          <p>De acuerdo a las habilidades en la que destaca y sus intereses, su inteligencia predominante es: {{_responseIntelligence.NAME_INTELLIGENSE}}</p>
-          <mat-grid-list cols="2" rowHeight="2:1">
-            <mat-grid-tile>CAPACIDADES</mat-grid-tile>
-            <mat-grid-tile>{{_responseIntelligence.CAPABILITIES}}</mat-grid-tile>
-            <mat-grid-tile>HABILIDADES</mat-grid-tile>
-            <mat-grid-tile>{{_responseIntelligence.SKILLS}}</mat-grid-tile>
-          </mat-grid-list>
-        </mat-card-content>
+        <span *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
+          <mat-card-content>
+            <P>
+              Para obtener una recomendación y conocer los resultados del test vocacional es necesario realizar el test.
+            </P>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>REALIZAR TEST</button>
+          </mat-card-actions>
+        </span>
 
-        <mat-card-actions *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
-          <button mat-button>REALIZAR TEST</button>
-        </mat-card-actions>
+        <span *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
+          <mat-card-content>
+            <p>De acuerdo a las habilidades en la que destaca y sus intereses, su inteligencia predominante es: {{_responseIntelligence.NAME_INTELLIGENSE}}</p>
+            <mat-grid-list cols="2" rowHeight="80px">
+              <mat-grid-tile>CAPACIDADES</mat-grid-tile>
+              <mat-grid-tile>{{_responseIntelligence.CAPABILITIES}}</mat-grid-tile>
+              <mat-grid-tile>HABILIDADES</mat-grid-tile>
+              <mat-grid-tile>{{_responseIntelligence.SKILLS}}</mat-grid-tile>
+            </mat-grid-list>
+          </mat-card-content>
+        </span>
+
       </mat-card>
 
     </div>

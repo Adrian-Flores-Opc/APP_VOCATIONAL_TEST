@@ -7,6 +7,7 @@ import { AnswersResponse } from 'src/app/model/answers/answers.model';
 import { StorageService } from 'src/app/core/session/storage.service';
 import { dataPuntuaction, Session } from 'src/app/model/session/session.model';
 import { ResultRequest, ResultResponse } from 'src/app/model/result/result.model';
+import { ServiceNotificationsService } from 'src/app/core/service-notifications/service-notifications.service';
 
 
 @Component({
@@ -78,7 +79,7 @@ export class TakeTestComponent implements OnInit {
 
 
 
-  constructor(private _connectionService: ConeectionApiService, private _storage: StorageService) { }
+  constructor(private _connectionService: ConeectionApiService, private _storage: StorageService, private _serviceNotification: ServiceNotificationsService) { }
 
   ngOnInit(): void {
     // this._questionsResponse = new QuestionsResponse;
@@ -665,13 +666,15 @@ export class TakeTestComponent implements OnInit {
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: 'Confirmar',
-      denyButtonText: 'Continuar Test'
+      confirmButtonColor: '#012d74',
+      denyButtonText: 'Continuar Test',
+      denyButtonColor: '#A1A1A1'
     }).then((_result) => {
       if (_result.isConfirmed){
         this.getResultTesting();
-        this._sessionResponse.stateTestingIdentity = 'C';
+        // this._sessionResponse.stateTestingIdentity = 'C';
         this._storage.setCurrentSession(this._sessionResponse);
-        Swal.fire('Respuestas guardadas correctamente.','','success');
+        this._serviceNotification.notificationsSimple('Respuestas guardadas correctamente.','success');
       } else if (_result.isDenied) {
         // Swal.fire('Respuestas guardadas correctamente.','','info');
       }

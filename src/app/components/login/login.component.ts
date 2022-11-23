@@ -34,12 +34,17 @@ export class LoginComponent implements OnInit {
   public _sessionRequest !: Session;
 
 
-  
+
   hide = true;
   @Output() headerEvent = new EventEmitter<boolean>();
   public headerEvetEmmiter = new BehaviorSubject<boolean>(true);
 
-  constructor(private _storage: StorageService,private _accessService: AccessService, private router: Router, private _service: ServiceMainService, private _serviceConnection: ConeectionApiService, private _serviceNotification: ServiceNotificationsService) { }
+  constructor(private _storage: StorageService,
+    private _accessService: AccessService,
+    private router: Router,
+    private _service: ServiceMainService,
+    private _serviceConnection: ConeectionApiService,
+    private _serviceNotification: ServiceNotificationsService) { }
 
   ngOnInit(): void {
     this._storage.logoutSession();

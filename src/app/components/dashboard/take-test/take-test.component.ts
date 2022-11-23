@@ -335,8 +335,8 @@ export class TakeTestComponent implements OnInit {
 
 
 
-      
-      
+
+
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
@@ -349,7 +349,7 @@ export class TakeTestComponent implements OnInit {
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
-      
+
     }});
   }
 
@@ -552,7 +552,7 @@ export class TakeTestComponent implements OnInit {
 
             this._puntuactionBloqueB = this._puntuactionBloqueB +_responsePunt.PUNCTUATION;
             this._puntuactionBloqueB = Math.max(
-              this._sessionResponse.puntuactionBloqueASectionB, 
+              this._sessionResponse.puntuactionBloqueASectionB,
               this._sessionResponse.puntuactionBloqueBSectionB,
               this._sessionResponse.puntuactionBloqueCSectionB,
               this._sessionResponse.puntuactionBloqueDSectionB,
@@ -560,7 +560,7 @@ export class TakeTestComponent implements OnInit {
               this._sessionResponse.puntuactionBloqueFSectionB,
               this._sessionResponse.puntuactionBloqueGSectionB,
               this._sessionResponse.puntuactionBloqueHSectionB);
-              
+
             this._sessionResponse.puntuactionSectionB = _comparationBloques;
             this._sessionResponse.puntuactionBloqueB = this._puntuactionBloqueB;
             this._storage.setCurrentSession(this._sessionResponse);
@@ -647,7 +647,7 @@ export class TakeTestComponent implements OnInit {
         this._sessionResponse.idInteligence = 7;
         this._storage.setCurrentSession(this._sessionResponse);
       }
-    } 
+    }
     //#endregion
 
     //#region VALIDAR ID INTELIGENCIA 8
@@ -675,9 +675,13 @@ export class TakeTestComponent implements OnInit {
       } else if (_result.isDenied) {
         // Swal.fire('Respuestas guardadas correctamente.','','info');
       }
-    });    
+    });
   }
   onChangeEventFunc(_dato: AnswersResponse, isChecked: boolean){
 
+  }
+
+  public obtRadioButtonValue(_datoAnswers: AnswersResponse, _idQuestions: number, _idSection: number, _bloque: String, _section: String):void{
+    console.log('DATO DEL RADIO BUTTON: ' + JSON.stringify(_datoAnswers) + ' - ' + _idQuestions + ' - ' + _idSection + ' - ' + _bloque + ' - ' + _section);
   }
 }

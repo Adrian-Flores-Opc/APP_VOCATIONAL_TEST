@@ -23,11 +23,27 @@
           <mat-error *ngIf="registerForm.controls.cellphoneRegister.hasError('required')">El campo es obligatorio</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <!-- <mat-form-field appearance="fill">
           <mat-label>Fecha de nacimiento</mat-label>
           <input matInput formControlName="dateOfBirdRegister" [(ngModel)]="_modelRegister.dateOfBird">
           <mat-error *ngIf="registerForm.controls.dateOfBirdRegister.hasError('required')">El campo es obligatorio</mat-error>
+        </mat-form-field> -->
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input matInput [matDatepicker]="datepicker" formControlName="dateOfBirdRegister" [(ngModel)]="_modelRegister.dateOfBird">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-error *ngIf="registerForm.controls.dateOfBirdRegister.hasError('required')">El campo es obligatorio</mat-error>
+          <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancelar</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Aceptar</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
         </mat-form-field>
+
 
         <mat-form-field appearance="fill">
           <mat-label>Nombre de usuario</mat-label>

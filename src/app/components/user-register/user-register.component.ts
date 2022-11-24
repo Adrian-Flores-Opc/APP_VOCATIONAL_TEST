@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ConeectionApiService } from 'src/app/core/service-connection/coneection-api.service';
+import { ServiceNotificationsService } from 'src/app/core/service-notifications/service-notifications.service';
 import { ServiceMainService } from 'src/app/core/service/service-main.service';
 import { StorageService } from 'src/app/core/session/storage.service';
 import { RegisterUser, RegisterUserRequest } from 'src/app/model/register/register-user.model';
@@ -17,7 +18,10 @@ export class UserRegisterComponent implements OnInit {
   public _modelRegister!: RegisterUser;
   public _requestUserRegister !: RegisterUserRequest;
   hide = true;
-  constructor(private _service: ServiceMainService, private _serviceConnection: ConeectionApiService, private _storage: StorageService) { }
+  constructor(private _service: ServiceMainService, 
+    private _serviceConnection: ConeectionApiService, 
+    private _storage: StorageService,
+    private _serviceNotification: ServiceNotificationsService) { }
 
   ngOnInit(): void {
     this._storage.logoutSession();
@@ -46,39 +50,9 @@ export class UserRegisterComponent implements OnInit {
     this._serviceConnection.saveUserRegister(this._requestUserRegister).subscribe({ next: (_response) => {
       console.log('REGISTRO USUARIO: ' + JSON.stringify(_response));
       if (_response != undefined){
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'center',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: false,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
-
-        Toast.fire({
-          icon: 'success',
-          title: 'Usuario Registrado Correctamente.'
-        })
+        this._serviceNotification.notificationsSimple('Usuario Registrado Correctamente.', 'success');
       } else {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'center',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: false,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
-
-        Toast.fire({
-          icon: 'error',
-          title: 'No se pudo registrar el usuario.'
-        })
+        this._serviceNotification.notificationsSimple('No se pudo registrar el usuario.','error');
       }
     }, error: (_error) => {
       console.log('ERROR: ' + _error);

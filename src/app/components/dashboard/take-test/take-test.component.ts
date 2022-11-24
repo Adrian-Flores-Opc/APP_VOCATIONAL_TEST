@@ -650,10 +650,51 @@ export class TakeTestComponent implements OnInit {
       denyButtonColor: '#A1A1A1'
     }).then((_result) => {
       if (_result.isConfirmed){
-        this.getResultTesting();
-        this._sessionResponse.stateTestingIdentity = 'C';
-        this._storage.setCurrentSession(this._sessionResponse);
-        Swal.fire('Respuestas guardadas correctamente.','','success');
+
+        //#region VERIFICACION DE QUE TODAS LAS RESPUESTAS ESTEN LLENADAS
+        let _lentVerifiSectionAbloqueA : number = this._verificationModelQuestions._verifiSectionAbloqueA.length;
+        let _lentVerifiSectionAbloqueB : number = this._verificationModelQuestions._verifiSectionAbloqueB.length;
+        let _lentVerifiSectionAbloqueC : number = this._verificationModelQuestions._verifiSectionAbloqueC.length;
+        let _lentVerifiSectionAbloqueD : number = this._verificationModelQuestions._verifiSectionAbloqueD.length;
+        let _lentVerifiSectionAbloqueE : number = this._verificationModelQuestions._verifiSectionAbloqueE.length;
+        let _lentVerifiSectionAbloqueF : number = this._verificationModelQuestions._verifiSectionAbloqueF.length;
+        let _lentVerifiSectionAbloqueG : number = this._verificationModelQuestions._verifiSectionAbloqueG.length;
+        let _lentVerifiSectionAbloqueH : number = this._verificationModelQuestions._verifiSectionAbloqueH.length;
+
+        let _lentVerifiSectionBbloqueA : number = this._verificationModelQuestions._verifiSectionBbloqueA.length;
+        let _lentVerifiSectionBbloqueB : number = this._verificationModelQuestions._verifiSectionBbloqueB.length;
+        let _lentVerifiSectionBbloqueC : number = this._verificationModelQuestions._verifiSectionBbloqueC.length;
+        let _lentVerifiSectionBbloqueD : number = this._verificationModelQuestions._verifiSectionBbloqueD.length;
+        let _lentVerifiSectionBbloqueE : number = this._verificationModelQuestions._verifiSectionBbloqueE.length;
+        let _lentVerifiSectionBbloqueF : number = this._verificationModelQuestions._verifiSectionBbloqueF.length;
+        let _lentVerifiSectionBbloqueG : number = this._verificationModelQuestions._verifiSectionBbloqueG.length;
+        let _lentVerifiSectionBbloqueH : number = this._verificationModelQuestions._verifiSectionBbloqueH.length;
+
+        if (_lentVerifiSectionAbloqueA === 6 &&
+            _lentVerifiSectionAbloqueB === 6 && 
+            _lentVerifiSectionAbloqueC === 6 &&
+            _lentVerifiSectionAbloqueD === 6 &&
+            _lentVerifiSectionAbloqueE === 6 &&
+            _lentVerifiSectionAbloqueF === 6 &&
+            _lentVerifiSectionAbloqueG === 6 &&
+            _lentVerifiSectionAbloqueH === 6 &&
+            _lentVerifiSectionBbloqueA === 6 &&
+            _lentVerifiSectionBbloqueB === 6 && 
+            _lentVerifiSectionBbloqueC === 6 &&
+            _lentVerifiSectionBbloqueD === 6 &&
+            _lentVerifiSectionBbloqueE === 6 &&
+            _lentVerifiSectionBbloqueF === 6 &&
+            _lentVerifiSectionBbloqueG === 6 &&
+            _lentVerifiSectionBbloqueH === 6){
+              this.getResultTesting();
+              this._sessionResponse.stateTestingIdentity = 'C';
+              this._storage.setCurrentSession(this._sessionResponse);
+              Swal.fire('Respuestas guardadas correctamente.','','success');
+            }
+            else {
+              this._serviceNotification.notificationsSimple('No termino de responder todas las preguntas.', 'Info');
+            }
+        //#endregion
       } else if (_result.isDenied) {
         // Swal.fire('Respuestas guardadas correctamente.','','info');
       }
@@ -676,6 +717,7 @@ export class TakeTestComponent implements OnInit {
     let _agregacionAnswers : AnswersModelVerification = new AnswersModelVerification();
     if (_bloque === 'A') {
       if (_section === 'A'){
+        //#region METODO DE VERIFICACION RESPUESTAS 
         let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueA.filter(x => x.idQuestions === _idQuestions);
         // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
         if (_verificationsCheckQuestions.length > 0) {
@@ -700,30 +742,429 @@ export class TakeTestComponent implements OnInit {
         }, complete:() => {
 
         }});
+        //#endregion
       }
       if (_section === 'B'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueB.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionAbloqueB = this._verificationModelQuestions._verifiSectionAbloqueB.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionAbloqueB.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
         
+                }, complete:() => {
+        
+                }});
+                //#endregion
       }
       if (_section === 'C'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueC.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionAbloqueC = this._verificationModelQuestions._verifiSectionAbloqueC.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionAbloqueC.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
         
+                }, complete:() => {
+        
+                }});
+                //#endregion
       }
       if (_section === 'D'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueD.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionAbloqueD = this._verificationModelQuestions._verifiSectionAbloqueD.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionAbloqueD.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
         
+                }, complete:() => {
+        
+                }});
+                //#endregion
       }
       if (_section === 'E'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueE.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionAbloqueE = this._verificationModelQuestions._verifiSectionAbloqueE.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionAbloqueE.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
         
+                }, complete:() => {
+        
+                }});
+                //#endregion
       }
       if (_section === 'F'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueF.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionAbloqueF = this._verificationModelQuestions._verifiSectionAbloqueF.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionAbloqueF.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
         
+                }, complete:() => {
+        
+                }});
+                //#endregion
       }
       if (_section === 'G'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueG.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionAbloqueG = this._verificationModelQuestions._verifiSectionAbloqueG.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionAbloqueG.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
         
+                }, complete:() => {
+        
+                }});
+                //#endregion
       }
       if (_section === 'H'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueH.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionAbloqueH = this._verificationModelQuestions._verifiSectionAbloqueH.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionAbloqueH.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
         
+                }, complete:() => {
+        
+                }});
+                //#endregion
       }
     } else if (_bloque === 'B') {
+      if (_section === 'A'){
+        //#region METODO DE VERIFICACION RESPUESTAS 
+        let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueA.filter(x => x.idQuestions === _idQuestions);
+        // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+        if (_verificationsCheckQuestions.length > 0) {
+          this._verificationModelQuestions._verifiSectionBbloqueA = this._verificationModelQuestions._verifiSectionBbloqueA.filter(X => X.idQuestions != _idQuestions);
+          this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+          // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+          // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+        } 
+        let _resultRequest : ResultRequest = new ResultRequest();
+        _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+        _resultRequest.ID_QUESTIONS = _idQuestions;
+        _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+        this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+          _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+          _agregacionAnswers.idQuestions = _idQuestions;
+          _agregacionAnswers.idResult = _response.ID_RESULT;
+          this._verificationModelQuestions._verifiSectionBbloqueA.push(_agregacionAnswers);
+          // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+          // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+        }, error: (_error) => {
 
+        }, complete:() => {
+
+        }});
+        //#endregion
+      }
+      if (_section === 'B'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueB.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionBbloqueB = this._verificationModelQuestions._verifiSectionBbloqueB.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionBbloqueB.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
+        
+                }, complete:() => {
+        
+                }});
+                //#endregion
+      }
+      if (_section === 'C'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueC.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionBbloqueC = this._verificationModelQuestions._verifiSectionBbloqueC.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionBbloqueC.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
+        
+                }, complete:() => {
+        
+                }});
+                //#endregion
+      }
+      if (_section === 'D'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueD.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionBbloqueD = this._verificationModelQuestions._verifiSectionBbloqueD.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionBbloqueD.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
+        
+                }, complete:() => {
+        
+                }});
+                //#endregion
+      }
+      if (_section === 'E'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueE.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionBbloqueE = this._verificationModelQuestions._verifiSectionBbloqueE.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionBbloqueE.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
+        
+                }, complete:() => {
+        
+                }});
+                //#endregion
+      }
+      if (_section === 'F'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueF.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionBbloqueF = this._verificationModelQuestions._verifiSectionBbloqueF.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionBbloqueF.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
+        
+                }, complete:() => {
+        
+                }});
+                //#endregion
+      }
+      if (_section === 'G'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueG.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionBbloqueG = this._verificationModelQuestions._verifiSectionBbloqueG.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionBbloqueG.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
+        
+                }, complete:() => {
+        
+                }});
+                //#endregion
+      }
+      if (_section === 'H'){
+                //#region METODO DE VERIFICACION RESPUESTAS 
+                let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueH.filter(x => x.idQuestions === _idQuestions);
+                // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+                if (_verificationsCheckQuestions.length > 0) {
+                  this._verificationModelQuestions._verifiSectionBbloqueH = this._verificationModelQuestions._verifiSectionBbloqueH.filter(X => X.idQuestions != _idQuestions);
+                  this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
+                  // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+                } 
+                let _resultRequest : ResultRequest = new ResultRequest();
+                _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+                _resultRequest.ID_QUESTIONS = _idQuestions;
+                _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+                this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+                  _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+                  _agregacionAnswers.idQuestions = _idQuestions;
+                  _agregacionAnswers.idResult = _response.ID_RESULT;
+                  this._verificationModelQuestions._verifiSectionBbloqueH.push(_agregacionAnswers);
+                  // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+                  // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+                }, error: (_error) => {
+        
+                }, complete:() => {
+        
+                }});
+                //#endregion
+      }
     }
   }
 }

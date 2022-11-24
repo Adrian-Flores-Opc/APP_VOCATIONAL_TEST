@@ -707,7 +707,8 @@ export class TakeTestComponent implements OnInit {
               Swal.fire('Respuestas guardadas correctamente.','','success');
             }
             else {
-              this._serviceNotification.notificationsSimple('No termino de responder todas las preguntas.', 'Info');
+              // this._serviceNotification.notificationsSimple('No termino de responder todas las preguntas.', 'Info');
+              this._serviceNotification.notificationsSimple('No termino de responder todas las preguntas.','warning');
             }
         //#endregion
       } else if (_result.isDenied) {

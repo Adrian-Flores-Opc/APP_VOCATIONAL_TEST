@@ -47,7 +47,8 @@ export class UserRegisterComponent implements OnInit {
     this._requestUserRegister.DateOfBird = _request.dateOfBird;
     this._requestUserRegister.NameUser = _request.nameUser;
     this._requestUserRegister.PassUser = _request.password;
-    this._requestUserRegister.RegistrationDate = formatDate(Date.now(), 'yyyy-MM-dd', 'en-US');
+    this._requestUserRegister.RegistrationDate = formatDate(Date.now(), 'yyyy-MM-ddThh:mm:ss.mmmZ', 'en-US');
+    // 2022-11-24T04:00:00.000Z
     if(_request.password != _request.verifyPassword){
       this._serviceNotification.notificationsSimple('La contraseña no es igual a la ingresada en el campo "repetir contraseña".','info');
     } else {

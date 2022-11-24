@@ -15,6 +15,7 @@
           <mat-label>Email</mat-label>
           <input matInput formControlName="emailRegister" [(ngModel)]="_modelRegister.email">
           <mat-error *ngIf="registerForm.controls.emailRegister.hasError('required')">El campo es obligatorio</mat-error>
+          <mat-error *ngIf="registerForm.controls.emailRegister.hasError('email')">Formato de email no valido</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -22,13 +23,6 @@
           <input matInput formControlName="cellphoneRegister" [(ngModel)]="_modelRegister.cellphone">
           <mat-error *ngIf="registerForm.controls.cellphoneRegister.hasError('required')">El campo es obligatorio</mat-error>
         </mat-form-field>
-
-        <!-- <mat-form-field appearance="fill">
-          <mat-label>Fecha de nacimiento</mat-label>
-          <input matInput formControlName="dateOfBirdRegister" [(ngModel)]="_modelRegister.dateOfBird">
-          <mat-error *ngIf="registerForm.controls.dateOfBirdRegister.hasError('required')">El campo es obligatorio</mat-error>
-        </mat-form-field> -->
-
 
         <mat-form-field appearance="fill" class="example-form-field">
           <mat-label>Fecha de nacimiento</mat-label>
@@ -56,14 +50,18 @@
         <mat-form-field appearance="fill">
           <mat-label>Contraseña</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordRegister" [(ngModel)]="_modelRegister.password">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
           <mat-error *ngIf="registerForm.controls.passwordRegister.hasError('required')">El campo es obligatorio</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Repita Contraseña</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="verifyPasswordRegister" [(ngModel)]="_modelRegister.verifyPassword">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
           <mat-error *ngIf="registerForm.controls.verifyPasswordRegister.hasError('required')">El campo es obligatorio</mat-error>
         </mat-form-field>
 

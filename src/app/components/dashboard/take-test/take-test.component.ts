@@ -709,6 +709,7 @@ export class TakeTestComponent implements OnInit {
         _agregacionAnswers.idQuestions = _idQuestions;
         this._verificationModelQuestions._verifiSectionAbloqueA.push(_agregacionAnswers);
         console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+        console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
       }
       if (_section === 'B'){
         

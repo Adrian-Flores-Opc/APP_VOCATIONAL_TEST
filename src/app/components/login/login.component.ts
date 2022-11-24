@@ -109,6 +109,7 @@ export class LoginComponent implements OnInit {
   public getTestingVerify(idUser: number):void{
     this._serviceConnection.getTesting().subscribe({ next: (_response) => {
       _response.find(x => x.STATE == 'P' && x.ID_USER == idUser)?.ID_TESTING;
+      console.log('JSON VERIFICACION STATUS: ' + JSON.stringify(_response));
     }, error: (_error) => {
 
     }, complete: () => {
@@ -148,7 +149,7 @@ export class LoginComponent implements OnInit {
     // console.log('SESSION POR GENERADA: ' + JSON.stringify(_data));
     this._storage.setCurrentSession(_data);
     this._sessionResponse = this._storage.getCurrentSession();
-    console.log('SESSION GENERADA: ' + JSON.stringify(this._sessionResponse));
-    this.router.navigate(['/Dashboard']);
+    // console.log('SESSION GENERADA: ' + JSON.stringify(this._sessionResponse));
+    this.router.navigate(['/Dashboard/Test']);
   }
 }

@@ -119,7 +119,6 @@ export class TakeTestComponent implements OnInit {
     this._sessionResponse.puntuactionBloqueHSectionB = this._puntuactionBloqueBSectionH = 0;
     console.log('INVOCACION NGONIT TAKE TEST');
     this.getQuestions();
-    this.getAnswers();
     this.getSections();
     // this.generateModelResult();
   }
@@ -234,6 +233,7 @@ export class TakeTestComponent implements OnInit {
       this._modelQuestionsResult.sectionFTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 14);
       this._modelQuestionsResult.sectionGTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 15);
       this._modelQuestionsResult.sectionHTypeB = this._questionsResponse.filter(x => x.ID_SECTION == 16);
+      this.getAnswers();
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {

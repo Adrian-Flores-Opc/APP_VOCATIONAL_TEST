@@ -693,7 +693,7 @@ export class TakeTestComponent implements OnInit {
   }
 
   public removeResultAnswers(idResult: number):void{
-
+    console.log('REMOVER RESULT ID : ' + idResult);
   }
 
   public obtRadioButtonValue(_datoAnswers: AnswersResponse, _idQuestions: number, _idSection: number, _bloque: String, _section: String):void{
@@ -705,20 +705,25 @@ export class TakeTestComponent implements OnInit {
         console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
         if (_verificationsCheckQuestions.length > 0) {
           this._verificationModelQuestions._verifiSectionAbloqueA = this._verificationModelQuestions._verifiSectionAbloqueA.filter(X => X.idQuestions != _idQuestions);
-          console.log('ID RESULT A ELIMINAR DE LA TABLA: ' + _verificationsCheckQuestions[0].idResult);
           this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
           console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
-          console.log('ELIMINAR ID DEL QUESTIOS:' + JSON.stringify(_verificationsCheckQuestions));
+          console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
         } 
-        _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
-        _agregacionAnswers.idQuestions = _idQuestions;
-        let _saveResult : ResultResponse = this.saveResultAnswers(_agregacionAnswers.idAnsweres, _agregacionAnswers.idQuestions);
-        console.log('ID RESULT PARA GUARDAR: ' + JSON.stringify(_saveResult));
-        _agregacionAnswers.idResult = this._saveResult.ID_RESULT;
-        this._verificationModelQuestions._verifiSectionAbloqueA.push(_agregacionAnswers);
-        
-        console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
-        console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+        let _resultRequest : ResultRequest = new ResultRequest();
+        _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
+        _resultRequest.ID_QUESTIONS = _idQuestions;
+        this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
+          _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+          _agregacionAnswers.idQuestions = _idQuestions;
+          _agregacionAnswers.idResult = _response.ID_RESULT;
+          this._verificationModelQuestions._verifiSectionAbloqueA.push(_agregacionAnswers);
+          console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+          console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+        }, error: (_error) => {
+
+        }, complete:() => {
+
+        }});
       }
       if (_section === 'B'){
         

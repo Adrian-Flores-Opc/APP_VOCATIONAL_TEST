@@ -59,3 +59,7 @@
 ::-webkit-scrollbar-track:active{
   background: #d4d4d4;
 }
+mat-radio-button{
+  display: block;
+  margin: 15px;
+}

@@ -41,3 +41,28 @@ export class QuestionsModelResul{
   public sectionGTypeB !: QuestionsResult[];
   public sectionHTypeB !: QuestionsResult[];
 }
+
+export class QuestionsModelVerification {
+  public _verifiSectionAbloqueA : AnswersModelVerification[] = [];
+  public _verifiSectionAbloqueB : AnswersModelVerification[] = [];
+  public _verifiSectionAbloqueC : AnswersModelVerification[] = [];
+  public _verifiSectionAbloqueD : AnswersModelVerification[] = [];
+  public _verifiSectionAbloqueE : AnswersModelVerification[] = [];
+  public _verifiSectionAbloqueF : AnswersModelVerification[] = [];
+  public _verifiSectionAbloqueG : AnswersModelVerification[] = [];
+  public _verifiSectionAbloqueH : AnswersModelVerification[] = [];
+
+  public _verifiSectionBbloqueA : AnswersModelVerification[] = [];
+  public _verifiSectionBbloqueB : AnswersModelVerification[] = [];
+  public _verifiSectionBbloqueC : AnswersModelVerification[] = [];
+  public _verifiSectionBbloqueD : AnswersModelVerification[] = [];
+  public _verifiSectionBbloqueE : AnswersModelVerification[] = [];
+  public _verifiSectionBbloqueF : AnswersModelVerification[] = [];
+  public _verifiSectionBbloqueG : AnswersModelVerification[] = [];
+  public _verifiSectionBbloqueH : AnswersModelVerification[] = [];
+}
+
+export class AnswersModelVerification {
+  public idQuestions !: number;
+  public idAnsweres !: number;
+}

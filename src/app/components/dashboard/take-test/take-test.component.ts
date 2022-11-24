@@ -1,3 +1,4 @@
+import { AnswersModelVerification, QuestionsModelVerification } from './../../../model/questions/questions.model';
 import Swal from 'sweetalert2';
 import { SectionsResponse } from './../../../model/sections/sections.model';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +8,7 @@ import { AnswersResponse } from 'src/app/model/answers/answers.model';
 import { StorageService } from 'src/app/core/session/storage.service';
 import { dataPuntuaction, Session } from 'src/app/model/session/session.model';
 import { ResultRequest, ResultResponse } from 'src/app/model/result/result.model';
+import { ServiceNotificationsService } from 'src/app/core/service-notifications/service-notifications.service';
 
 
 @Component({
@@ -16,6 +18,7 @@ import { ResultRequest, ResultResponse } from 'src/app/model/result/result.model
 })
 export class TakeTestComponent implements OnInit {
 
+  //#region  VARIABLES QUESTIONS AND ANSWERS 
   public _questionsResponse!: QuestionsResponse[];
   public _sectionsResponse!: SectionsResponse[];
   public _answersResponse!: AnswersResponse[];
@@ -76,19 +79,25 @@ export class TakeTestComponent implements OnInit {
   public _puntuactionBloqueBSectionG!:number;
   public _puntuactionBloqueBSectionH!:number;
 
+//#endregion
+
+  public _verificationModelQuestions !: QuestionsModelVerification;
 
 
-  constructor(private _connectionService: ConeectionApiService, private _storage: StorageService) { }
+
+
+  constructor(private _connectionService: ConeectionApiService, private _storage: StorageService, private _serviceNotification: ServiceNotificationsService) { }
 
   ngOnInit(): void {
     // this._questionsResponse = new QuestionsResponse;
+    this._verificationModelQuestions = new QuestionsModelVerification();
     this._puntuactionBloqueA = 0;
     this._puntuactionBloqueB = 0;
     this._resultQuestionsRequest = new ResultRequest();
     this._resultQuestionsResponse = new ResultResponse();
     this._modelQuestionsResult = new QuestionsModelResul();
     this._sessionResponse = this._storage.getCurrentSession();
-    console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
+    // console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
     this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA = 0;
     this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB = 0;
     this._sessionResponse.puntuactionBloqueCSectionA = this._puntuactionBloqueASectionC = 0;
@@ -333,7 +342,9 @@ export class TakeTestComponent implements OnInit {
         });
       });
 
-      console.log('JSON PARA LA GENERACION DE PREGUNTAS Y RESPUESTAS: ' + JSON.stringify(this._modelQuestionsResult));
+
+
+      
       
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
@@ -347,7 +358,7 @@ export class TakeTestComponent implements OnInit {
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
-      
+
     }});
   }
 
@@ -550,7 +561,7 @@ export class TakeTestComponent implements OnInit {
 
             this._puntuactionBloqueB = this._puntuactionBloqueB +_responsePunt.PUNCTUATION;
             this._puntuactionBloqueB = Math.max(
-              this._sessionResponse.puntuactionBloqueASectionB, 
+              this._sessionResponse.puntuactionBloqueASectionB,
               this._sessionResponse.puntuactionBloqueBSectionB,
               this._sessionResponse.puntuactionBloqueCSectionB,
               this._sessionResponse.puntuactionBloqueDSectionB,
@@ -558,7 +569,7 @@ export class TakeTestComponent implements OnInit {
               this._sessionResponse.puntuactionBloqueFSectionB,
               this._sessionResponse.puntuactionBloqueGSectionB,
               this._sessionResponse.puntuactionBloqueHSectionB);
-              
+
             this._sessionResponse.puntuactionSectionB = _comparationBloques;
             this._sessionResponse.puntuactionBloqueB = this._puntuactionBloqueB;
             this._storage.setCurrentSession(this._sessionResponse);
@@ -646,7 +657,7 @@ export class TakeTestComponent implements OnInit {
         this._sessionResponse.idInteligence = 7;
         this._storage.setCurrentSession(this._sessionResponse);
       }
-    } 
+    }
     //#endregion
 
     //#region VALIDAR ID INTELIGENCIA 8
@@ -664,19 +675,57 @@ export class TakeTestComponent implements OnInit {
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: 'Confirmar',
-      denyButtonText: 'Continuar Test'
+      confirmButtonColor: '#012d74',
+      denyButtonText: 'Continuar Test',
+      denyButtonColor: '#A1A1A1'
     }).then((_result) => {
       if (_result.isConfirmed){
         this.getResultTesting();
-        // this._sessionResponse.stateTestingIdentity = 'C';
-        // this._storage.setCurrentSession(this._sessionResponse);
+        this._sessionResponse.stateTestingIdentity = 'C';
+        this._storage.setCurrentSession(this._sessionResponse);
         Swal.fire('Respuestas guardadas correctamente.','','success');
       } else if (_result.isDenied) {
         // Swal.fire('Respuestas guardadas correctamente.','','info');
       }
-    });    
+    });
   }
   onChangeEventFunc(_dato: AnswersResponse, isChecked: boolean){
 
+  }
+
+  public obtRadioButtonValue(_datoAnswers: AnswersResponse, _idQuestions: number, _idSection: number, _bloque: String, _section: String):void{
+    console.log('DATO DEL RADIO BUTTON: ' + JSON.stringify(_datoAnswers) + ' - ' + _idQuestions + ' - ' + _idSection + ' - ' + _bloque + ' - ' + _section);
+    let _agregacionAnswers : AnswersModelVerification = new AnswersModelVerification();
+    if (_bloque === 'A') {
+      if (_section === 'A'){
+        _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
+        _agregacionAnswers.idQuestions = _idQuestions;
+        this._verificationModelQuestions._verifiSectionAbloqueA.push(_agregacionAnswers);
+        console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+      }
+      if (_section === 'B'){
+        
+      }
+      if (_section === 'C'){
+        
+      }
+      if (_section === 'D'){
+        
+      }
+      if (_section === 'E'){
+        
+      }
+      if (_section === 'F'){
+        
+      }
+      if (_section === 'G'){
+        
+      }
+      if (_section === 'H'){
+        
+      }
+    } else if (_bloque === 'B') {
+
+    }
   }
 }

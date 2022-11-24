@@ -24,7 +24,7 @@ export class ResultsComponent implements OnInit {
       }, error: (_error) => {
 
       }, complete:() => {
-        
+
       }});
     }
   }

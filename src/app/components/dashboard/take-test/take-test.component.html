@@ -15,19 +15,15 @@
               <mat-card-content>
 
                 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
-                  <mat-radio-button class="example-radio-button" *ngFor="let answers of  itemQuestionsA.ANSWERS" [value]="answers">{{answers.ANSWERS}}</mat-radio-button>
+                  <mat-radio-button class="example-radio-button" *ngFor="let answers of  itemQuestionsA.ANSWERS" [value]="answers" (click)="obtRadioButtonValue(answers, itemQuestionsA.ID_QUESTIONS, itemQuestionsA.ID_SECTION, 'A', 'A')">{{answers.ANSWERS}}</mat-radio-button>
                 </mat-radio-group>
 
-                <section *ngFor="let itemAnswersA of itemQuestionsA.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" [(ngModel)]="_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK" (click)="checkAnswersVerify(itemAnswersA, 'A', 'A',itemQuestionsA,!_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK, indexOfElement,i)">{{itemAnswersA.ANSWERS}}</mat-checkbox>
-                  <!-- <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersA, 'A', 'A',itemQuestionsA,!_modelQuestionsResult.sectionATypeA[indexOfElement].ANSWERS[i].CHECK, indexOfElement,i)">{{itemAnswersA.ANSWERS}}</mat-checkbox> -->
-                </section>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -42,15 +38,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersB of itemQuestionsB.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin"  (click)="checkAnswersVerify(itemAnswersB, 'A', 'B',itemQuestionsB,!itemAnswersB.CHECK, indexOfElement, i)">{{itemAnswersB.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersB of itemQuestionsB.ANSWERS;" [value]="itemAnswersB" (click)="obtRadioButtonValue(itemAnswersB, itemQuestionsB.ID_QUESTIONS, itemQuestionsB.ID_SECTION, 'A', 'B')">{{itemAnswersB.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -65,15 +61,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersC of itemQuestionsC.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersC, 'A', 'A',itemQuestionsC,!itemAnswersC.CHECK, indexOfElement,i)">{{itemAnswersC.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersC of itemQuestionsC.ANSWERS;" [value]="itemAnswersC" (click)="obtRadioButtonValue(itemAnswersC, itemQuestionsC.ID_QUESTIONS, itemQuestionsC.ID_SECTION, 'A', 'C')">{{itemAnswersC.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -88,15 +84,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersD of itemQuestionsD.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersD, 'A', 'A',itemQuestionsD,!itemAnswersD.CHECK, indexOfElement,i)">{{itemAnswersD.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersD of itemQuestionsD.ANSWERS;" [value]="itemAnswersD" (click)="obtRadioButtonValue(itemAnswersD, itemQuestionsD.ID_QUESTIONS, itemQuestionsD.ID_SECTION, 'A', 'D')">{{itemAnswersD.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -111,15 +107,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersE of itemQuestionsE.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersE, 'A', 'A',itemQuestionsE,!itemAnswersE.CHECK, indexOfElement,i)">{{itemAnswersE.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersE of itemQuestionsE.ANSWERS;" [value]="itemAnswersE" (click)="obtRadioButtonValue(itemAnswersE, itemQuestionsE.ID_QUESTIONS, itemQuestionsE.ID_SECTION, 'A', 'E')">{{itemAnswersE.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -134,15 +130,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersF of itemQuestionsF.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersF, 'A', 'A',itemQuestionsF,!itemAnswersF.CHECK, indexOfElement,i)">{{itemAnswersF.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersF of itemQuestionsF.ANSWERS;" [value]="itemAnswersF" (click)="obtRadioButtonValue(itemAnswersF, itemQuestionsF.ID_QUESTIONS, itemQuestionsF.ID_SECTION, 'A', 'F')">{{itemAnswersF.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -157,15 +153,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersG of itemQuestionsG.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersG, 'A', 'A',itemQuestionsG,!itemAnswersG.CHECK, indexOfElement,i)">{{itemAnswersG.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersG of itemQuestionsG.ANSWERS;" [value]="itemAnswersG" (click)="obtRadioButtonValue(itemAnswersG, itemQuestionsG.ID_QUESTIONS, itemQuestionsG.ID_SECTION, 'A', 'G')">{{itemAnswersG.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -180,15 +176,16 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersH of itemQuestionsH.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersH, 'A', 'A',itemQuestionsH,!itemAnswersH.CHECK, indexOfElement,i)">{{itemAnswersH.ANSWERS}}</mat-checkbox>
-                </section>
+
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersH of itemQuestionsH.ANSWERS;" [value]="itemAnswersH" (click)="obtRadioButtonValue(itemAnswersH, itemQuestionsH.ID_QUESTIONS, itemQuestionsH.ID_SECTION, 'A', 'H')">{{itemAnswersH.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
 
@@ -205,15 +202,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersA of itemQuestionsA.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersA, 'A', 'A',itemQuestionsA,!itemAnswersA.CHECK, indexOfElement,i)">{{itemAnswersA.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersA of itemQuestionsA.ANSWERS;" [value]="itemAnswersA" (click)="obtRadioButtonValue(itemAnswersA, itemQuestionsA.ID_QUESTIONS, itemQuestionsA.ID_SECTION, 'B', 'A')">{{itemAnswersA.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -228,15 +225,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersB of itemQuestionsB.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersB, 'A', 'A',itemQuestionsB,!itemAnswersB.CHECK, indexOfElement,i)">{{itemAnswersB.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersB of itemQuestionsB.ANSWERS;" [value]="itemAnswersB" (click)="obtRadioButtonValue(itemAnswersB, itemQuestionsB.ID_QUESTIONS, itemQuestionsB.ID_SECTION, 'B', 'B')">{{itemAnswersB.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -251,15 +248,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersC of itemQuestionsC.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersC, 'A', 'A',itemQuestionsC,!itemAnswersC.CHECK, indexOfElement,i)">{{itemAnswersC.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersC of itemQuestionsC.ANSWERS;" [value]="itemAnswersC" (click)="obtRadioButtonValue(itemAnswersC, itemQuestionsC.ID_QUESTIONS, itemQuestionsC.ID_SECTION, 'B', 'C')">{{itemAnswersC.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -274,15 +271,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersD of itemQuestionsD.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersD, 'A', 'A',itemQuestionsD,!itemAnswersD.CHECK, indexOfElement,i)">{{itemAnswersD.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersD of itemQuestionsD.ANSWERS;" [value]="itemAnswersD" (click)="obtRadioButtonValue(itemAnswersD, itemQuestionsD.ID_QUESTIONS, itemQuestionsD.ID_SECTION, 'B', 'D')">{{itemAnswersD.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -297,15 +294,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersE of itemQuestionsE.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin"  (click)="checkAnswersVerify(itemAnswersE, 'A', 'A',itemQuestionsE,!itemAnswersE.CHECK, indexOfElement,i)">{{itemAnswersE.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersE of itemQuestionsE.ANSWERS;" [value]="itemAnswersE" (click)="obtRadioButtonValue(itemAnswersE, itemQuestionsE.ID_QUESTIONS, itemQuestionsE.ID_SECTION, 'B', 'E')">{{itemAnswersE.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -320,15 +317,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersF of itemQuestionsF.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersF, 'A', 'A',itemQuestionsF,!itemAnswersF.CHECK, indexOfElement,i)">{{itemAnswersF.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersF of itemQuestionsF.ANSWERS;" [value]="itemAnswersF" (click)="obtRadioButtonValue(itemAnswersF, itemQuestionsF.ID_QUESTIONS, itemQuestionsF.ID_SECTION, 'B', 'F')">{{itemAnswersF.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -343,15 +340,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersG of itemQuestionsG.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersG, 'A', 'A',itemQuestionsG,!itemAnswersG.CHECK, indexOfElement,i)">{{itemAnswersG.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersG of itemQuestionsG.ANSWERS;" [value]="itemAnswersG" (click)="obtRadioButtonValue(itemAnswersG, itemQuestionsG.ID_QUESTIONS, itemQuestionsG.ID_SECTION, 'B', 'G')">{{itemAnswersG.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
     <mat-card style="margin: 15px;">
@@ -366,15 +363,15 @@
             <mat-card>
               <mat-card-content>
 
-                <section *ngFor="let itemAnswersH of itemQuestionsH.ANSWERS; let i = index">
-                  <mat-checkbox class="example-margin" (click)="checkAnswersVerify(itemAnswersH, 'A', 'A',itemQuestionsH,!itemAnswersH.CHECK, indexOfElement,i)">{{itemAnswersH.ANSWERS}}</mat-checkbox>
-                </section>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                  <mat-radio-button class="example-radio-button" *ngFor="let itemAnswersH of itemQuestionsH.ANSWERS;" [value]="itemAnswersH" (click)="obtRadioButtonValue(itemAnswersH, itemQuestionsH.ID_QUESTIONS, itemQuestionsH.ID_SECTION, 'B', 'H')">{{itemAnswersH.ANSWERS}}</mat-radio-button>
+                </mat-radio-group>
 
               </mat-card-content>
             </mat-card>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-card-actions>      
+      </mat-card-actions>
     </mat-card>
 
 

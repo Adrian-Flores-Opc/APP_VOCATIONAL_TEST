@@ -1,3 +1,4 @@
+import { AppComponent } from './../../app.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // MODULOS
@@ -31,6 +32,9 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
+import { AccessService } from 'src/app/core/layout/access.service';
+import { StorageService } from 'src/app/core/session/storage.service';
+import { AuthGuardService } from 'src/app/core/auth/auth-guard.service';
 
 
 @NgModule({
@@ -97,6 +101,8 @@ import { RouterModule } from '@angular/router';
     MatDialogModule,
     RouterModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [AccessService, StorageService, AuthGuardService],
+  bootstrap: [AppComponent]
 })
 export class SharedModule { }

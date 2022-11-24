@@ -44,7 +44,6 @@ export class StorageService {
   }
   getCurrentToken(): String {
     var session = this.getCurrentSession();
-    console.log('sesion: ' + session);
     if (session != null) {
       return (session && session.tokenIdentity) ? session.tokenIdentity : '';
     } else {

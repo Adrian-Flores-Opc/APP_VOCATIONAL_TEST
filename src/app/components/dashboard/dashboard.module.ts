@@ -1,3 +1,4 @@
+import { AppComponent } from './../../app.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,6 +11,9 @@ import { CareersComponent } from './careers/careers.component';
 import { SharedModule } from '../shared/shared.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { AccessService } from 'src/app/core/layout/access.service';
+import { StorageService } from 'src/app/core/session/storage.service';
+import { AuthGuardService } from 'src/app/core/auth/auth-guard.service';
 
 
 @NgModule({
@@ -25,6 +29,8 @@ import { DialogComponent } from './dialog/dialog.component';
     CommonModule,
     DashboardRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [ AccessService, StorageService, AuthGuardService ],
+  bootstrap:[ AppComponent ]
 })
 export class DashboardModule { }

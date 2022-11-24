@@ -363,25 +363,7 @@ export class TakeTestComponent implements OnInit {
     }});
   }
 
-  public checkAnswersVerify(_data: AnswersResponse, typeSection: String, section: String, _dataQuestions:QuestionsResult, evento:boolean, quesId: number, ansId: number):void{
-    this.saveResultAnswers(_data.ID_ANSWERS,_dataQuestions.ID_QUESTIONS);
-    if(typeSection === 'A'){
-      switch(section){
-        case 'A':
-          _dataQuestions.ANSWERS.forEach(element => {
-            if(element.ID_ANSWERS != _data.ID_ANSWERS){
-              element.CHECK = false;
-            }
-          });
-          break;
-        case 'B':
-          break;
-      }
 
-    } else if (typeSection === 'B') {
-
-    }
-  }
 
   public getResultTesting():void{
     this._connectionService.getResul().subscribe({ next: (_response) => {
@@ -678,22 +660,15 @@ export class TakeTestComponent implements OnInit {
     });
   }
 
-  public saveResultAnswers(idAnswers: number, idQuestions: number):ResultResponse{
-    this._resultQuestionsRequest.ID_ANSWERS = idAnswers;
-    this._resultQuestionsRequest.ID_QUESTIONS = idQuestions;
-    this._resultQuestionsRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
-    this._connectionService.saveResult(this._resultQuestionsRequest).subscribe({ next: (_response) => {
-      this._saveResult = _response;
-    }, error: (_error) => {
-
-    }, complete: () => {
-
-    }});
-    return this._saveResult;
-  }
-
   public removeResultAnswers(idResult: number):void{
     console.log('REMOVER RESULT ID : ' + idResult);
+    this._connectionService.deleteResult(idResult).subscribe({ next: (_response) => {
+
+    }, error: (_error) => {
+
+    }, complete:() => {
+      
+    }});
   }
 
   public obtRadioButtonValue(_datoAnswers: AnswersResponse, _idQuestions: number, _idSection: number, _bloque: String, _section: String):void{
@@ -702,12 +677,12 @@ export class TakeTestComponent implements OnInit {
     if (_bloque === 'A') {
       if (_section === 'A'){
         let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueA.filter(x => x.idQuestions === _idQuestions);
-        console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+        // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
         if (_verificationsCheckQuestions.length > 0) {
           this._verificationModelQuestions._verifiSectionAbloqueA = this._verificationModelQuestions._verifiSectionAbloqueA.filter(X => X.idQuestions != _idQuestions);
           this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
-          console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
-          console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
+          // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+          // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
         } 
         let _resultRequest : ResultRequest = new ResultRequest();
         _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
@@ -717,8 +692,8 @@ export class TakeTestComponent implements OnInit {
           _agregacionAnswers.idQuestions = _idQuestions;
           _agregacionAnswers.idResult = _response.ID_RESULT;
           this._verificationModelQuestions._verifiSectionAbloqueA.push(_agregacionAnswers);
-          console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
-          console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
+          // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+          // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
         }, error: (_error) => {
 
         }, complete:() => {

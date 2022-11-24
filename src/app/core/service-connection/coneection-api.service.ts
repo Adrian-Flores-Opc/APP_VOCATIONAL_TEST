@@ -144,7 +144,7 @@ export class ConeectionApiService {
     .pipe(catchError(this.handleError));
   }
 
-  
+
   public updateTesting(_datos: TestingResponse): Observable<TestingResponse>{
     const withCredentials = false;
     let headers = new HttpHeaders();
@@ -179,6 +179,11 @@ export class ConeectionApiService {
     .pipe(catchError(this.handleError));
   }
 
+  public deleteResult(_idResult: number):Observable<ResultResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.delete<ResultResponse>(`${this.rootUrl}ResultController/api/v1/Delete/${_idResult}`,{ headers : {'Access-Control-Allow-Origin':'*'}, withCredentials } ).pipe(catchError(this.handleError));
+  }
 
 
 

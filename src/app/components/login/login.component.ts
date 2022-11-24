@@ -149,6 +149,6 @@ export class LoginComponent implements OnInit {
     this._storage.setCurrentSession(_data);
     this._sessionResponse = this._storage.getCurrentSession();
     console.log('SESSION GENERADA: ' + JSON.stringify(this._sessionResponse));
-    // this.router.navigate(['/Dashboard']);
+    this.router.navigate(['/Dashboard']);
   }
 }

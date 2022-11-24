@@ -80,7 +80,6 @@ export class LoginComponent implements OnInit {
       })
       if (email) {
         Swal.fire('Cuenta recuperada correctamente.');
-        console.log('CORREO ELECTRONICO PARA VERIFICAR: ' + email);
       }
     } catch (e){
 
@@ -89,7 +88,7 @@ export class LoginComponent implements OnInit {
 
   public registerTesting(_datos: TestingResponse, _request: LoginResponse):void{
     this._serviceConnection.saveTesting(_datos).subscribe( { next: (_response) => {
-      console.log('TESTING REGISTER: ' + JSON.stringify(_response));
+      // console.log('TESTING REGISTER: ' + JSON.stringify(_response));
       this._testingResponse = _response;
       this._sessionRequest.fullNameUserIdentity = _request.fullName;
       this._sessionRequest.iduserIdentity = _request.idUser;
@@ -123,7 +122,7 @@ export class LoginComponent implements OnInit {
         const responseLogin =_response.find( x => x.nameUser == _request.usuario && x.passUser == _request.password);
         if (responseLogin != undefined){
           this.getTestingVerify(responseLogin.idUser);
-          console.log('USUARIO LOGUEADO: ' + JSON.stringify(responseLogin));
+          // console.log('USUARIO LOGUEADO: ' + JSON.stringify(responseLogin));
           this._serviceNotification.notificationsSimple('Usuario logueado correctamente.','success');
           this._testingRequest.ID_INTELLIGENSE = 9;
           this._testingRequest.ID_USER = responseLogin.idUser;
@@ -138,7 +137,7 @@ export class LoginComponent implements OnInit {
       }, error: (_error) => {
         this._serviceNotification.notificationsSimple('Se genero el siguiente error: ' + JSON.stringify(_error),'error');
       }, complete: () =>{
-        console.log('VALIDACION COMPLETA DE USUARIO');
+        // console.log('VALIDACION COMPLETA DE USUARIO');
       }});
     } catch(e){
       this._serviceNotification.notificationsSimple('Se genero el siguiente error: ' + e,'error');
@@ -146,10 +145,10 @@ export class LoginComponent implements OnInit {
   }
 
   private correctLogin(_data: Session){
-    console.log('SESSION POR GENERADA: ' + JSON.stringify(_data));
+    // console.log('SESSION POR GENERADA: ' + JSON.stringify(_data));
     this._storage.setCurrentSession(_data);
     this._sessionResponse = this._storage.getCurrentSession();
     console.log('SESSION GENERADA: ' + JSON.stringify(this._sessionResponse));
-    this.router.navigate(['/Dashboard']);
+    // this.router.navigate(['/Dashboard']);
   }
 }

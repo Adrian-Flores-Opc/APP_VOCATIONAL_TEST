@@ -14,6 +14,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { AccessService } from 'src/app/core/layout/access.service';
 import { StorageService } from 'src/app/core/session/storage.service';
 import { AuthGuardService } from 'src/app/core/auth/auth-guard.service';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { AuthGuardService } from 'src/app/core/auth/auth-guard.service';
     MainNavComponent,
     DialogComponent
   ],
-  imports: [
+  imports: [  BrowserModule,
     CommonModule,
     DashboardRoutingModule,
     SharedModule

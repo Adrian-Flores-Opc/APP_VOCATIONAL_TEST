@@ -10,9 +10,9 @@ const routes: Routes = [
   { path: '', component: DashboardComponent, children:
   [
     // { path: '', component: TakeTestComponent, canActivate: [AuthGuardService] },
-    { path: 'Test', component: TakeTestComponent, canActivate: [AuthGuardService] },
-    { path: 'Results', component: ResultsComponent, canActivate: [AuthGuardService] },
-    { path: 'Careers', component: CareersComponent, canActivate: [AuthGuardService] }
+    { path: 'Test', canActivate: [AuthGuardService],  component: TakeTestComponent },
+    { path: 'Results',canActivate: [AuthGuardService],  component: ResultsComponent },
+    { path: 'Careers', canActivate: [AuthGuardService],  component: CareersComponent }
   ]}
 ];
 

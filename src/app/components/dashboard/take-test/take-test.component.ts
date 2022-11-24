@@ -19,7 +19,7 @@ import { TestingResponse } from 'src/app/model/testing/testing.model';
 })
 export class TakeTestComponent implements OnInit {
 
-  //#region  VARIABLES QUESTIONS AND ANSWERS 
+  //#region  VARIABLES QUESTIONS AND ANSWERS
   public _questionsResponse!: QuestionsResponse[];
   public _sectionsResponse!: SectionsResponse[];
   public _answersResponse!: AnswersResponse[];
@@ -346,8 +346,8 @@ export class TakeTestComponent implements OnInit {
 
 
 
-      
-      
+
+
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
     }, complete:() => {
@@ -564,7 +564,9 @@ export class TakeTestComponent implements OnInit {
     let _habilidarMayorIntSec = bloqueHabilidad.filter(x => x.puntuaction == _habilidadMayor);
     let _interesMayorIntSec = _bloqueInteres.filter(x => x.puntuaction == _interesMayor);
     let _interesAct = _habilidadMayor;
+    // let _valorMayorContrario = this._sessionResponse.puntuactionSectionA.filter(x => x.puntuaction === _habilidadMayor)
     //#region VALIDARDOR ID INTELIGENCIA 1
+    this._sessionResponse.idInteligence = 1;
     if(_habilidadMayor < 15 && _interesMayor >= 15){
       // ASIGNAR ID INTELIGENCIA 1
       this._sessionResponse.idInteligence = 1;
@@ -592,7 +594,7 @@ export class TakeTestComponent implements OnInit {
     }
     //#endregion
 
-    //#region VALIDAR ID INTELIGENCIA 4 // 
+    //#region VALIDAR ID INTELIGENCIA 4 //
     let _interesActValidar = this._sessionResponse.puntuactionSectionB.filter(x => x.bloque === 'BLOQUE HABILIDAD MAYOR');
     if(_habilidadMayor > 18 && _interesMayor >= _interesAct && _interesMayor < 16){
       // ASIGNAR ID INTELIGENCIA 4
@@ -686,7 +688,7 @@ export class TakeTestComponent implements OnInit {
         let _lentVerifiSectionBbloqueH : number = this._verificationModelQuestions._verifiSectionBbloqueH.length;
 
         if (_lentVerifiSectionAbloqueA === 6 &&
-            _lentVerifiSectionAbloqueB === 6 && 
+            _lentVerifiSectionAbloqueB === 6 &&
             _lentVerifiSectionAbloqueC === 6 &&
             _lentVerifiSectionAbloqueD === 6 &&
             _lentVerifiSectionAbloqueE === 6 &&
@@ -694,7 +696,7 @@ export class TakeTestComponent implements OnInit {
             _lentVerifiSectionAbloqueG === 6 &&
             _lentVerifiSectionAbloqueH === 6 &&
             _lentVerifiSectionBbloqueA === 6 &&
-            _lentVerifiSectionBbloqueB === 6 && 
+            _lentVerifiSectionBbloqueB === 6 &&
             _lentVerifiSectionBbloqueC === 6 &&
             _lentVerifiSectionBbloqueD === 6 &&
             _lentVerifiSectionBbloqueE === 6 &&
@@ -724,7 +726,7 @@ export class TakeTestComponent implements OnInit {
     }, error: (_error) => {
 
     }, complete:() => {
-      
+
     }});
   }
 
@@ -733,7 +735,7 @@ export class TakeTestComponent implements OnInit {
     let _agregacionAnswers : AnswersModelVerification = new AnswersModelVerification();
     if (_bloque === 'A') {
       if (_section === 'A'){
-        //#region METODO DE VERIFICACION RESPUESTAS 
+        //#region METODO DE VERIFICACION RESPUESTAS
         let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueA.filter(x => x.idQuestions === _idQuestions);
         // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
         if (_verificationsCheckQuestions.length > 0) {
@@ -741,7 +743,7 @@ export class TakeTestComponent implements OnInit {
           this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
           // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
           // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-        } 
+        }
         let _resultRequest : ResultRequest = new ResultRequest();
         _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
         _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -761,7 +763,7 @@ export class TakeTestComponent implements OnInit {
         //#endregion
       }
       if (_section === 'B'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueB.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -769,7 +771,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -782,14 +784,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'C'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueC.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -797,7 +799,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -810,14 +812,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'D'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueD.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -825,7 +827,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -838,14 +840,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'E'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueE.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -853,7 +855,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -866,14 +868,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'F'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueF.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -881,7 +883,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -894,14 +896,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'G'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueG.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -909,7 +911,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -922,14 +924,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'H'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueH.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -937,7 +939,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -950,15 +952,15 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
     } else if (_bloque === 'B') {
       if (_section === 'A'){
-        //#region METODO DE VERIFICACION RESPUESTAS 
+        //#region METODO DE VERIFICACION RESPUESTAS
         let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueA.filter(x => x.idQuestions === _idQuestions);
         // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
         if (_verificationsCheckQuestions.length > 0) {
@@ -966,7 +968,7 @@ export class TakeTestComponent implements OnInit {
           this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
           // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
           // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-        } 
+        }
         let _resultRequest : ResultRequest = new ResultRequest();
         _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
         _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -986,7 +988,7 @@ export class TakeTestComponent implements OnInit {
         //#endregion
       }
       if (_section === 'B'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueB.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -994,7 +996,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -1007,14 +1009,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'C'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueC.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -1022,7 +1024,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -1035,14 +1037,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'D'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueD.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -1050,7 +1052,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -1063,14 +1065,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'E'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueE.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -1078,7 +1080,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -1091,14 +1093,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'F'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueF.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -1106,7 +1108,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -1119,14 +1121,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'G'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueG.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -1134,7 +1136,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -1147,14 +1149,14 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }
       if (_section === 'H'){
-                //#region METODO DE VERIFICACION RESPUESTAS 
+                //#region METODO DE VERIFICACION RESPUESTAS
                 let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionBbloqueH.filter(x => x.idQuestions === _idQuestions);
                 // console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
                 if (_verificationsCheckQuestions.length > 0) {
@@ -1162,7 +1164,7 @@ export class TakeTestComponent implements OnInit {
                   this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
                   // console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('ELIMINAR ID DEL QUESTIONS:' + JSON.stringify(_verificationsCheckQuestions));
-                } 
+                }
                 let _resultRequest : ResultRequest = new ResultRequest();
                 _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
                 _resultRequest.ID_QUESTIONS = _idQuestions;
@@ -1175,9 +1177,9 @@ export class TakeTestComponent implements OnInit {
                   // console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
                   // console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
                 }, error: (_error) => {
-        
+
                 }, complete:() => {
-        
+
                 }});
                 //#endregion
       }

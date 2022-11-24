@@ -713,7 +713,8 @@ export class TakeTestComponent implements OnInit {
         _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
         _agregacionAnswers.idQuestions = _idQuestions;
         let _saveResult : ResultResponse = this.saveResultAnswers(_agregacionAnswers.idAnsweres, _agregacionAnswers.idQuestions);
-        _agregacionAnswers.idResult = _saveResult.ID_RESULT;
+        console.log('ID RESULT PARA GUARDAR: ' + JSON.stringify(_saveResult));
+        _agregacionAnswers.idResult = this._saveResult.ID_RESULT;
         this._verificationModelQuestions._verifiSectionAbloqueA.push(_agregacionAnswers);
         
         console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));

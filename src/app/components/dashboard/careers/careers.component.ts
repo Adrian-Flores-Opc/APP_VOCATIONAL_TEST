@@ -38,7 +38,7 @@ export class CareersComponent implements OnInit {
     this._universitiesAdd = new UniversitiesResponse();
     this._sessionResponse = this._storage.getCurrentSession();
     this._responseIntelligense = new IntelligenceResponse();
-    if(this._sessionResponse.stateTestingIdentity === 'C'){
+    if(this._sessionResponse.stateTestingIdentity === 'P'){
       this.getintelligenseById();
       this.getCarrerasIterar();
     }

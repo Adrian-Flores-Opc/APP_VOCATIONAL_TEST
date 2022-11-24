@@ -18,7 +18,7 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit(): void {
     this._sessionResponse = this._storage.getCurrentSession();
-    if(this._sessionResponse.stateTestingIdentity === 'C'){
+    if(this._sessionResponse.stateTestingIdentity === 'P'){
       this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligence).subscribe({ next: (_response) => {
         this._responseIntelligence = _response;
       }, error: (_error) => {

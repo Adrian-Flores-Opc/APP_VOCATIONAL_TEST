@@ -333,9 +333,7 @@ export class TakeTestComponent implements OnInit {
         });
       });
 
-
-
-      
+      console.log('JSON PARA LA GENERACION DE PREGUNTAS Y RESPUESTAS: ' + JSON.stringify(this._modelQuestionsResult));
       
     }, error: (_error) => {
       console.log('ERROR: ' + _error);
@@ -390,9 +388,9 @@ export class TakeTestComponent implements OnInit {
     this._connectionService.getResul().subscribe({ next: (_response) => {
 
       //ID TESTING PARA OBTENER LA RESPUESTAS
-      this._resultCalculation = _response.filter(x => x.ID_TESTING === this._sessionResponse.idTestingIdentity);
+      // this._resultCalculation = _response.filter(x => x.ID_TESTING === this._sessionResponse.idTestingIdentity);
       //DATO QUEMADO
-      // this._resultCalculation = _response.filter(x => x.ID_TESTING == 19);
+      this._resultCalculation = _response.filter(x => x.ID_TESTING === 19);
       this.obtTotalTipoSeccion(this._resultCalculation);
     }, error: (_error) => {
 
@@ -612,7 +610,8 @@ export class TakeTestComponent implements OnInit {
     }
     //#endregion
 
-    //#region VALIDAR ID INTELIGENCIA 4
+    //#region VALIDAR ID INTELIGENCIA 4 // 
+    let _interesActValidar = this._sessionResponse.puntuactionSectionB.filter(x => x.bloque === 'BLOQUE HABILIDAD MAYOR');
     if(_habilidadMayor > 18 && _interesMayor >= _interesAct && _interesMayor < 16){
       // ASIGNAR ID INTELIGENCIA 4
       this._sessionResponse.idInteligence = 4;
@@ -669,8 +668,8 @@ export class TakeTestComponent implements OnInit {
     }).then((_result) => {
       if (_result.isConfirmed){
         this.getResultTesting();
-        this._sessionResponse.stateTestingIdentity = 'C';
-        this._storage.setCurrentSession(this._sessionResponse);
+        // this._sessionResponse.stateTestingIdentity = 'C';
+        // this._storage.setCurrentSession(this._sessionResponse);
         Swal.fire('Respuestas guardadas correctamente.','','success');
       } else if (_result.isDenied) {
         // Swal.fire('Respuestas guardadas correctamente.','','info');

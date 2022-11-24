@@ -6,7 +6,7 @@
           <mat-card-header>
             <mat-card-title>CARRERAS PROFESIONALES</mat-card-title>
           </mat-card-header>
-          <span *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
+          <span *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
             <mat-card-content>
               <P>
                 Para obtener una recomendación y conocer los resultados del test vocacional es necesario realizar el test.
@@ -17,7 +17,7 @@
             </mat-card-actions>
           </span>
 
-          <span *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
+          <span *ngIf="_sessionResponse.stateTestingIdentity == 'P'">
             <mat-card-subtitle>
               {{_responseIntelligense.DESCRIPTION_INTELLIGENSE}}
             </mat-card-subtitle>

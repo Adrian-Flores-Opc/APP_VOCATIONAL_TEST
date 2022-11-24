@@ -144,6 +144,20 @@ export class ConeectionApiService {
     .pipe(catchError(this.handleError));
   }
 
+  
+  public updateTesting(_datos: TestingResponse): Observable<TestingResponse>{
+    const withCredentials = false;
+    let headers = new HttpHeaders();
+    return this.http.put<TestingResponse>(`${this.rootUrl}TestingController/api/v1/Update/${_datos.ID_TESTING}`,
+    _datos,{
+      headers:{
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*'
+      }, withCredentials
+    })
+    .pipe(catchError(this.handleError));
+  }
+
   //CONEXION METODOS DE GUARDAR RESPUESTAS 
   
   public getResul(): Observable<ResultResponse[]>{
@@ -166,18 +180,7 @@ export class ConeectionApiService {
   }
 
 
-  public updateTesting(_datos: TestingResponse): Observable<TestingResponse>{
-    const withCredentials = false;
-    let headers = new HttpHeaders();
-    return this.http.put<TestingResponse>(`${this.rootUrl}TestingController/api/v1/Update/${_datos.ID_TESTING}`,
-    _datos,{
-      headers:{
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin':'*'
-      }, withCredentials
-    })
-    .pipe(catchError(this.handleError));
-  }
+
 
   public handleError(message: HttpErrorResponse){
     let errorMessage = 'UNKNOWN ERROR';

@@ -65,4 +65,5 @@ export class QuestionsModelVerification {
 export class AnswersModelVerification {
   public idQuestions !: number;
   public idAnsweres !: number;
+  public idResult !: number;
 }

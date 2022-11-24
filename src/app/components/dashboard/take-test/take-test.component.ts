@@ -82,7 +82,7 @@ export class TakeTestComponent implements OnInit {
 //#endregion
 
   public _verificationModelQuestions !: QuestionsModelVerification;
-
+  public _saveResult !: ResultResponse;
 
 
 
@@ -91,6 +91,7 @@ export class TakeTestComponent implements OnInit {
   ngOnInit(): void {
     // this._questionsResponse = new QuestionsResponse;
     this._verificationModelQuestions = new QuestionsModelVerification();
+    this._saveResult = new ResultResponse();
     this._puntuactionBloqueA = 0;
     this._puntuactionBloqueB = 0;
     this._resultQuestionsRequest = new ResultRequest();
@@ -381,19 +382,6 @@ export class TakeTestComponent implements OnInit {
 
     }
   }
-
-  public saveResultAnswers(idAnswers: number, idQuestions: number):void{
-    this._resultQuestionsRequest.ID_ANSWERS = idAnswers;
-    this._resultQuestionsRequest.ID_QUESTIONS = idQuestions;
-    this._resultQuestionsRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
-    this._connectionService.saveResult(this._resultQuestionsRequest).subscribe({ next: (_response) => {
-    }, error: (_error) => {
-
-    }, complete: () => {
-
-    }});
-  }
-
 
   public getResultTesting():void{
     this._connectionService.getResul().subscribe({ next: (_response) => {
@@ -689,7 +677,22 @@ export class TakeTestComponent implements OnInit {
       }
     });
   }
-  onChangeEventFunc(_dato: AnswersResponse, isChecked: boolean){
+
+  public saveResultAnswers(idAnswers: number, idQuestions: number):ResultResponse{
+    this._resultQuestionsRequest.ID_ANSWERS = idAnswers;
+    this._resultQuestionsRequest.ID_QUESTIONS = idQuestions;
+    this._resultQuestionsRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
+    this._connectionService.saveResult(this._resultQuestionsRequest).subscribe({ next: (_response) => {
+      this._saveResult = _response;
+    }, error: (_error) => {
+
+    }, complete: () => {
+
+    }});
+    return this._saveResult;
+  }
+
+  public removeResultAnswers(idResult: number):void{
 
   }
 
@@ -702,12 +705,17 @@ export class TakeTestComponent implements OnInit {
         console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
         if (_verificationsCheckQuestions.length > 0) {
           this._verificationModelQuestions._verifiSectionAbloqueA = this._verificationModelQuestions._verifiSectionAbloqueA.filter(X => X.idQuestions != _idQuestions);
+          console.log('ID RESULT A ELIMINAR DE LA TABLA: ' + _verificationsCheckQuestions[0].idResult);
+          this.removeResultAnswers(_verificationsCheckQuestions[0].idResult);
           console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
           console.log('ELIMINAR ID DEL QUESTIOS:' + JSON.stringify(_verificationsCheckQuestions));
         } 
         _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
         _agregacionAnswers.idQuestions = _idQuestions;
+        let _saveResult : ResultResponse = this.saveResultAnswers(_agregacionAnswers.idAnsweres, _agregacionAnswers.idQuestions);
+        _agregacionAnswers.idResult = _saveResult.ID_RESULT;
         this._verificationModelQuestions._verifiSectionAbloqueA.push(_agregacionAnswers);
+        
         console.log('VERIFICACION DE PREGUNTAS: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
         console.log('CANTIDAD DE PREGUNTAS RESPONDIDAS: ' + this._verificationModelQuestions._verifiSectionAbloqueA.length);
       }

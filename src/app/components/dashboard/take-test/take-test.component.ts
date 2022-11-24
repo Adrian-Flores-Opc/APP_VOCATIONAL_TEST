@@ -9,6 +9,7 @@ import { StorageService } from 'src/app/core/session/storage.service';
 import { dataPuntuaction, Session } from 'src/app/model/session/session.model';
 import { ResultRequest, ResultResponse } from 'src/app/model/result/result.model';
 import { ServiceNotificationsService } from 'src/app/core/service-notifications/service-notifications.service';
+import { TestingResponse } from 'src/app/model/testing/testing.model';
 
 
 @Component({
@@ -116,7 +117,7 @@ export class TakeTestComponent implements OnInit {
     this._sessionResponse.puntuactionBloqueFSectionB = this._puntuactionBloqueBSectionF = 0;
     this._sessionResponse.puntuactionBloqueGSectionB = this._puntuactionBloqueBSectionG = 0;
     this._sessionResponse.puntuactionBloqueHSectionB = this._puntuactionBloqueBSectionH = 0;
-
+    console.log('INVOCACION NGONIT TAKE TEST');
     this.getQuestions();
     this.getAnswers();
     this.getSections();
@@ -369,9 +370,9 @@ export class TakeTestComponent implements OnInit {
     this._connectionService.getResul().subscribe({ next: (_response) => {
 
       //ID TESTING PARA OBTENER LA RESPUESTAS
-      // this._resultCalculation = _response.filter(x => x.ID_TESTING === this._sessionResponse.idTestingIdentity);
+      this._resultCalculation = _response.filter(x => x.ID_TESTING === this._sessionResponse.idTestingIdentity);
       //DATO QUEMADO
-      this._resultCalculation = _response.filter(x => x.ID_TESTING === 19);
+      // this._resultCalculation = _response.filter(x => x.ID_TESTING === 19);
       this.obtTotalTipoSeccion(this._resultCalculation);
     }, error: (_error) => {
 
@@ -637,6 +638,20 @@ export class TakeTestComponent implements OnInit {
       this._storage.setCurrentSession(this._sessionResponse);
     }
     //#endregion
+
+    this._sessionResponse = this._storage.getCurrentSession();
+    let _testingUpdate : TestingResponse = new TestingResponse();
+    _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+    _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+    _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+    _testingUpdate.STATE = 'C';
+    this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+
+    }, error: (_error) => {
+
+    }, complete:() => {
+
+    }});
   }
 
   public confirmationSaveTestVocational():void{

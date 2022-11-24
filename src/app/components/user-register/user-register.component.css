@@ -47,3 +47,7 @@ h2{
   border-radius: 45px;
   box-shadow: 1px 5px 14px 5px #00000091;
 }
+
+.date-form-content {
+  display: flex !important;
+}

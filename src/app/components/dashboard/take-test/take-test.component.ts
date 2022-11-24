@@ -687,6 +687,7 @@ export class TakeTestComponent implements OnInit {
         let _resultRequest : ResultRequest = new ResultRequest();
         _resultRequest.ID_ANSWERS = _datoAnswers.ID_ANSWERS;
         _resultRequest.ID_QUESTIONS = _idQuestions;
+        _resultRequest.ID_TESTING = this._sessionResponse.idTestingIdentity;
         this._connectionService.saveResult(_resultRequest).subscribe({ next: (_response) => {
           _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
           _agregacionAnswers.idQuestions = _idQuestions;

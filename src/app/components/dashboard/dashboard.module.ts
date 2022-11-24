@@ -26,7 +26,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MainNavComponent,
     DialogComponent
   ],
-  imports: [  BrowserModule,
+  imports: [
     CommonModule,
     DashboardRoutingModule,
     SharedModule

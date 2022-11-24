@@ -64,6 +64,42 @@ export class ServiceNotificationsService {
           title: message
         })
         break;
+      case 'info':
+        const ToastInfo = Swal.mixin({
+          toast: true,
+          position: 'center',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: false,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+    
+        ToastInfo.fire({
+          icon: 'info',
+          title: message
+        })
+        break;
+      case 'question':
+        const ToastQuestion = Swal.mixin({
+          toast: true,
+          position: 'center',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: false,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+    
+        ToastQuestion.fire({
+          icon: 'question',
+          title: message
+        })
+        break;
     }
   }
 }

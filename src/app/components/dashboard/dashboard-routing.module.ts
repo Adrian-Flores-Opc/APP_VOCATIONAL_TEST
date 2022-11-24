@@ -4,14 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { TakeTestComponent } from './take-test/take-test.component';
 import { CareersComponent } from './careers/careers.component';
+import { AuthGuardService } from 'src/app/core/auth/auth-guard.service';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, children:
   [
-    { path: '', component: TakeTestComponent },
-    { path: 'Test', component: TakeTestComponent },
-    { path: 'Results', component: ResultsComponent },
-    { path: 'Careers', component: CareersComponent }
+    { path: '', component: TakeTestComponent, canActivate: [AuthGuardService] },
+    { path: 'Test', component: TakeTestComponent, canActivate: [AuthGuardService] },
+    { path: 'Results', component: ResultsComponent, canActivate: [AuthGuardService] },
+    { path: 'Careers', component: CareersComponent, canActivate: [AuthGuardService] }
   ]}
 ];
 

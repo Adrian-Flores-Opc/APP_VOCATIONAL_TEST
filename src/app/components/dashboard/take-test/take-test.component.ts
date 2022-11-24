@@ -697,6 +697,13 @@ export class TakeTestComponent implements OnInit {
     let _agregacionAnswers : AnswersModelVerification = new AnswersModelVerification();
     if (_bloque === 'A') {
       if (_section === 'A'){
+        let _verificationsCheckQuestions = this._verificationModelQuestions._verifiSectionAbloqueA.filter(x => x.idQuestions === _idQuestions);
+        console.log('VERIFICACION EN ARRAY DEL FILTER: ' + _verificationsCheckQuestions.length);
+        if (_verificationsCheckQuestions.length > 0) {
+          this._verificationModelQuestions._verifiSectionAbloqueA = this._verificationModelQuestions._verifiSectionAbloqueA.filter(X => X.idQuestions != _idQuestions);
+          console.log('ELIMINAR EL VALOR DEL ARRAY: ' + JSON.stringify(this._verificationModelQuestions._verifiSectionAbloqueA));
+          console.log('ELIMINAR ID DEL QUESTIOS:' + JSON.stringify(_verificationsCheckQuestions));
+        } 
         _agregacionAnswers.idAnsweres = _datoAnswers.ID_ANSWERS;
         _agregacionAnswers.idQuestions = _idQuestions;
         this._verificationModelQuestions._verifiSectionAbloqueA.push(_agregacionAnswers);

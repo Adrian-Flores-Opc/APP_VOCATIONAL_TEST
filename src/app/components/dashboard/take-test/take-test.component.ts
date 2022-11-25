@@ -565,6 +565,8 @@ export class TakeTestComponent implements OnInit {
     let _interesMayorIntSec = _bloqueInteres.filter(x => x.puntuaction == _interesMayor);
     let _interesAct = _habilidadMayor;
     //#region VALIDARDOR ID INTELIGENCIA 1
+    this._sessionResponse.idInteligence = 8;
+    this._storage.setCurrentSession(this._sessionResponse);
     if(_habilidadMayor < 15 && _interesMayor >= 15){
       // ASIGNAR ID INTELIGENCIA 1
       this._sessionResponse.idInteligence = 1;

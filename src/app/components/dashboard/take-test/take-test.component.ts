@@ -10,6 +10,7 @@ import { dataPuntuaction, Session } from 'src/app/model/session/session.model';
 import { ResultRequest, ResultResponse } from 'src/app/model/result/result.model';
 import { ServiceNotificationsService } from 'src/app/core/service-notifications/service-notifications.service';
 import { TestingResponse } from 'src/app/model/testing/testing.model';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
@@ -117,7 +118,7 @@ export class TakeTestComponent implements OnInit {
     this._sessionResponse.puntuactionBloqueFSectionB = this._puntuactionBloqueBSectionF = 0;
     this._sessionResponse.puntuactionBloqueGSectionB = this._puntuactionBloqueBSectionG = 0;
     this._sessionResponse.puntuactionBloqueHSectionB = this._puntuactionBloqueBSectionH = 0;
-    console.log('INVOCACION NGONIT TAKE TEST');
+    // console.log('INVOCACION NGONIT TAKE TEST');
     this.getQuestions();
     this.getSections();
     // this.generateModelResult();
@@ -464,10 +465,21 @@ export class TakeTestComponent implements OnInit {
             }
 
             this._puntuactionBloqueA = this._puntuactionBloqueA +_responsePunt.PUNCTUATION;
-            this._puntuactionBloqueA = Math.max(this._sessionResponse.puntuactionBloqueASectionA, this._sessionResponse.puntuactionBloqueBSectionA,this._sessionResponse.puntuactionBloqueCSectionA,this._sessionResponse.puntuactionBloqueDSectionA,this._sessionResponse.puntuactionBloqueESectionA,this._sessionResponse.puntuactionBloqueFSectionA,this._sessionResponse.puntuactionBloqueGSectionA,this._sessionResponse.puntuactionBloqueHSectionA);
+            this._puntuactionBloqueA = Math.max(
+              this._sessionResponse.puntuactionBloqueASectionA, 
+              this._sessionResponse.puntuactionBloqueBSectionA,
+              this._sessionResponse.puntuactionBloqueCSectionA,
+              this._sessionResponse.puntuactionBloqueDSectionA,
+              this._sessionResponse.puntuactionBloqueESectionA,
+              this._sessionResponse.puntuactionBloqueFSectionA,
+              this._sessionResponse.puntuactionBloqueGSectionA,
+              this._sessionResponse.puntuactionBloqueHSectionA);
+              
             this._sessionResponse.puntuactionSectionA = _comparationBloques;
             this._sessionResponse.puntuactionBloqueA = this._puntuactionBloqueA;
             this._storage.setCurrentSession(this._sessionResponse);
+            this._sessionResponse = this._storage.getCurrentSession();
+            this.getIntelligense(this._sessionResponse.puntuactionBloqueA, this._sessionResponse.puntuactionBloqueB, this._sessionResponse.puntuactionSectionA , this._sessionResponse.puntuactionSectionB);
           }, error: (_error) => {
 
           }, complete: () => {
@@ -544,33 +556,45 @@ export class TakeTestComponent implements OnInit {
             this._sessionResponse.puntuactionSectionB = _comparationBloques;
             this._sessionResponse.puntuactionBloqueB = this._puntuactionBloqueB;
             this._storage.setCurrentSession(this._sessionResponse);
+            this._sessionResponse = this._storage.getCurrentSession();
+
+            this.getIntelligense(this._sessionResponse.puntuactionBloqueA, this._sessionResponse.puntuactionBloqueB, this._sessionResponse.puntuactionSectionA , this._sessionResponse.puntuactionSectionB);
           }, error: (_error) => {
 
           }, complete: () => {
 
           }});
         }
+
       }, error: (_error) => {
 
       }, complete: () => {
 
       }});
     });
-    this._sessionResponse = this._storage.getCurrentSession();
-    this.getIntelligense(this._sessionResponse.puntuactionBloqueA, this._sessionResponse.puntuactionBloqueB, this._sessionResponse.puntuactionSectionA , this._sessionResponse.puntuactionSectionB);
+    // this._sessionResponse = this._storage.getCurrentSession();
+    // this.getIntelligense(this._sessionResponse.puntuactionBloqueA, this._sessionResponse.puntuactionBloqueB, this._sessionResponse.puntuactionSectionA , this._sessionResponse.puntuactionSectionB);
   }
 
   public getIntelligense(_habilidadMayor:number,  _interesMayor: number, bloqueHabilidad: dataPuntuaction[],  _bloqueInteres:dataPuntuaction[]):void{
+    if(_habilidadMayor != undefined && _interesMayor != undefined && bloqueHabilidad != undefined && _bloqueInteres != undefined){
+      // console.log('INVOCACION OBTENER ID INTELLIGENSE: ' + _habilidadMayor + ' - ' + _interesMayor + ' - ' + JSON.stringify(bloqueHabilidad) + ' - ' + JSON.stringify(_bloqueInteres));
     let _habilidarMayorIntSec = bloqueHabilidad.filter(x => x.puntuaction == _habilidadMayor);
     let _interesMayorIntSec = _bloqueInteres.filter(x => x.puntuaction == _interesMayor);
-    let _interesAct = _habilidadMayor;
+
+    let _interesAct = bloqueHabilidad.find(x => x.puntuaction === _habilidadMayor)?.bloque;
+    let _bloqueSectionAnswers = _bloqueInteres.find(x => x.bloque === _interesAct)?.bloque;
+    let _interesActValor = _bloqueInteres.find(x => x.bloque === _bloqueSectionAnswers)?.puntuaction;
+    let _valAct : number = _interesActValor === undefined ? 0 : _interesActValor;
+    // console.log('PUNTUACION ACT: ' + _interesActValor);
     //#region VALIDARDOR ID INTELIGENCIA 1
     this._sessionResponse.idInteligence = 8;
     this._storage.setCurrentSession(this._sessionResponse);
+    this._sessionResponse = this._storage.getCurrentSession();
+    // console.log('SESSION GENERADA PARA EL ID_INTELLIGENSE: ' + JSON.stringify(this._sessionResponse));
     if(_habilidadMayor < 15 && _interesMayor >= 15){
       // ASIGNAR ID INTELIGENCIA 1
       this._sessionResponse.idInteligence = 1;
-      this._storage.setCurrentSession(this._sessionResponse);
     }
     //#endregion
 
@@ -579,7 +603,6 @@ export class TakeTestComponent implements OnInit {
       if  (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
           // ASIGNAR ID INTELIGENCIA 2
           this._sessionResponse.idInteligence = 2;
-          this._storage.setCurrentSession(this._sessionResponse);
       }
     }
     //#endregion
@@ -589,17 +612,15 @@ export class TakeTestComponent implements OnInit {
       if (_habilidarMayorIntSec != _interesMayorIntSec){
         // ASIGNAR ID INTELIGENCIA 3
         this._sessionResponse.idInteligence = 3;
-        this._storage.setCurrentSession(this._sessionResponse);
       }
     }
     //#endregion
 
     //#region VALIDAR ID INTELIGENCIA 4 // 
-    let _interesActValidar = this._sessionResponse.puntuactionSectionB.filter(x => x.bloque === 'BLOQUE HABILIDAD MAYOR');
-    if(_habilidadMayor > 18 && _interesMayor >= _interesAct && _interesMayor < 16){
+    // let _interesActValidar = this._sessionResponse.puntuactionSectionB.filter(x => x.bloque === 'BLOQUE HABILIDAD MAYOR');
+    if(_habilidadMayor > 18 && _interesMayor >=  _valAct && _interesMayor < 16){
       // ASIGNAR ID INTELIGENCIA 4
       this._sessionResponse.idInteligence = 4;
-      this._storage.setCurrentSession(this._sessionResponse);
     }
     //#endregion
 
@@ -608,7 +629,6 @@ export class TakeTestComponent implements OnInit {
       if(_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 5
         this._sessionResponse.idInteligence = 5;
-        this._storage.setCurrentSession(this._sessionResponse);
       }
     }
     //#endregion
@@ -618,7 +638,6 @@ export class TakeTestComponent implements OnInit {
       if (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 6
         this._sessionResponse.idInteligence = 6;
-        this._storage.setCurrentSession(this._sessionResponse);
       }
     }
     //#endregion
@@ -628,7 +647,6 @@ export class TakeTestComponent implements OnInit {
       if (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 7
         this._sessionResponse.idInteligence = 7;
-        this._storage.setCurrentSession(this._sessionResponse);
       }
     }
     //#endregion
@@ -637,16 +655,17 @@ export class TakeTestComponent implements OnInit {
     if (_interesMayor < 15 && _habilidadMayor < 15){
       // ASIGNAR ID INTELIGENCIA 8
       this._sessionResponse.idInteligence = 8;
-      this._storage.setCurrentSession(this._sessionResponse);
     }
     //#endregion
-
+    this._sessionResponse.stateTestingIdentity = 'C';
+    this._storage.setCurrentSession(this._sessionResponse);
     this._sessionResponse = this._storage.getCurrentSession();
     let _testingUpdate : TestingResponse = new TestingResponse();
     _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
     _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
     _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
     _testingUpdate.STATE = 'C';
+    console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
     this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
 
     }, error: (_error) => {
@@ -654,6 +673,7 @@ export class TakeTestComponent implements OnInit {
     }, complete:() => {
 
     }});
+    }
   }
 
   public confirmationSaveTestVocational():void{
@@ -704,8 +724,6 @@ export class TakeTestComponent implements OnInit {
             _lentVerifiSectionBbloqueG === 6 &&
             _lentVerifiSectionBbloqueH === 6){
               this.getResultTesting();
-              this._sessionResponse.stateTestingIdentity = 'C';
-              this._storage.setCurrentSession(this._sessionResponse);
               Swal.fire('Respuestas guardadas correctamente.','','success');
             }
             else {
@@ -720,7 +738,7 @@ export class TakeTestComponent implements OnInit {
   }
 
   public removeResultAnswers(idResult: number):void{
-    console.log('REMOVER RESULT ID : ' + idResult);
+    // console.log('REMOVER RESULT ID : ' + idResult);
     this._connectionService.deleteResult(idResult).subscribe({ next: (_response) => {
 
     }, error: (_error) => {
@@ -731,7 +749,7 @@ export class TakeTestComponent implements OnInit {
   }
 
   public obtRadioButtonValue(_datoAnswers: AnswersResponse, _idQuestions: number, _idSection: number, _bloque: String, _section: String):void{
-    console.log('DATO DEL RADIO BUTTON: ' + JSON.stringify(_datoAnswers) + ' - ' + _idQuestions + ' - ' + _idSection + ' - ' + _bloque + ' - ' + _section);
+    // console.log('DATO DEL RADIO BUTTON: ' + JSON.stringify(_datoAnswers) + ' - ' + _idQuestions + ' - ' + _idSection + ' - ' + _bloque + ' - ' + _section);
     let _agregacionAnswers : AnswersModelVerification = new AnswersModelVerification();
     if (_bloque === 'A') {
       if (_section === 'A'){

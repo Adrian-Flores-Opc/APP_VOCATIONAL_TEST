@@ -595,6 +595,24 @@ export class TakeTestComponent implements OnInit {
     if(_habilidadMayor < 15 && _interesMayor >= 15){
       // ASIGNAR ID INTELIGENCIA 1
       this._sessionResponse.idInteligence = 1;
+      this._sessionResponse.stateTestingIdentity = 'C';
+      this._storage.setCurrentSession(this._sessionResponse);
+      this._sessionResponse = this._storage.getCurrentSession();
+      let _testingUpdate : TestingResponse = new TestingResponse();
+      _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+      _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+      _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+      _testingUpdate.STATE = 'C';
+      console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
+      this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+  
+      }, error: (_error) => {
+  
+      }, complete:() => {
+  
+      }});
+
+      return;
     }
     //#endregion
 
@@ -603,6 +621,23 @@ export class TakeTestComponent implements OnInit {
       if  (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
           // ASIGNAR ID INTELIGENCIA 2
           this._sessionResponse.idInteligence = 2;
+          this._sessionResponse.stateTestingIdentity = 'C';
+          this._storage.setCurrentSession(this._sessionResponse);
+          this._sessionResponse = this._storage.getCurrentSession();
+          let _testingUpdate : TestingResponse = new TestingResponse();
+          _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+          _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+          _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+          _testingUpdate.STATE = 'C';
+          console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
+          this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+      
+          }, error: (_error) => {
+      
+          }, complete:() => {
+      
+          }});
+          return;
       }
     }
     //#endregion
@@ -612,6 +647,24 @@ export class TakeTestComponent implements OnInit {
       if (_habilidarMayorIntSec != _interesMayorIntSec){
         // ASIGNAR ID INTELIGENCIA 3
         this._sessionResponse.idInteligence = 3;
+        this._sessionResponse.stateTestingIdentity = 'C';
+        this._storage.setCurrentSession(this._sessionResponse);
+        this._sessionResponse = this._storage.getCurrentSession();
+        let _testingUpdate : TestingResponse = new TestingResponse();
+        _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+        _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+        _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+        _testingUpdate.STATE = 'C';
+        console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
+        this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+    
+        }, error: (_error) => {
+    
+        }, complete:() => {
+    
+        }});
+
+        return;
       }
     }
     //#endregion
@@ -621,6 +674,23 @@ export class TakeTestComponent implements OnInit {
     if(_habilidadMayor > 18 && _interesMayor >=  _valAct && _interesMayor < 16){
       // ASIGNAR ID INTELIGENCIA 4
       this._sessionResponse.idInteligence = 4;
+      this._sessionResponse.stateTestingIdentity = 'C';
+      this._storage.setCurrentSession(this._sessionResponse);
+      this._sessionResponse = this._storage.getCurrentSession();
+      let _testingUpdate : TestingResponse = new TestingResponse();
+      _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+      _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+      _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+      _testingUpdate.STATE = 'C';
+      console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
+      this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+  
+      }, error: (_error) => {
+  
+      }, complete:() => {
+  
+      }});
+      return;
     }
     //#endregion
 
@@ -629,6 +699,23 @@ export class TakeTestComponent implements OnInit {
       if(_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 5
         this._sessionResponse.idInteligence = 5;
+        this._sessionResponse.stateTestingIdentity = 'C';
+        this._storage.setCurrentSession(this._sessionResponse);
+        this._sessionResponse = this._storage.getCurrentSession();
+        let _testingUpdate : TestingResponse = new TestingResponse();
+        _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+        _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+        _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+        _testingUpdate.STATE = 'C';
+        console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
+        this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+    
+        }, error: (_error) => {
+    
+        }, complete:() => {
+    
+        }});
+        return;
       }
     }
     //#endregion
@@ -638,6 +725,23 @@ export class TakeTestComponent implements OnInit {
       if (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 6
         this._sessionResponse.idInteligence = 6;
+        this._sessionResponse.stateTestingIdentity = 'C';
+        this._storage.setCurrentSession(this._sessionResponse);
+        this._sessionResponse = this._storage.getCurrentSession();
+        let _testingUpdate : TestingResponse = new TestingResponse();
+        _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+        _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+        _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+        _testingUpdate.STATE = 'C';
+        console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
+        this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+    
+        }, error: (_error) => {
+    
+        }, complete:() => {
+    
+        }});
+        return;
       }
     }
     //#endregion
@@ -647,6 +751,23 @@ export class TakeTestComponent implements OnInit {
       if (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 7
         this._sessionResponse.idInteligence = 7;
+        this._sessionResponse.stateTestingIdentity = 'C';
+        this._storage.setCurrentSession(this._sessionResponse);
+        this._sessionResponse = this._storage.getCurrentSession();
+        let _testingUpdate : TestingResponse = new TestingResponse();
+        _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+        _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+        _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+        _testingUpdate.STATE = 'C';
+        console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
+        this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+    
+        }, error: (_error) => {
+    
+        }, complete:() => {
+    
+        }});
+        return;
       }
     }
     //#endregion
@@ -655,6 +776,23 @@ export class TakeTestComponent implements OnInit {
     if (_interesMayor < 15 && _habilidadMayor < 15){
       // ASIGNAR ID INTELIGENCIA 8
       this._sessionResponse.idInteligence = 8;
+      this._sessionResponse.stateTestingIdentity = 'C';
+      this._storage.setCurrentSession(this._sessionResponse);
+      this._sessionResponse = this._storage.getCurrentSession();
+      let _testingUpdate : TestingResponse = new TestingResponse();
+      _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
+      _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
+      _testingUpdate.ID_USER = this._sessionResponse.iduserIdentity;
+      _testingUpdate.STATE = 'C';
+      console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
+      this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+  
+      }, error: (_error) => {
+  
+      }, complete:() => {
+  
+      }});
+      return;
     }
     //#endregion
     this._sessionResponse.stateTestingIdentity = 'C';

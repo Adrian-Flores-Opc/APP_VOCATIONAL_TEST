@@ -617,7 +617,7 @@ export class TakeTestComponent implements OnInit {
     //#endregion
 
     //#region VALIDAR ID INTELIGENCIA 2
-    if(_habilidadMayor >= 15 && _habilidadMayor <= 19 && _interesMayor >= 15){
+    if(_habilidadMayor >= 15 && _habilidadMayor < 19 && _interesMayor >= 15){
       if  (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
           // ASIGNAR ID INTELIGENCIA 2
           this._sessionResponse.idInteligence = 2;
@@ -644,7 +644,7 @@ export class TakeTestComponent implements OnInit {
 
     //#region VALIDAR ID INTELIGENCIA 3
     if(_habilidadMayor > 15 && _habilidadMayor < 19 && _interesMayor > 15 && _interesMayor < 19){
-      if (_habilidarMayorIntSec != _interesMayorIntSec){
+      if (_habilidarMayorIntSec === _interesMayorIntSec){
         // ASIGNAR ID INTELIGENCIA 3
         this._sessionResponse.idInteligence = 3;
         this._sessionResponse.stateTestingIdentity = 'C';
@@ -722,7 +722,7 @@ export class TakeTestComponent implements OnInit {
 
     //#region  VALIDAR ID INTELIGENCIA 6
     if(_habilidadMayor > 18 && _interesMayor > 18 ){
-      if (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
+      if (_habilidarMayorIntSec[0].bloque === _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 6
         this._sessionResponse.idInteligence = 6;
         this._sessionResponse.stateTestingIdentity = 'C';

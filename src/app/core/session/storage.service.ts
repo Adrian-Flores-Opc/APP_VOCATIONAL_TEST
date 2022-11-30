@@ -19,9 +19,7 @@ export class StorageService {
 
   setCurrentSession(session: Session): void {
     this._currenSession = session;
-    console.log('entrada sesion: ' +session);
     this._localStorageService.setItem('currentUser', JSON.stringify(session));
-    console.log('entrada sesion dos: ' +this._localStorageService);
   }
   loadSessionData(): Session {
     var sessionStr = this._localStorageService.getItem('currentUser');

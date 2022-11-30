@@ -98,6 +98,8 @@ export class LoginComponent implements OnInit {
       this._sessionRequest.stateTestingIdentity = this._testingResponse.STATE;
       this._sessionRequest.tokenIdentity = this._accessService.GetToken();
       this._sessionRequest.dashboard = true;
+      this._sessionRequest.idInteligence = 9;
+      this._sessionRequest.stateTestingIdentity = 'P';
       this.correctLogin(this._sessionRequest);
     }, error: (_error) => {
       console.log('ERROR TESTING REGISTER: ' + JSON.stringify(_error));
@@ -109,7 +111,7 @@ export class LoginComponent implements OnInit {
   public getTestingVerify(idUser: number):void{
     this._serviceConnection.getTesting().subscribe({ next: (_response) => {
       _response.find(x => x.STATE == 'P' && x.ID_USER == idUser)?.ID_TESTING;
-      console.log('JSON VERIFICACION STATUS: ' + JSON.stringify(_response));
+      // console.log('JSON VERIFICACION STATUS: ' + JSON.stringify(_response));
     }, error: (_error) => {
 
     }, complete: () => {

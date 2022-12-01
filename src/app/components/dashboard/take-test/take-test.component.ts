@@ -92,6 +92,7 @@ export class TakeTestComponent implements OnInit {
 
   ngOnInit(): void {
     // this._questionsResponse = new QuestionsResponse;
+    this._sessionResponse = this._storage.getCurrentSession();
     this._verificationModelQuestions = new QuestionsModelVerification();
     this._saveResult = new ResultResponse();
     this._puntuactionBloqueA = 0;
@@ -99,7 +100,6 @@ export class TakeTestComponent implements OnInit {
     this._resultQuestionsRequest = new ResultRequest();
     this._resultQuestionsResponse = new ResultResponse();
     this._modelQuestionsResult = new QuestionsModelResul();
-    this._sessionResponse = this._storage.getCurrentSession();
     // console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
     this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA = 0;
     this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB = 0;
@@ -119,6 +119,11 @@ export class TakeTestComponent implements OnInit {
     this._sessionResponse.puntuactionBloqueGSectionB = this._puntuactionBloqueBSectionG = 0;
     this._sessionResponse.puntuactionBloqueHSectionB = this._puntuactionBloqueBSectionH = 0;
     // console.log('INVOCACION NGONIT TAKE TEST');
+    this._sessionResponse.puntuactionSectionA = [];
+    this._sessionResponse.puntuactionSectionB = [];
+    this._storage.setCurrentSession(this._sessionResponse);
+    this._sessionResponse = this._storage.getCurrentSession();
+
     this.getQuestions();
     this.getSections();
     // this.generateModelResult();
@@ -466,7 +471,7 @@ export class TakeTestComponent implements OnInit {
 
             this._puntuactionBloqueA = this._puntuactionBloqueA +_responsePunt.PUNCTUATION;
             this._puntuactionBloqueA = Math.max(
-              this._sessionResponse.puntuactionBloqueASectionA, 
+              this._sessionResponse.puntuactionBloqueASectionA,
               this._sessionResponse.puntuactionBloqueBSectionA,
               this._sessionResponse.puntuactionBloqueCSectionA,
               this._sessionResponse.puntuactionBloqueDSectionA,
@@ -474,7 +479,7 @@ export class TakeTestComponent implements OnInit {
               this._sessionResponse.puntuactionBloqueFSectionA,
               this._sessionResponse.puntuactionBloqueGSectionA,
               this._sessionResponse.puntuactionBloqueHSectionA);
-              
+
             this._sessionResponse.puntuactionSectionA = _comparationBloques;
             this._sessionResponse.puntuactionBloqueA = this._puntuactionBloqueA;
             this._storage.setCurrentSession(this._sessionResponse);
@@ -581,11 +586,6 @@ export class TakeTestComponent implements OnInit {
       // console.log('INVOCACION OBTENER ID INTELLIGENSE: ' + _habilidadMayor + ' - ' + _interesMayor + ' - ' + JSON.stringify(bloqueHabilidad) + ' - ' + JSON.stringify(_bloqueInteres));
     let _habilidarMayorIntSec = bloqueHabilidad.filter(x => x.puntuaction == _habilidadMayor);
     let _interesMayorIntSec = _bloqueInteres.filter(x => x.puntuaction == _interesMayor);
-<<<<<<< HEAD
-    let _interesAct = _habilidadMayor;
-    // let _valorMayorContrario = this._sessionResponse.puntuactionSectionA.filter(x => x.puntuaction === _habilidadMayor)
-    //#region VALIDARDOR ID INTELIGENCIA 1
-=======
 
     let _interesAct = bloqueHabilidad.find(x => x.puntuaction === _habilidadMayor)?.bloque;
     let _bloqueSectionAnswers = _bloqueInteres.find(x => x.bloque === _interesAct)?.bloque;
@@ -597,7 +597,6 @@ export class TakeTestComponent implements OnInit {
     this._storage.setCurrentSession(this._sessionResponse);
     this._sessionResponse = this._storage.getCurrentSession();
     // console.log('SESSION GENERADA PARA EL ID_INTELLIGENSE: ' + JSON.stringify(this._sessionResponse));
->>>>>>> 587d74feefb802fe170f529a4b3c29720f81c941
     if(_habilidadMayor < 15 && _interesMayor >= 15){
       // ASIGNAR ID INTELIGENCIA 1
       this._sessionResponse.idInteligence = 1;
@@ -611,14 +610,14 @@ export class TakeTestComponent implements OnInit {
       _testingUpdate.STATE = 'C';
       console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
       this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-  
+        return;
       }, error: (_error) => {
-  
+
       }, complete:() => {
-  
+
       }});
 
-      return;
+      // return;
     }
     //#endregion
 
@@ -637,13 +636,13 @@ export class TakeTestComponent implements OnInit {
           _testingUpdate.STATE = 'C';
           console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
           this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-      
+            return;
           }, error: (_error) => {
-      
+
           }, complete:() => {
-      
+
           }});
-          return;
+          // return;
       }
     }
     //#endregion
@@ -663,27 +662,21 @@ export class TakeTestComponent implements OnInit {
         _testingUpdate.STATE = 'C';
         console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
         this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-    
+          return;
         }, error: (_error) => {
-    
+
         }, complete:() => {
-    
+
         }});
 
-        return;
+        // return;
       }
     }
     //#endregion
 
-<<<<<<< HEAD
     //#region VALIDAR ID INTELIGENCIA 4 //
-    let _interesActValidar = this._sessionResponse.puntuactionSectionB.filter(x => x.bloque === 'BLOQUE HABILIDAD MAYOR');
-    if(_habilidadMayor > 18 && _interesMayor >= _interesAct && _interesMayor < 16){
-=======
-    //#region VALIDAR ID INTELIGENCIA 4 // 
     // let _interesActValidar = this._sessionResponse.puntuactionSectionB.filter(x => x.bloque === 'BLOQUE HABILIDAD MAYOR');
     if(_habilidadMayor > 18 && _interesMayor >=  _valAct && _interesMayor < 16){
->>>>>>> 587d74feefb802fe170f529a4b3c29720f81c941
       // ASIGNAR ID INTELIGENCIA 4
       this._sessionResponse.idInteligence = 4;
       this._sessionResponse.stateTestingIdentity = 'C';
@@ -696,13 +689,13 @@ export class TakeTestComponent implements OnInit {
       _testingUpdate.STATE = 'C';
       console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
       this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-  
+        return;
       }, error: (_error) => {
-  
+
       }, complete:() => {
-  
+
       }});
-      return;
+      // return;
     }
     //#endregion
 
@@ -721,13 +714,13 @@ export class TakeTestComponent implements OnInit {
         _testingUpdate.STATE = 'C';
         console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
         this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-    
+          return;
         }, error: (_error) => {
-    
+
         }, complete:() => {
-    
+
         }});
-        return;
+        // return;
       }
     }
     //#endregion
@@ -747,13 +740,13 @@ export class TakeTestComponent implements OnInit {
         _testingUpdate.STATE = 'C';
         console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
         this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-    
+          return;
         }, error: (_error) => {
-    
+
         }, complete:() => {
-    
+
         }});
-        return;
+        // return;
       }
     }
     //#endregion
@@ -773,13 +766,13 @@ export class TakeTestComponent implements OnInit {
         _testingUpdate.STATE = 'C';
         console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
         this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-    
+          return;
         }, error: (_error) => {
-    
+
         }, complete:() => {
-    
+
         }});
-        return;
+        // return;
       }
     }
     //#endregion
@@ -798,13 +791,13 @@ export class TakeTestComponent implements OnInit {
       _testingUpdate.STATE = 'C';
       console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
       this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-  
+        return;
       }, error: (_error) => {
-  
+
       }, complete:() => {
-  
+
       }});
-      return;
+      // return;
     }
     //#endregion
     this._sessionResponse.stateTestingIdentity = 'C';
@@ -817,13 +810,13 @@ export class TakeTestComponent implements OnInit {
     _testingUpdate.STATE = 'C';
     console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
     this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
-
+      return;
     }, error: (_error) => {
 
     }, complete:() => {
 
     }});
-    }
+  }
   }
 
   public confirmationSaveTestVocational():void{

@@ -19,8 +19,9 @@ export class UserRegisterComponent implements OnInit {
   public _modelRegister!: RegisterUser;
   public _requestUserRegister !: RegisterUserRequest;
   hide = true;
-  constructor(private _service: ServiceMainService, 
-    private _serviceConnection: ConeectionApiService, 
+  hide1 = true;
+  constructor(private _service: ServiceMainService,
+    private _serviceConnection: ConeectionApiService,
     private _storage: StorageService,
     private _serviceNotification: ServiceNotificationsService) { }
 

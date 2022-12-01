@@ -28,9 +28,9 @@
           <mat-label>Fecha de nacimiento</mat-label>
           <div class="date-form-content">
             <input matInput [matDatepicker]="datepicker" formControlName="dateOfBirdRegister" [(ngModel)]="_modelRegister.dateOfBird">
-            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>  
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
           </div>
-          <mat-error *ngIf="registerForm.controls.dateOfBirdRegister.hasError('required')">El campo es obligatorio</mat-error> 
+          <mat-error *ngIf="registerForm.controls.dateOfBirdRegister.hasError('required')">El campo es obligatorio</mat-error>
           <mat-datepicker #datepicker>
             <mat-datepicker-actions>
               <button mat-button matDatepickerCancel>Cancelar</button>
@@ -58,9 +58,9 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Repita Contraseña</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="verifyPasswordRegister" [(ngModel)]="_modelRegister.verifyPassword">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="verifyPasswordRegister" [(ngModel)]="_modelRegister.verifyPassword">
+          <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+            <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="registerForm.controls.verifyPasswordRegister.hasError('required')">El campo es obligatorio</mat-error>
         </mat-form-field>

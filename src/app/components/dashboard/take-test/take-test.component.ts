@@ -100,6 +100,8 @@ export class TakeTestComponent implements OnInit {
     this._resultQuestionsRequest = new ResultRequest();
     this._resultQuestionsResponse = new ResultResponse();
     this._modelQuestionsResult = new QuestionsModelResul();
+    this._sessionResponse.puntuactionBloqueA = 0;
+    this._sessionResponse.puntuactionBloqueB = 0;
     // console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
     this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA = 0;
     this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB = 0;

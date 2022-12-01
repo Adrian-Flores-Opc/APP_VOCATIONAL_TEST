@@ -20,7 +20,9 @@
 
         <span *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
           <mat-card-content>
-            <p>De acuerdo a las habilidades en la que destaca y sus intereses, su inteligencia predominante es: {{_responseIntelligence.NAME_INTELLIGENSE}}</p>
+            <p>De acuerdo a las habilidades en la que destaca y sus intereses, su inteligencia predominante es:
+              <strong>{{_responseIntelligence.NAME_INTELLIGENSE}}</strong>
+            </p>
             <mat-grid-list cols="2" rowHeight="80px">
               <mat-grid-tile>CAPACIDADES</mat-grid-tile>
               <mat-grid-tile>{{_responseIntelligence.CAPABILITIES}}</mat-grid-tile>

@@ -35,7 +35,7 @@ export class Session {
 
     public idInteligence !: number;
     public idInteligenceSiete !: number;
-
+    public idRecomendacion !: number;
     public dashboard : boolean = false;
 }
 

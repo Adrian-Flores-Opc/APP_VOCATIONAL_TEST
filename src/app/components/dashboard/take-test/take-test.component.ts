@@ -103,6 +103,7 @@ export class TakeTestComponent implements OnInit {
     this._sessionResponse.puntuactionBloqueA = 0;
     this._sessionResponse.puntuactionBloqueB = 0;
     this._sessionResponse.idInteligenceSiete = 0;
+    this._sessionResponse.idRecomendacion = 0;
     // console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
     this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA = 0;
     this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB = 0;
@@ -610,7 +611,9 @@ export class TakeTestComponent implements OnInit {
       console.log('ID INTELIGENCIA OBTENIDO INTERES MAYOR INTELIGENCIA UNO: ' + _indexInteresMayor);
       this._sessionResponse.idInteligence = _indexInteresMayor;
       this._sessionResponse.stateTestingIdentity = 'C';
+      this._sessionResponse.idRecomendacion = 1;
       this._storage.setCurrentSession(this._sessionResponse);
+
       this._sessionResponse = this._storage.getCurrentSession();
 
       let _testingUpdate : TestingResponse = new TestingResponse();
@@ -641,8 +644,8 @@ export class TakeTestComponent implements OnInit {
           console.log('ID INTELIGENCIA OBTENIDO INTERES MAYOR INTELIGENCIA DOS: ' + _indexInteresMayor);
           this._sessionResponse.idInteligence = _indexInteresMayor;
           this._sessionResponse.stateTestingIdentity = 'C';
+          this._sessionResponse.idRecomendacion = 2;
           this._storage.setCurrentSession(this._sessionResponse);
-
           this._sessionResponse = this._storage.getCurrentSession();
           let _testingUpdate : TestingResponse = new TestingResponse();
           _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
@@ -672,6 +675,7 @@ export class TakeTestComponent implements OnInit {
         console.log('ID INTELIGENCIA OBTENIDO INTERES MAYOR INTELIGENCIA TRES: ' + _indexHabilidadMayor);
         this._sessionResponse.idInteligence = _indexHabilidadMayor;
         this._sessionResponse.stateTestingIdentity = 'C';
+        this._sessionResponse.idRecomendacion = 3;
         this._storage.setCurrentSession(this._sessionResponse);
 
         this._sessionResponse = this._storage.getCurrentSession();
@@ -705,6 +709,7 @@ export class TakeTestComponent implements OnInit {
       console.log('ID INTELIGENCIA OBTENIDO HABILIDAD MAYOR INTELIGENCIA CUATRO: ' + _indexHabilidadMayor);
       this._sessionResponse.idInteligence = _indexHabilidadMayor;
       this._sessionResponse.stateTestingIdentity = 'C';
+      this._sessionResponse.idRecomendacion = 4;
       this._storage.setCurrentSession(this._sessionResponse);
 
 
@@ -736,6 +741,7 @@ export class TakeTestComponent implements OnInit {
         console.log('ID INTELIGENCIA OBTENIDO HABILIDAD MAYOR INTELIGENCIA CINCO: ' + _indexHabilidadMayor);
         this._sessionResponse.idInteligence = _indexHabilidadMayor;
         this._sessionResponse.stateTestingIdentity = 'C';
+        this._sessionResponse.idRecomendacion = 5;
         this._storage.setCurrentSession(this._sessionResponse);
 
         this._sessionResponse = this._storage.getCurrentSession();
@@ -767,6 +773,7 @@ export class TakeTestComponent implements OnInit {
         console.log('ID INTELIGENCIA OBTENIDO HABILIDAD MAYOR INTELIGENCIA SEIS: ' + _indexHabilidadMayor);
         this._sessionResponse.idInteligence = _indexHabilidadMayor;
         this._sessionResponse.stateTestingIdentity = 'C';
+        this._sessionResponse.idRecomendacion = 6;
         this._storage.setCurrentSession(this._sessionResponse);
 
         this._sessionResponse = this._storage.getCurrentSession();
@@ -803,6 +810,7 @@ export class TakeTestComponent implements OnInit {
         this._sessionResponse.idInteligenceSiete = _indexInteresMayor1;
         this._sessionResponse.idInteligence = _indexHabilidadMayor;
         this._sessionResponse.stateTestingIdentity = 'C';
+        this._sessionResponse.idRecomendacion = 7;
         this._storage.setCurrentSession(this._sessionResponse);
 
 
@@ -829,6 +837,7 @@ export class TakeTestComponent implements OnInit {
     if (_interesMayor < 15 && _habilidadMayor < 15){
       // ASIGNAR ID INTELIGENCIA 8
       this._sessionResponse.idInteligence = 9;
+      this._sessionResponse.idRecomendacion = 8;
       this._sessionResponse.stateTestingIdentity = 'C';
       this._storage.setCurrentSession(this._sessionResponse);
       this._sessionResponse = this._storage.getCurrentSession();

@@ -18,6 +18,10 @@
           </span>
 
           <span *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
+            <mat-card-content *ngIf="_sessionResponse.idRecomendacion === 8 && _sessionResponse.idInteligence === 9">
+              <p>Sin resultados por favor vuelva a realizar el test.</p>
+            </mat-card-content>
+
             <mat-card-subtitle *ngIf="_sessionResponse.idInteligenceSiete === 0">
               {{_responseIntelligense.DESCRIPTION_INTELLIGENSE}}
             </mat-card-subtitle>

@@ -19,7 +19,7 @@
         </span>
 
         <span *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
-          <mat-card-content *ngIf="_sessionResponse.idInteligence === 0">
+          <mat-card-content *ngIf="_sessionResponse.idInteligenceSiete === 0">
             <p>De acuerdo a las habilidades en la que destaca y sus intereses, su inteligencia predominante es:
               <strong>{{_responseIntelligence.NAME_INTELLIGENSE}}</strong>
             </p>
@@ -31,7 +31,7 @@
             </mat-grid-list>
           </mat-card-content>
 
-          <mat-card-content *ngIf="_sessionResponse.idInteligence != 0">
+          <mat-card-content *ngIf="_sessionResponse.idInteligenceSiete != 0">
             <p>De acuerdo a las habilidades en la que destaca y sus intereses, su inteligencia predominante es:
               <strong>{{_responseIntelligence.NAME_INTELLIGENSE}} y {{_responseIntelligenseSiete.NAME_INTELLIGENSE}}</strong>
             </p>

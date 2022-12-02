@@ -34,6 +34,7 @@ export class Session {
     public puntuactionSectionB!:dataPuntuaction[];
 
     public idInteligence !: number;
+    public idInteligenceSiete !: number;
 
     public dashboard : boolean = false;
 }

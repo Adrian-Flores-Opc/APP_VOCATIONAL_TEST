@@ -30,6 +30,7 @@ export class CareersComponent implements OnInit {
 
 
   public _responseIntelligense !: IntelligenceResponse;
+  public _responseIntelligenseSiete !: IntelligenceResponse;
   constructor(private _storage: StorageService, private _serviceConnection: ConeectionApiService, private _dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -38,6 +39,7 @@ export class CareersComponent implements OnInit {
     this._universitiesAdd = new UniversitiesResponse();
     this._sessionResponse = this._storage.getCurrentSession();
     this._responseIntelligense = new IntelligenceResponse();
+    this._responseIntelligenseSiete = new IntelligenceResponse();
     if(this._sessionResponse.stateTestingIdentity === 'C'){
       this.getintelligenseById();
       this.getCarrerasIterar();
@@ -49,14 +51,36 @@ export class CareersComponent implements OnInit {
   }
 
   public getCarrerasIterar():void{
-    this._serviceConnection.getCareers().subscribe({ next: (_response) =>{
-      let _verificarCarreraIterar = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
-      this.armadoModeloCarrera(_verificarCarreraIterar);
-    }, error: (_error) =>{
+    if (this._sessionResponse.idInteligenceSiete != 0){
+      this._serviceConnection.getCareers().subscribe({ next: (_response) =>{
+        let _verificarCarreraIterar = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
+        this._serviceConnection.getCareers().subscribe( { next: (_responseTwo) => {
+          let _verificarCarreraIterarTwo = _responseTwo.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligenceSiete);
+          let _verificarCarreras = _verificarCarreraIterar.concat(_verificarCarreraIterarTwo);
+          this.armadoModeloCarrera(_verificarCarreras);
 
-    }, complete:() =>{
+        }, error: (_error) => {
 
-    }});
+        }, complete: () => {
+
+        }});
+      }, error: (_error) =>{
+
+      }, complete:() =>{
+
+      }});
+    } else {
+
+      this._serviceConnection.getCareers().subscribe({ next: (_response) =>{
+        let _verificarCarreraIterar = _response.filter(x => x.ID_INTELLIGENSE === this._sessionResponse.idInteligence);
+        this.armadoModeloCarrera(_verificarCarreraIterar);
+      }, error: (_error) =>{
+
+      }, complete:() =>{
+
+      }});
+
+    }
   }
 
   public armadoModeloCarrera(_dato: CareersResponse[]):void{
@@ -73,12 +97,31 @@ export class CareersComponent implements OnInit {
   }
 
   public getintelligenseById():void{
-    this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligence).subscribe( { next: (_response) => {
-      this._responseIntelligense = _response;
-    }, error: (_error) => {
+    if (this._sessionResponse.idInteligenceSiete != 0){
+      this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligence).subscribe( { next: (_response) => {
+        this._responseIntelligense = _response;
+        this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligenceSiete).subscribe( { next: (_responseTwo) => {
+          this._responseIntelligenseSiete = _responseTwo;
+        }, error: (_error) => {
 
-    }, complete:() => {
+        }, complete: () => {
 
-    }});
+        }});
+
+      }, error: (_error) => {
+
+      }, complete:() => {
+
+      }});
+
+    } else {
+      this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligence).subscribe( { next: (_response) => {
+        this._responseIntelligense = _response;
+      }, error: (_error) => {
+
+      }, complete:() => {
+
+      }});
+    }
   }
 }

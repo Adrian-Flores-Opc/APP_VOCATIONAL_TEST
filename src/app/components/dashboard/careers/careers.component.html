@@ -18,9 +18,15 @@
           </span>
 
           <span *ngIf="_sessionResponse.stateTestingIdentity == 'C'">
-            <mat-card-subtitle>
+            <mat-card-subtitle *ngIf="_sessionResponse.idInteligenceSiete === 0">
               {{_responseIntelligense.DESCRIPTION_INTELLIGENSE}}
             </mat-card-subtitle>
+
+            <mat-card-subtitle *ngIf="_sessionResponse.idInteligenceSiete != 0">
+              {{_responseIntelligense.DESCRIPTION_INTELLIGENSE}} y {{_responseIntelligenseSiete.DESCRIPTION_INTELLIGENSE}}
+            </mat-card-subtitle>
+
+
             <mat-card-content>
               <span class="container-carreras" *ngFor="let item of _modelToDrawRaces">
                 <button mat-button (click)="openDialog(item.CAREERS.CAREERS)">{{item.CAREERS.CAREERS}}</button>

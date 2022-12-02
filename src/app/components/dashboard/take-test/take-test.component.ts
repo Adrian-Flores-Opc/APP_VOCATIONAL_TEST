@@ -102,6 +102,7 @@ export class TakeTestComponent implements OnInit {
     this._modelQuestionsResult = new QuestionsModelResul();
     this._sessionResponse.puntuactionBloqueA = 0;
     this._sessionResponse.puntuactionBloqueB = 0;
+    this._sessionResponse.idInteligenceSiete = 0;
     // console.log('DASHBOARD MODULE ACTIVATE: ' + JSON.stringify(this._sessionResponse));
     this._sessionResponse.puntuactionBloqueASectionA = this._puntuactionBloqueASectionA = 0;
     this._sessionResponse.puntuactionBloqueBSectionA = this._puntuactionBloqueASectionB = 0;
@@ -599,12 +600,19 @@ export class TakeTestComponent implements OnInit {
     this._storage.setCurrentSession(this._sessionResponse);
     this._sessionResponse = this._storage.getCurrentSession();
     // console.log('SESSION GENERADA PARA EL ID_INTELLIGENSE: ' + JSON.stringify(this._sessionResponse));
+
     if(_habilidadMayor < 15 && _interesMayor >= 15){
       // ASIGNAR ID INTELIGENCIA 1
-      this._sessionResponse.idInteligence = 1;
+
+      this._sessionResponse = this._storage.getCurrentSession();
+      let _bloqueInteresMayor = _bloqueInteres.filter(x => x.puntuaction === _interesMayor);
+      let _indexInteresMayor : number = _bloqueInteres.indexOf(_bloqueInteresMayor[0]) + 1;
+      console.log('ID INTELIGENCIA OBTENIDO INTERES MAYOR INTELIGENCIA UNO: ' + _indexInteresMayor);
+      this._sessionResponse.idInteligence = _indexInteresMayor;
       this._sessionResponse.stateTestingIdentity = 'C';
       this._storage.setCurrentSession(this._sessionResponse);
       this._sessionResponse = this._storage.getCurrentSession();
+
       let _testingUpdate : TestingResponse = new TestingResponse();
       _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
       _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
@@ -627,9 +635,14 @@ export class TakeTestComponent implements OnInit {
     if(_habilidadMayor >= 15 && _habilidadMayor < 19 && _interesMayor >= 15){
       if  (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
           // ASIGNAR ID INTELIGENCIA 2
-          this._sessionResponse.idInteligence = 2;
+
+          let _bloqueInteresMayor = _bloqueInteres.filter(x => x.puntuaction === _interesMayor);
+          let _indexInteresMayor : number = _bloqueInteres.indexOf(_bloqueInteresMayor[0]) + 1;
+          console.log('ID INTELIGENCIA OBTENIDO INTERES MAYOR INTELIGENCIA DOS: ' + _indexInteresMayor);
+          this._sessionResponse.idInteligence = _indexInteresMayor;
           this._sessionResponse.stateTestingIdentity = 'C';
           this._storage.setCurrentSession(this._sessionResponse);
+
           this._sessionResponse = this._storage.getCurrentSession();
           let _testingUpdate : TestingResponse = new TestingResponse();
           _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
@@ -653,9 +666,14 @@ export class TakeTestComponent implements OnInit {
     if(_habilidadMayor > 15 && _habilidadMayor < 19 && _interesMayor > 15 && _interesMayor < 19){
       if (_habilidarMayorIntSec === _interesMayorIntSec){
         // ASIGNAR ID INTELIGENCIA 3
-        this._sessionResponse.idInteligence = 3;
+
+        let _bloqueHabilidadMayor = bloqueHabilidad.filter(x => x.puntuaction === _habilidadMayor);
+        let _indexHabilidadMayor : number = bloqueHabilidad.indexOf(_bloqueHabilidadMayor[0]) + 1;
+        console.log('ID INTELIGENCIA OBTENIDO INTERES MAYOR INTELIGENCIA TRES: ' + _indexHabilidadMayor);
+        this._sessionResponse.idInteligence = _indexHabilidadMayor;
         this._sessionResponse.stateTestingIdentity = 'C';
         this._storage.setCurrentSession(this._sessionResponse);
+
         this._sessionResponse = this._storage.getCurrentSession();
         let _testingUpdate : TestingResponse = new TestingResponse();
         _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
@@ -680,9 +698,16 @@ export class TakeTestComponent implements OnInit {
     // let _interesActValidar = this._sessionResponse.puntuactionSectionB.filter(x => x.bloque === 'BLOQUE HABILIDAD MAYOR');
     if(_habilidadMayor > 18 && _interesMayor >=  _valAct && _interesMayor < 16){
       // ASIGNAR ID INTELIGENCIA 4
-      this._sessionResponse.idInteligence = 4;
+
+
+      let _bloqueHabilidadMayor = bloqueHabilidad.filter(x => x.puntuaction === _habilidadMayor);
+      let _indexHabilidadMayor : number = bloqueHabilidad.indexOf(_bloqueHabilidadMayor[0]) + 1;
+      console.log('ID INTELIGENCIA OBTENIDO HABILIDAD MAYOR INTELIGENCIA CUATRO: ' + _indexHabilidadMayor);
+      this._sessionResponse.idInteligence = _indexHabilidadMayor;
       this._sessionResponse.stateTestingIdentity = 'C';
       this._storage.setCurrentSession(this._sessionResponse);
+
+
       this._sessionResponse = this._storage.getCurrentSession();
       let _testingUpdate : TestingResponse = new TestingResponse();
       _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
@@ -705,9 +730,14 @@ export class TakeTestComponent implements OnInit {
     if(_habilidadMayor > 18 && _interesMayor > 18 && _interesMayor < 24){
       if(_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 5
-        this._sessionResponse.idInteligence = 5;
+
+        let _bloqueHabilidadMayor = bloqueHabilidad.filter(x => x.puntuaction === _habilidadMayor);
+        let _indexHabilidadMayor : number = bloqueHabilidad.indexOf(_bloqueHabilidadMayor[0]) + 1;
+        console.log('ID INTELIGENCIA OBTENIDO HABILIDAD MAYOR INTELIGENCIA CINCO: ' + _indexHabilidadMayor);
+        this._sessionResponse.idInteligence = _indexHabilidadMayor;
         this._sessionResponse.stateTestingIdentity = 'C';
         this._storage.setCurrentSession(this._sessionResponse);
+
         this._sessionResponse = this._storage.getCurrentSession();
         let _testingUpdate : TestingResponse = new TestingResponse();
         _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
@@ -731,9 +761,14 @@ export class TakeTestComponent implements OnInit {
     if(_habilidadMayor > 18 && _interesMayor > 18 ){
       if (_habilidarMayorIntSec[0].bloque === _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 6
-        this._sessionResponse.idInteligence = 6;
+
+        let _bloqueHabilidadMayor = bloqueHabilidad.filter(x => x.puntuaction === _habilidadMayor);
+        let _indexHabilidadMayor : number = bloqueHabilidad.indexOf(_bloqueHabilidadMayor[0]) + 1;
+        console.log('ID INTELIGENCIA OBTENIDO HABILIDAD MAYOR INTELIGENCIA SEIS: ' + _indexHabilidadMayor);
+        this._sessionResponse.idInteligence = _indexHabilidadMayor;
         this._sessionResponse.stateTestingIdentity = 'C';
         this._storage.setCurrentSession(this._sessionResponse);
+
         this._sessionResponse = this._storage.getCurrentSession();
         let _testingUpdate : TestingResponse = new TestingResponse();
         _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
@@ -742,6 +777,7 @@ export class TakeTestComponent implements OnInit {
         _testingUpdate.STATE = 'C';
         console.log('ID INTELLIGENSE PARA GUARDAR: ' + this._sessionResponse.idInteligence)
         this._connectionService.updateTesting(_testingUpdate).subscribe({ next: (_response) => {
+
           return;
         }, error: (_error) => {
 
@@ -757,10 +793,20 @@ export class TakeTestComponent implements OnInit {
     if (_habilidadMayor > 18 && _interesMayor > 23){
       if (_habilidarMayorIntSec[0].bloque != _interesMayorIntSec[0].bloque){
         // ASIGNAR ID INTELIGENCIA 7
-        this._sessionResponse.idInteligence = 7;
+        let _bloqueHabilidadMayor = bloqueHabilidad.filter(x => x.puntuaction === _habilidadMayor);
+        let _indexHabilidadMayor : number = bloqueHabilidad.indexOf(_bloqueHabilidadMayor[0]) + 1;
+        console.log('ID INTELIGENCIA OBTENIDO HABILIDAD MAYOR INTELIGENCIA SIETE: ' + _indexHabilidadMayor);
+
+        let _bloqueInteresMayor1 = _bloqueInteres.filter(x => x.puntuaction === _interesMayor);
+        let _indexInteresMayor1 : number = _bloqueInteres.indexOf(_bloqueInteresMayor1[0]) + 1;
+        console.log('ID INTELIGENCIA OBTENIDO INTERES MAYOR INTELIGENCIA SIETE: ' + _indexInteresMayor1);
+        this._sessionResponse.idInteligenceSiete = _indexInteresMayor1;
+        this._sessionResponse.idInteligence = _indexHabilidadMayor;
         this._sessionResponse.stateTestingIdentity = 'C';
         this._storage.setCurrentSession(this._sessionResponse);
-        this._sessionResponse = this._storage.getCurrentSession();
+
+
+
         let _testingUpdate : TestingResponse = new TestingResponse();
         _testingUpdate.ID_INTELLIGENSE = this._sessionResponse.idInteligence;
         _testingUpdate.ID_TESTING = this._sessionResponse.idTestingIdentity;
@@ -782,7 +828,7 @@ export class TakeTestComponent implements OnInit {
     //#region VALIDAR ID INTELIGENCIA 8
     if (_interesMayor < 15 && _habilidadMayor < 15){
       // ASIGNAR ID INTELIGENCIA 8
-      this._sessionResponse.idInteligence = 8;
+      this._sessionResponse.idInteligence = 9;
       this._sessionResponse.stateTestingIdentity = 'C';
       this._storage.setCurrentSession(this._sessionResponse);
       this._sessionResponse = this._storage.getCurrentSession();

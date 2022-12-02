@@ -100,6 +100,7 @@ export class LoginComponent implements OnInit {
       this._sessionRequest.dashboard = true;
       this._sessionRequest.idInteligence = 9;
       this._sessionRequest.stateTestingIdentity = 'P';
+      this._sessionRequest.idInteligenceSiete = 0 ;
       this.correctLogin(this._sessionRequest);
     }, error: (_error) => {
       console.log('ERROR TESTING REGISTER: ' + JSON.stringify(_error));

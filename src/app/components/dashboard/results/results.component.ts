@@ -14,18 +14,37 @@ export class ResultsComponent implements OnInit {
   public _sessionResponse !: Session;
 
   public _responseIntelligence !: IntelligenceResponse;
+  public _responseIntelligenseSiete !: IntelligenceResponse;
   constructor(private _storage: StorageService, private _serviceConnection: ConeectionApiService) { }
 
   ngOnInit(): void {
     this._sessionResponse = this._storage.getCurrentSession();
     if(this._sessionResponse.stateTestingIdentity === 'C'){
-      this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligence).subscribe({ next: (_response) => {
-        this._responseIntelligence = _response;
-      }, error: (_error) => {
+      if(this._sessionResponse.idInteligence != 0){
+        this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligence).subscribe({ next: (_response) => {
+          this._responseIntelligence = _response;
+          this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligenceSiete).subscribe({ next: (_responseTwo) => {
+            this._responseIntelligenseSiete = _responseTwo;
+          }, error: (_error) => {
 
-      }, complete:() => {
+          }, complete: () => {
 
-      }});
+          }});
+
+        }, error: (_error) => {
+
+        }, complete:() => {
+
+        }});
+      } else {
+        this._serviceConnection.getIntelligenceById(this._sessionResponse.idInteligence).subscribe({ next: (_response) => {
+          this._responseIntelligence = _response;
+        }, error: (_error) => {
+
+        }, complete:() => {
+
+        }});
+      }
     }
   }
 
